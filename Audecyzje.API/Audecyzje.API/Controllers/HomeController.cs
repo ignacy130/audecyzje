@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Audecyzje.Infrastructure.Dtos;
+using Audecyzje.Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Audecyzje.API.Controllers
@@ -9,14 +11,16 @@ namespace Audecyzje.API.Controllers
     [Route("api/[controller]")]
     public class HomeController : Controller
     {
-        public HomeController()
+        private IDocumentService _documentService;
+
+        public HomeController(IDocumentService documentService)
         {
-            
+            _documentService = documentService;
         }
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IEnumerable<DocumentDto>> Get()
         {
-            return new string[] { "" };
+            return await _documentService.GetAll();
         }
 
     }

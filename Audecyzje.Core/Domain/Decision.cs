@@ -11,7 +11,7 @@ namespace Audecyzje.Core.Domain
         public bool IsApproved { get; set; }
         public Document Document { get; set; }
         public string Content { get; set; }
-        public int DecisionId { get; set; }
+
 
     }
 }

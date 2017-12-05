@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Audecyzje.Core.Repositories;
+using Audecyzje.Infrastructure.DatabaseContext;
 using Audecyzje.Infrastructure.Repositories;
 using Audecyzje.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
@@ -24,15 +26,20 @@ namespace Audecyzje.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DbContext>(options => options.UseSqlServer(Configuration.GetSection("ConnectionStrings")["DatabaseServer"],
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetSection("ConnectionStrings")["DatabaseServer"],
                 c => c.MigrationsAssembly("Audecyzje.API")), ServiceLifetime.Transient);
 
 
             services.AddMvc();
 
+
+            services.AddTransient<IDocumentRepository, DocumentRepository>();
+
             services.Scan(selector =>
             {
+                
                 selector.FromAssemblyOf<Service>().AddClasses().AsImplementedInterfaces().WithTransientLifetime();
+                
             });
             services.AddCors(x =>
             {
