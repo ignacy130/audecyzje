@@ -60,7 +60,10 @@ namespace Audecyzje.API
                 options.SwaggerDoc("v1", new Info { Title = "Audecyzje API", Version = "v1" });
             });
 
+<<<<<<< HEAD
             return services.BuildServiceProvider();
+=======
+>>>>>>> 281b4f6e08bdf9ec560ef64103f9e2595492b89c
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,9 +82,12 @@ namespace Audecyzje.API
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Shop Online API V1");
             });
 
-      
+
+<<<<<<< HEAD
             var dbContext = serviceProvider.GetService<AppDbContext>();
             AppDbContextInMemory.Seed(dbContext);
+=======
+>>>>>>> 281b4f6e08bdf9ec560ef64103f9e2595492b89c
         }
     }
 }
