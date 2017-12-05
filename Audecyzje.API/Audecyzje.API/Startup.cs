@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Audecyzje.Core.Repositories;
 using Audecyzje.Infrastructure.DatabaseContext;
+using Audecyzje.Infrastructure.Mappers;
 using Audecyzje.Infrastructure.Repositories;
 using Audecyzje.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
@@ -32,7 +33,7 @@ namespace Audecyzje.API
 
             services.AddMvc();
 
-
+            services.AddTransient(c => AutoMapperConfig.Initialize());
             services.AddTransient<IDocumentRepository, DocumentRepository>();
 
             services.Scan(selector =>
