@@ -24,7 +24,7 @@ namespace Audecyzje.Infrastructure.Services
 
         public async Task<List<DocumentDto>> GetAll()
         {
-           return _mapper.Map<List<DocumentDto>>(new List<Document>());
+           return _mapper.Map<List<DocumentDto>>(await _documentRepository.GetAll());
         }
     }
 }

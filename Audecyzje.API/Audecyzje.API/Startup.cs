@@ -29,7 +29,7 @@ namespace Audecyzje.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase(Guid.NewGuid().ToString("N")), ServiceLifetime.Transient);
+            services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase(Guid.NewGuid().ToString("N")), ServiceLifetime.Singleton);
 //                Configuration.GetSection("ConnectionStrings")["DatabaseServer"],
 //                c => c.MigrationsAssembly("Audecyzje.API")), ServiceLifetime.Transient);
 
