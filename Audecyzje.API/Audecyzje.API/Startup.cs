@@ -24,11 +24,11 @@ namespace Audecyzje.API
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetSection("ConnectionStrings")["DatabaseServer"],
-                c => c.MigrationsAssembly("Audecyzje.API")), ServiceLifetime.Transient);
-
+            services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase(Guid.NewGuid().ToString("N")), ServiceLifetime.Transient);
+//                Configuration.GetSection("ConnectionStrings")["DatabaseServer"],
+//                c => c.MigrationsAssembly("Audecyzje.API")), ServiceLifetime.Transient);
 
             services.AddMvc();
 
@@ -52,20 +52,22 @@ namespace Audecyzje.API
                 });
             });
 
-          
+            return services.BuildServiceProvider();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
             app.UseCors("AllowAll");
             app.UseMvc();
 
-      
+            var dbContext = serviceProvider.GetService<AppDbContext>();
+            AppDbContextInMemory.Seed(dbContext);
         }
     }
 }

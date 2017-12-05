@@ -1,4 +1,6 @@
 using System;
+using Audecyzje.Infrastructure.DatabaseContext;
+using Microsoft.EntityFrameworkCore;
 using Xunit;
 
 namespace Audecyzje.Tests
