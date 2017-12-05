@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace Audecyzje.API
 {
@@ -52,8 +54,12 @@ namespace Audecyzje.API
                     builder.AllowCredentials();
                 });
             });
+            services.AddSwaggerGen(options =>
+            {
+                options.CustomSchemaIds(type => type.FullName);
+                options.SwaggerDoc("v1", new Info { Title = "Audecyzje API", Version = "v1" });
+            });
 
-          
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,8 +71,13 @@ namespace Audecyzje.API
             }
             app.UseCors("AllowAll");
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Shop Online API V1");
+            });
 
-      
+
         }
     }
 }
