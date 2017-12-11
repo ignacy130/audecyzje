@@ -40,9 +40,7 @@ namespace Audecyzje.API
 
             services.Scan(selector =>
             {
-                
                 selector.FromAssemblyOf<Service>().AddClasses().AsImplementedInterfaces().WithTransientLifetime();
-                
             });
             services.AddCors(x =>
             {
@@ -76,7 +74,7 @@ namespace Audecyzje.API
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Shop Online API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Audecyzje API V1");
             });
 
       
