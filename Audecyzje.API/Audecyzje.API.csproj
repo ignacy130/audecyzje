@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Audecyzje.Infrastructure\Audecyzje.Infrastructure.csproj" />
+    <ProjectReference Include="..\Audecyzje.Infrastructure\Audecyzje.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
