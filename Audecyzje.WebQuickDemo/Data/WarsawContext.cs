@@ -23,6 +23,10 @@ namespace Audecyzje.WebQuickDemo.Data
             modelBuilder.Entity<Localization>().ToTable("Localization");
             modelBuilder.Entity<DecisionTag>().HasKey(x => new { x.DecisionID, x.TagID });
         }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseMySQL("server=hostnseek.com;database=bene12_mjn;user=bene12_mjn;password=1qaz@WSX");
+        }
 
     }
 }

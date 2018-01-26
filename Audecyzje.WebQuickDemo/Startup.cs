@@ -24,8 +24,8 @@ namespace Audecyzje.WebQuickDemo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddDbContext<WarsawContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<WarsawContext>();// options =>
+            //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
 
