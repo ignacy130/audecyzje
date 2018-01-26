@@ -8,32 +8,40 @@ namespace Audecyzje.WebQuickDemo.Data
 {
     public class DbInitializer
     {
-
         public static void Initialize(WarsawContext context)
         {
             context.Database.EnsureCreated();
+            if (!context.Descisions.Any())
+            {
+                Decision dec = new Decision()
+                {
+                    Content = "Initial decision"
+                };
+                context.Add(dec);
+                context.SaveChanges();
+            }
 
-            Decision dec = new Decision()
+            if (!context.Localizations.Any())
             {
-                Content = "Initial decision"
-            };
-            context.Add(dec);
-            context.SaveChanges();
+                Localization loc = new Localization()
+                {
+                    Latitude = 20.9945904,
+                    Longitude = 52.2330803,
+                    Street = "Initial Warsaw"
+                };
+                context.Add(loc);
+                context.SaveChanges();
+            }
 
-            Localization loc = new Localization()
+            if (!context.Tags.Any())
             {
-                Latitude = 20.9945904,
-                Longitude = 52.2330803,
-                Street = "Initial Warsaw"
-            };
-            context.Add(loc);
-            context.SaveChanges();
-            Tag tag = new Tag()
-            {
-                TagName = "Initial Tag"
-            };
-            context.Add(tag);
-            context.SaveChanges();
+                Tag tag = new Tag()
+                {
+                    TagName = "Initial Tag"
+                };
+                context.Add(tag);
+                context.SaveChanges();
+            }
         }
     }
 
