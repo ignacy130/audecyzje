@@ -11,6 +11,7 @@ namespace Audecyzje.WebQuickDemo.Models
         public DateTime SubmissionDate { get; set; }
         public IEnumerable<DecisionTag> LinkedTags { get; set; }
         public string Content { get; set; }
+        public string DecisionNumber { get; set; }
         public ICollection<Localization> Localizations { get; set; }
     }
 }
