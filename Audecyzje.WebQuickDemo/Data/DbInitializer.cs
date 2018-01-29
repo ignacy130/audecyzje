@@ -43,7 +43,7 @@ namespace Audecyzje.WebQuickDemo.Data
                 context.SaveChanges();
             }
 
-            LoadFilesToDb(context);
+            //LoadFilesToDb(context);
         }
         static void LoadFilesToDb(WarsawContext context)
         {

@@ -20,9 +20,49 @@ namespace Audecyzje.WebQuickDemo.Controllers
         }
 
         // GET: Decisions
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(await _context.Descisions.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+
+            //return View(await _context.Descisions.ToListAsync());
+
+            var decisions = from s in _context.Descisions
+                           select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                decisions = decisions.Where(s => s.Content.Contains(searchString)
+                                       || s.DecisionNumber.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    decisions = decisions.OrderByDescending(s => s.DecisionNumber);
+                    break;
+                case "Date":
+                    decisions = decisions.OrderBy(s => s.SubmissionDate);
+                    break;
+                case "date_desc":
+                    decisions = decisions.OrderByDescending(s => s.SubmissionDate);
+                    break;
+                default:
+                    decisions = decisions.OrderBy(s => s.ID);
+                    break;
+            }
+            int pageSize = 10;
+            return View(await PaginatedList<Decision>.CreateAsync(decisions.AsNoTracking(), page ?? 1, pageSize));
         }
 
         // GET: Decisions/Details/5
