@@ -12,5 +12,13 @@ namespace Audecyzje.WebQuickDemo.Models
         public string TagName { get; set; }
         public string RegExp { get; set; }
         public IEnumerable<DecisionTag> LinkedDecisions { get; set; }
+
+        public int LinkedDecisionsCount
+        {
+            get
+            {
+                return new List<DecisionTag>(LinkedDecisions).Count;
+            }
+        }
     }
 }

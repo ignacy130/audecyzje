@@ -15,6 +15,7 @@ namespace Audecyzje.WebQuickDemo.Data
         public DbSet<Decision> Descisions { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Localization> Localizations { get; set; }
+        public DbSet<DecisionTag> DecisionTags { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
