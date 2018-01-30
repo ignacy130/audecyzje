@@ -17,6 +17,10 @@ namespace Audecyzje.WebQuickDemo.Models
         {
             get
             {
+                if (LinkedDecisions == null)
+                {
+                    return 0;
+                }
                 return new List<DecisionTag>(LinkedDecisions).Count;
             }
         }

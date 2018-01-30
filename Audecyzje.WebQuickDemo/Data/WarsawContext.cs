@@ -22,6 +22,7 @@ namespace Audecyzje.WebQuickDemo.Data
             modelBuilder.Entity<Decision>().ToTable("Decision");
             modelBuilder.Entity<Tag>().ToTable("Tag");
             modelBuilder.Entity<Localization>().ToTable("Localization");
+            modelBuilder.Entity<DecisionTag>().ToTable("DecisionTag");
             modelBuilder.Entity<DecisionTag>().HasKey(x => new { x.DecisionID, x.TagID });
         }
 
