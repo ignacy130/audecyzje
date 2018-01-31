@@ -7,11 +7,13 @@ init:
   - git config --global core.autocrlf true
 before_build:
   # Display minimal restore text
-  - cmd: dotnet restore ./Audecyzje.API/Audecyzje.API/Audecyzje.API.csproj --verbosity m
+  - cmd: dotnet restore ./Audecyzje.API/Audecyzje.API.csproj --verbosity m
+  - cmd: dotnet restore ./Audecyzje.WebQuickDemo/Audecyzje.WebQuickDemo.csproj --verbosity m
 build_script:
-  - cmd: dotnet publish ./Audecyzje.API/Audecyzje.API/Audecyzje.API.csproj
+  - cmd: dotnet publish ./Audecyzje.API/Audecyzje.API.csproj
+  - cmd: dotnet publish ./Audecyzje.WebQuickDemo/Audecyzje.WebQuickDemo.csproj
 artifacts:
- - path: '\Audecyzje.API\Audecyzje.API\bin\Debug\netcoreapp2.0\publish'
+ - path: '\Audecyzje.API\bin\Debug\netcoreapp2.0\publish'
    name: WebSite
    type: WebDeployPackage
 deploy:
