@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Audecyzje.Core.Domain
 {
     public class Document :BaseEntity
     {
+        // Czemu tu jest Localization i Localizations
         public string Localization { get; set; }
         public string DecisionNumber { get; set; }
         public DateTime Date { get; set; }

@@ -9,6 +9,9 @@ namespace Audecyzje.Core.Repositories
 {
     public interface IDocumentRepository : IRepository<Document>
     {
-        
+        Task<List<Document>> GetByLocalization(string address);
+        Task<List<Document>> GetByDecisionNumber(string decisionNumber);
+        Task<List<Document>> GetByDecisionDate(DateTime dateTime);
+        Task<List<Document>> GetByLegalBasis(string legalBasis);
     }
 }

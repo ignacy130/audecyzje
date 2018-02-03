@@ -26,5 +26,26 @@ namespace Audecyzje.Infrastructure.Services
         {
            return _mapper.Map<List<DocumentDto>>(await _documentRepository.GetAll());
         }
+
+        public async Task<List<DocumentDto>> GetByDecisionNumber(string decisionNumber)
+        {
+            return _mapper.Map<List<DocumentDto>>(await _documentRepository.GetByDecisionNumber(decisionNumber));
+        }
+
+        public async Task<List<DocumentDto>> GetByDecisionDate(DateTime dateTime)
+        {
+            return _mapper.Map<List<DocumentDto>>(await _documentRepository.GetByDecisionDate(dateTime));
+        }
+
+        public async Task<List<DocumentDto>> GetByLegalBasis(string legalBasis)
+        {
+            return _mapper.Map<List<DocumentDto>>(await _documentRepository.GetByLegalBasis(legalBasis));
+        }
+
+        public async Task<IEnumerable<DocumentDto>> GetByAddress(string address)
+        {
+            var listOfDocuments = await _documentRepository.GetByLocalization(address);
+            return _mapper.Map<List<DocumentDto>>(listOfDocuments);
+        }
     }
 }
