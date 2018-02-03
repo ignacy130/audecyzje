@@ -23,7 +23,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
         // GET: Tags
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Tags.Include(t=> t.LinkedDecisions).ToListAsync());
+            return View(await _context.Tags.Include(t=> t.LinkedDecisions).ThenInclude(link=> link.Decision).ToListAsync());
         }
 
         public async Task<IActionResult> ClearAllTagRelations()
@@ -34,7 +34,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
                 _context.DecisionTags.Remove(dg);
             }
             await _context.SaveChangesAsync();
-            return View("Index");
+            return RedirectToAction("Index");
         }
         public async Task<IActionResult> CheckAllDecisionsContentWithTagsRegexp()
         {
@@ -57,7 +57,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
                 }
                 await _context.SaveChangesAsync();
             }
-            return View("Index");
+            return RedirectToAction("Index");
         }
         // GET: Tags/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -68,6 +68,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
             }
 
             var tag = await _context.Tags
+                .Include(t => t.LinkedDecisions).ThenInclude(link=> link.Decision)
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (tag == null)
             {

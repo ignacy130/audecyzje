@@ -22,6 +22,15 @@
         <dd>
             @Html.DisplayFor(model => model.RegExp)
         </dd>
+        @foreach (var dt in Model.LinkedDecisions)
+        {
+            <dt>
+                Decision
+            </dt>
+            <dd>
+                <a asp-action="Details" asp-controller="Decisions" asp-route-id="@dt.DecisionID">@dt.DecisionID</a>
+            </dd>
+        }
     </dl>
 </div>
 <div>
