@@ -1,9 +1,4 @@
-Audecyzje.API/.vs/
-Audecyzje.API/Audecyzje.API/bin/
-Audecyzje.API/Audecyzje.API/obj/
-Audecyzje.Core/bin/
-Audecyzje.Core/obj/
-Audecyzje.Infrastructure/bin/
-Audecyzje.Infrastructure/obj/
-Audecyzje.Tests/bin/
-Audecyzje.Tests/obj/
+.vs
+bin/
+obj/
+Audecyzje.WebQuickDemo/Resources/txtmjnall/
