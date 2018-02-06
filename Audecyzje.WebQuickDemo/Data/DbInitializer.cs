@@ -117,10 +117,71 @@ namespace Audecyzje.WebQuickDemo.Data
                         }     
 
                     }
-                    if (!GKDW)
-                    {
-                        //przypadek do zrobienia "odtylu"
-                    }
+                    var GK = filename.Contains("GK");
+                    // TODO
+                    //if (GK && !GKDW)
+                    //{
+                    //    var submissionDate = new DateTime();
+                    //    var datestring = string.Empty;
+                    //    var streetFull = "Failed to parse street";
+                    //    try
+                    //    {
+                    //        var ind = filename.IndexOf("GK");
+
+                    //        var streetstartIndex = ind + 2 + 8 + 4;//pomijam gkdw, date, i powtorzony rok 
+                    //        var streetEndIndex = filename.IndexOf('.'); // jeśli nic sie nie dzieje to do kropki
+                    //        if (CRWIP)
+                    //        {
+                    //            streetEndIndex = filename.IndexOf("CRW");
+                    //        }
+                    //        if (CRWIPbis)
+                    //        {
+                    //            streetEndIndex = filename.IndexOf("CWR");
+                    //        }
+                    //        if (randomEnding && !(CRWIP || CRWIPbis))
+                    //        {
+                    //            streetEndIndex = streetEndIndex - 4;//cofamy od kropki 4 wstecz
+                    //        }
+                    //        streetFull = filename.Substring(streetstartIndex, streetEndIndex - streetstartIndex);
+                    //        datestring = filename.Substring(ind + 4, 8);
+                    //        submissionDate = DateTime.ParseExact(datestring, "yyyyddMM", provider);
+                    //    }
+                    //    catch (Exception ex)
+                    //    {
+
+                    //    }
+                    //    finally
+                    //    {
+                    //        Localization loc = new Localization()
+                    //        {
+                    //            Street = streetFull
+                    //        };
+                    //        Decision dec = new Decision()
+                    //        {
+                    //            Localizations = new List<Localization>() { loc },
+                    //            SubmissionDate = submissionDate,
+                    //            Content = fileContent
+                    //        };
+                    //        context.Add(dec);
+                    //        context.SaveChanges();
+                    //    }
+                    //}
+
+                    //if (!GK && !GKDW)
+                    //{
+                    //    string s = "street nejm";
+                    //    int streetStart = 0;
+                    //    while (!Char.IsLetter(s[streetStart]))
+                    //    {
+                    //        ++streetStart;
+                    //    }
+                    //}
+
+                    //int pos = 0;
+                    //while (!Char.IsLetter(s[pos]))
+                    //{
+                    //    ++pos;
+                    //}
                 }
             }
         }
