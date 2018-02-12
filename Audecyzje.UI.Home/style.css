@@ -1,0 +1,70 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.view {
+  height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("./alexey-topolyanskiy-270795.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.navbar {
+  background-color: transparent !important;
+}
+
+.navbar a {
+  margin: 0 2.3rem;
+}
+
+.input-field h1 {
+  color: #eee;
+  font-weight: 700;
+  line-height: 4rem;
+}
+
+.input-field h2 {
+  font-weight: 300;
+  color: #eee;
+}
+
+.btn-warning {
+  background-color: #FCE603;
+  border: #FCE603;
+}
+
+.card {
+  box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+  color: #FCE603;
+  font-weight: 700;
+}
+
+.stats {
+  margin-top: -3rem;
+}
+
+footer .col-sm-8 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+footer ul {
+  list-style: none;
+}
+
+footer li img {
+  width: 50px;
+  height: 50px;
+}
+
+@media (min-width:700px) and (max-width: 1200px) {
+  .input-field {
+    height: 100%;
+  }
+}
