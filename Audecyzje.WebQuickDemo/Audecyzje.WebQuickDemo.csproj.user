@@ -11,5 +11,6 @@
     <WebStackScaffolding_DbContextTypeFullName>Audecyzje.WebQuickDemo.Data.WarsawContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_IsViewGenerationSelected>True</WebStackScaffolding_IsViewGenerationSelected>
+    <NameOfLastUsedPublishProfile>spolecznyaudyt - Web Deploy</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>
