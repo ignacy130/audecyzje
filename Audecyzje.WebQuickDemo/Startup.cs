@@ -48,7 +48,7 @@ namespace Audecyzje.WebQuickDemo
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Decisions}/{action=Index}/{id?}");
             });
         }
     }
