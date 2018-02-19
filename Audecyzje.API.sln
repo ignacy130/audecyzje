@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2024
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audecyzje.API", "Audecyzje.API\Audecyzje.API.csproj", "{3DA60117-05BF-4419-A773-C9077865BEB0}"
 EndProject
@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audecyzje.Infrastructure", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audecyzje.Tests", "Audecyzje.Tests\Audecyzje.Tests.csproj", "{1A11743A-95A7-4E8C-A5A8-E64E26ED396E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audecyzje.WebQuickDemo", "Audecyzje.WebQuickDemo\Audecyzje.WebQuickDemo.csproj", "{C3C523F4-942E-47ED-B3EC-E4D0FB1FFDA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audecyzje.WebQuickDemo", "Audecyzje.WebQuickDemo\Audecyzje.WebQuickDemo.csproj", "{C3C523F4-942E-47ED-B3EC-E4D0FB1FFDA7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

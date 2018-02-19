@@ -1,0 +1,62 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.jumbotron {
+  border-radius: 0%;
+  background-color: #fff;
+}
+
+.navbar a {
+  margin: 0 2.3rem;
+}
+
+.map-responsive {
+  overflow: hidden;
+  padding-bottom: 50%;
+  position: relative;
+  height: 0;
+}
+
+.map-responsive iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.card p {
+  font-size: 0.9rem;
+}
+
+.card div ul {
+  cursor: pointer;
+}
+
+.card div ul:hover {
+  font-size: 106%
+}
+
+.color-blue {
+  color: #007BFF;
+}
+
+.hide {
+  display: none;
+}
+
+footer .col-sm-5 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+footer ul {
+  list-style: none;
+}
+
+@media (min-width:700px) and (max-width: 1200px) {
+  .input-field {
+    height: 100%;
+  }
+}
