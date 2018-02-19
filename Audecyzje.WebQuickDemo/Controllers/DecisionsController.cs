@@ -73,7 +73,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
                 return NotFound();
             }
 
-            var decision = await _context.Descisions
+            var decision = await _context.Descisions.Include(d=>d.Localizations)
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (decision == null)
             {

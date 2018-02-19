@@ -16,10 +16,16 @@
         <dd>
             @Html.DisplayFor(model => model.SubmissionDate)
         </dd>
-        <dt >
+        <dt>
+            Localization
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Localizations.SingleOrDefault().Street)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Content)
         </dt>
-        <dd style="white-space: pre;"> 
+        <dd style="white-space: pre;">
             @Html.DisplayFor(model => model.Content)
         </dd>
     </dl>
