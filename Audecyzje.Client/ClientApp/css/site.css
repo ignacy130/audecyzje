@@ -1,136 +1,136 @@
-@media (max-width: 767px) {
-    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
-    body {
-        padding-top: 50px;
-    }
-}
-
 body {
-	font-family: 'Open Sans', sans-serif;
-}
-
-.map-responsive {
-	overflow: hidden;
-	padding-bottom: 50%;
-	position: relative;
-	height: 0;
-}
-
-	.map-responsive iframe {
-		left: 0;
-		top: 0;
-		height: 100%;
-		width: 100%;
-		position: absolute;
-	}
-
-p {
-	font-size: 0.9rem;
-}
-
-div ul {
-	cursor: pointer;
-}
-
-div ul:hover {
-	/*font-size: 120%*/
-}
-
-.color-blue {
-	color: #007BFF;
-}
-
-.hide {
-	display: none;
-}
-
-.container {
-	height: 100%;
-	width: 100%;
-}
-
-footer ul.col-sm-8 {
-	display: flex;
-	justify-content: flex-end;
-}
-
-footer ul {
-	list-style: none;
-}
-
-@media (min-width:700px) and (max-width: 1200px) {
-	.input-field {
-		height: 100%;
-	}
-}
-
-body {
-	font-family: 'Open Sans', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 .view {
-	height: 100vh;
-	width: 100%;
-	/*background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("./alexey-topolyanskiy-270795.jpg");*/
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-attachment: fixed;
+  height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("./alexey-topolyanskiy-270795.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .navbar {
-	background-color: transparent !important;
+  background-color: transparent !important;
 }
 
 .navbar a {
-	margin: 0 2.3rem;
+  margin: 0 2.3rem;
 }
 
 .input-field h1 {
-	color: #eee;
-	font-weight: 700;
-	line-height: 4rem;
+  color: #fff;
+  font-weight: 700;
+  line-height: 4.5rem;
+  font-size: 3rem;
+  font-family: 'Oswald', sans-serif;
 }
 
 .input-field h2 {
-	font-weight: 300;
-	color: #eee;
+  color: #fff;
 }
 
 .btn-warning {
-	background-color: #FCE603;
-	border: #FCE603;
+  background-color: #FCE603;
+  border: #FCE603;
 }
 
-.card {
-	box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2);
+.stats .card {
+  box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2);
 }
 
-.card-title {
-	color: #FCE603;
-	font-weight: 700;
+.stats .card-body {
+  padding: 3rem;
+}
+
+.stats .card-title {
+  color: #FCE603;
+  font-weight: 700;
+  font-size: 4rem;
+  font-family: 'Oswald', sans-serif;
 }
 
 .stats {
-	margin-top: -3rem;
+  margin-top: -3rem;
 }
 
-footer .col-sm-8 {
-	display: flex;
-	justify-content: flex-end;
+footer .col-sm-5 {
+  display: flex;
+  justify-content: flex-end;
 }
 
 footer ul {
-	list-style: none;
+  list-style: none;
 }
 
 footer li img {
-	width: 50px;
-	height: 50px;
+  width: 50px;
+  height: 50px;
 }
 
-@media (min-width:700px) and (max-width: 1200px) {
-	.input-field {
-		height: 100%;
-	}
+
+/* Search Page */
+
+.jumbotron {
+  border-radius: 0%;
+  background-color: #fff;
+}
+
+.map-responsive {
+  overflow: hidden;
+  padding-bottom: 50%;
+  position: relative;
+  height: 0;
+}
+
+.map-responsive iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.jumbotron .card p {
+  font-size: 1rem;
+}
+
+/* .card div ul {
+  cursor: pointer;
+}
+
+.card div ul:hover {
+  font-size: 106%
+}
+
+.color-blue {
+  color: #007BFF;
+} */
+
+.hide {
+  display: none;
+}
+
+
+/* Media Queries */
+
+@media (max-width: 464px) {
+  .navbar a {
+    margin: 0;
+  }
+}
+
+@media (max-width: 1200px) {
+  .view {
+    height: 100%;
+    padding-bottom: 5%;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 1200px) {
+  .stats .card-body {
+    padding: 0.5rem;
+  }
 }
