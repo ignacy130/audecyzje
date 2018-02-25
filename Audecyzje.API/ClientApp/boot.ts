@@ -1,7 +1,9 @@
+import Vue from 'vue';
+import Component from 'vue-class-component'
+
+import VueRouter from 'vue-router';
 import './css/site.css';
 import 'bootstrap';
-import Vue from 'vue';
-import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 const routes = [

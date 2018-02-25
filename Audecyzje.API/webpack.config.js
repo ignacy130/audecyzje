@@ -11,14 +11,29 @@ module.exports = (env) => {
         stats: { modules: false },
         context: __dirname,
         resolve: { extensions: [ '.js', '.ts' ] },
-        entry: { 'main': './ClientApp/boot.ts' },
+		entry: { 'main': './ClientApp/boot.ts' },
+		devtool: "source-map",
         module: {
             rules: [
-                { test: /\.vue\.html$/, include: /ClientApp/, loader: 'vue-loader', options: { loaders: { js: 'awesome-typescript-loader?silent=true' } } },
+				{ test: /\.vue\.html$/, include: /ClientApp/, loader: 'vue-loader', options: { loaders: { js: 'awesome-typescript-loader?silent=true'} } },
                 { test: /\.ts$/, include: /ClientApp/, use: 'awesome-typescript-loader?silent=true' },
                 { test: /\.css$/, use: isDevBuild ? [ 'style-loader', 'css-loader' ] : ExtractTextPlugin.extract({ use: 'css-loader?minimize' }) },
                 { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' }
-            ]
+			],
+			loaders: [{
+				test: /\.scss$/,
+				loaders: [
+					'style-loader',
+					'css-loader?sourceMap',
+					'sass-loader?sourceMap'
+				]
+			}, {
+				test: /\.css$/,
+				loaders: [
+					"style-loader",
+					"css-loader?sourceMap"
+				]
+			},]
         },
         output: {
             path: path.join(__dirname, bundleOutputDir),

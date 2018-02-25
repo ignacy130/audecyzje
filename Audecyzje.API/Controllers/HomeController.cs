@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Audecyzje.API.Controllers
 {
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
     public class HomeController : Controller
     {
         private IDocumentService _documentService;
@@ -17,7 +17,13 @@ namespace Audecyzje.API.Controllers
         {
             _documentService = documentService;
         }
-        [HttpGet]
+
+		public IActionResult Index()
+		{
+			return View();
+		}
+
+		[HttpGet]
         public async Task<IEnumerable<DocumentDto>> Get()
         {
             return await _documentService.GetAll();
