@@ -58,7 +58,7 @@ namespace Audecyzje.Infrastructure.DatabaseContext
                 Content = "tresc dokumentu",
                 Date = DateTime.Today,
                 LegalBasis = "Podstawy prawne",
-                DecisionNumber = "1234",
+                DecisionNumber = "5111",
                 SubmissionDate = DateTime.Today,
 
             };
