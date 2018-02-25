@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audecyzje.Tests", "Audecyzj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audecyzje.WebQuickDemo", "Audecyzje.WebQuickDemo\Audecyzje.WebQuickDemo.csproj", "{C3C523F4-942E-47ED-B3EC-E4D0FB1FFDA7}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audecyzje.Client", "Audecyzje.Client\Audecyzje.Client.csproj", "{DBA9EEF2-1C87-410F-A082-D64F48B7E2C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{C3C523F4-942E-47ED-B3EC-E4D0FB1FFDA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3C523F4-942E-47ED-B3EC-E4D0FB1FFDA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3C523F4-942E-47ED-B3EC-E4D0FB1FFDA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBA9EEF2-1C87-410F-A082-D64F48B7E2C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBA9EEF2-1C87-410F-A082-D64F48B7E2C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBA9EEF2-1C87-410F-A082-D64F48B7E2C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBA9EEF2-1C87-410F-A082-D64F48B7E2C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
