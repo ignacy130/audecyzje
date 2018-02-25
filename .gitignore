@@ -2,3 +2,5 @@
 bin/
 obj/
 Audecyzje.WebQuickDemo/Resources/txtmjnall/
+Audecyzje.API/node_modules
+/node_modules
