@@ -70,9 +70,19 @@ namespace Audecyzje.API
             }
 
             app.UseCors("AllowAll");
-            app.UseMvc();
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
+			app.UseStaticFiles();
+
+			app.UseMvc(routes =>
+			{
+				routes.MapRoute(
+					name: "default",
+					template: "{controller=Home}/{action=Index}/{id?}");
+
+				//routes.MapSpaFallbackRoute(
+				//	name: "spa-fallback",
+				//	defaults: new { controller = "Home", action = "Index" });
+			});
+			app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Audecyzje API V1");
             });
