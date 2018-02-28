@@ -3,13 +3,14 @@ body {
 }
 
 .view {
-  height: 100vh;
+  height: 104vh;
   width: 100%;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("./alexey-topolyanskiy-270795.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("./alexey-topolyanskiy-270795.jpg");
+  margin-top: -5rem;
 }
 
 .navbar {
@@ -70,7 +71,6 @@ footer li img {
   height: 50px;
 }
 
-
 /* Search Page */
 
 .jumbotron {
@@ -113,12 +113,43 @@ footer li img {
   display: none;
 }
 
-
 /* Media Queries */
 
 @media (max-width: 464px) {
   .navbar a {
-    margin: 0;
+    margin: -6px 0 0 0;
+    padding: 0;
+  }
+  button.navbar-toggler {
+    padding: 0;
+  }
+  .view {
+    margin-top: -8rem;
+  }
+  .input-field {
+    margin-top: 4rem;
+  }
+}
+
+@media (min-width: 465px) {
+  .btn-warning {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 465px) and (max-width: 991px) {
+  .view {
+    margin-top: -14rem;
+  }
+  .input-field {
+    margin-top: 10rem;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 1200px) {
+  .stats .card-body {
+    padding: 0.5rem;
   }
 }
 
@@ -129,8 +160,8 @@ footer li img {
   }
 }
 
-@media (min-width: 576px) and (max-width: 1200px) {
-  .stats .card-body {
-    padding: 0.5rem;
+@media (min-width: 1201px) {
+  .input-field {
+    margin-top: 5rem;
   }
 }
