@@ -1,36 +1,31 @@
 <template>
-    <div id="app" class="container-fluid">
-        <div class="row">
-            <div class="col-sm-3">
-                <nav-menu params="route: route"></nav-menu>
-            </div>
-            <div class="col-sm-9">
-                <router-view></router-view>
-            </div>
-        </div>
-
+    <div id='app'>
+        <nav-menu />
+        <router-view></router-view>
+        <footer-view />
     </div>
-
 </template>
 
 <script>
-import Vue from 'vue'
-import CounterExample from './counter-example'
-import FetchData from './fetch-data'
-import HomePage from './home-page'
-import NavMenu from './nav-menu'
+    import Vue from 'vue'
+    import CounterExample from './counter-example'
+    import FetchData from './fetch-data'
+    import HomePage from './home-page'
+    import NavMenu from './nav-menu'
+    import Footer from './footer-view'
 
-Vue.component('counter-example', CounterExample);
-Vue.component('fetch-data', FetchData);
-Vue.component('home-page', HomePage);
-Vue.component('nav-menu', NavMenu);
+    Vue.component('counter-example', CounterExample);
+    Vue.component('fetch-data', FetchData);
+    Vue.component('home-page', HomePage);
+    Vue.component('nav-menu', NavMenu);
+    Vue.component('footer-view', Footer);
 
-export default {
+    export default {
     data() {
-        return {
-        }
+    return {
     }
-}
+    }
+    }
 </script>
 
 <style>

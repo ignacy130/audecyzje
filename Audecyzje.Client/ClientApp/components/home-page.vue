@@ -1,38 +1,79 @@
 <template>
     <div>
-        <h1>Hello, world!</h1>
-        <p>Welcome to your new single-page application, built with:</p>
-        <ul>
-            <li><a href="https://get.asp.net/">ASP.NET Core</a> and <a href="https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx">C#</a>                    for cross-platform server-side code</li>
-            <li><a href="https://vuejs.org/">Vue.js</a> for client-side code</li>
-            <li><a href="https://webpack.js.org/">Webpack</a> for building and bundling client-side resources</li>
-            <li><a href="http://getbootstrap.com/">Bootstrap</a> for layout and styling</li>
-            <li><a href="api/SampleData/WeatherForecasts">API sample data</a> from the dotnet controller</li>
-        </ul>
-        <p>To help you get started, we've also set up:</p>
-        <ul>
-            <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return
-                here.</li>
-            <li><strong>Webpack dev middleware</strong>. In development mode, there's no need to run the <code>webpack</code>                    build tool. Your client-side resources are dynamically built on demand. Updates are available as soon
-                as you modify any file.</li>
-            <li><strong>Hot module replacement</strong>. In development mode, you don't even need to reload the page after
-                making most changes. Within seconds of saving changes to files, your Vue.js app will be rebuilt and
-                a new instance injected is into the page.</li>
-            <li><strong>Code splitting and lazy loading</strong>. Vue.js components may optionally be bundled individually and
-                loaded on demand. For example, the code and template for 'Counter' is not loaded until you navigate to
-                it..</li>
-            <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled,
-                and the <code>webpack</code> build tool produces minified static CSS and JavaScript files.</li>
-        </ul>
+        <!-- Input Field -->
+        <div class="view">
+            <div class="container pt-5">
+                <div class="text-center input-field py-5">
+                    <h1 class="text-center">Dostęp do ponad 2000 decyzji reprywatyzacyjnych wydanych w Warszawie w latach 1950-2017</h1>
+                    <div class="input-group my-4">
+                        <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="Wpisz adres warszawskiej nieruchomości">
+                            <button type="button" class="btn btn-warning btn-lg">Sprawdź</button>
+                        </div>
+                    <h2 class="text-center">
+                        Lorem ipsum dolor sit amet augue. Praesent gravida pulvinar. Nulla facilisi. Etiam vel nulla. Curabitur scelerisque
+                        tellus augue, ullamcorper ut, condimentum urna, placerat tempor ac, suscipit in, vulputate tortor id felis.
+                    </h2>
+                </div>
+            </div>
+        </div>
 
-        <br><br>
+        <!-- Stats -->
+        <section>
+            <div class="container">
+                <div class="stats">
+                    <div class="card-deck">
+                        <div class="card">
+                            <div class="card-body">
+                                <h1 class="card-title text-center">20 tys.</h1>
+                                <p class="card-text">Aż tyle osób straciło dach nad głową w wyniku reprywatyzacji.</p>
+                                <p>To 1% mieszkańców Warszawy.</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h1 class="card-title text-center">450</h1>
+                                <p class="card-text">Tyle nieruchomości zostało przekazanych w latach 1950-2017.</p>
+                                <p>To 3% budynkow w Warszawie.</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h1 class="card-title text-center">15 mln</h1>
+                                <p class="card-text">To łączna wartość zreprywatyzowanych nieruchomości w stolicy.</p>
+                                <p>To 5% budżetu rocznego Warszawy.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <h2>This Template brought to you by <a href="http://DevHelp.Online">DevHelp.Online</a></h2>
-        <strong>Consulting | Development | Training | Workshops</strong><br>
-        <p>Get your Team or Application up to speed by working with some of the leading industry experts in JavaScript & ASP.NET!</p>
 
-        <strong>Contact us today: </strong>
-        <p><a href="mailto:hello@devhelp.online">Hello@DevHelp.Online</a></p>
+        <!-- Info -->
+        <section class="container info my-5">
+            <div class="row">
+                <div class="col-sm mb-4">
+                    <h5 class="font-weight-bold">Reprywatyzacja w Twojej dzielnicy</h5>
+                    <p>Lorem ipsum dolor sit amet augue. Praesent gravida pulvinar. Nulla facilisi. Etiam vel nulla.</p>
+                    <a href="">Przeglądaj ></a>
+                </div>
+                <div class="col-sm mb-4">
+                    <h5 class="font-weight-bold">Raporty i opracowania</h5>
+                    <p>Lorem ipsum dolor sit amet augue. Praesent gravida pulvinar. Nulla facilisi. Etiam vel nulla.</p>
+                    <a href="">Przeglądaj ></a>
+                </div>
+                <div class="col-sm mb-4">
+                    <h5 class="font-weight-bold">Baza wiedzy o reprywatyzacji</h5>
+                    <p>Lorem ipsum dolor sit amet augue. Praesent gravida pulvinar. Nulla facilisi. Etiam vel nulla.</p>
+                    <a href="">Przeglądaj ></a>
+                </div>
+                <div class="col-sm mb-4">
+                    <h5 class="font-weight-bold">Kontakt/ źródła opracowań</h5>
+                    <p>Lorem ipsum dolor sit amet augue. Praesent gravida pulvinar. Nulla facilisi. Etiam vel nulla.</p>
+                    <a href="">Przeglądaj ></a>
+                </div>
+            </div>
+        </section>
     </div>
 </template>
 
