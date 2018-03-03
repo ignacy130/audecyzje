@@ -9,13 +9,13 @@
 <script>
     import Vue from 'vue'
     import CounterExample from './counter-example'
-    import FetchData from './fetch-data'
+    import Map from './map'
     import HomePage from './home-page'
     import NavMenu from './nav-menu'
     import Footer from './footer-view'
 
     Vue.component('counter-example', CounterExample);
-    Vue.component('fetch-data', FetchData);
+    Vue.component('map', Map);
     Vue.component('home-page', HomePage);
     Vue.component('nav-menu', NavMenu);
     Vue.component('footer-view', Footer);
@@ -23,6 +23,7 @@
     export default {
     data() {
     return {
+        isHome: true,
     }
     }
     }

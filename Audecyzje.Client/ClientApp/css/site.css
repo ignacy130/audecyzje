@@ -18,9 +18,13 @@ body {
     background-color: transparent !important;
 }
 
-    .navbar a {
-        margin: 0 2.3rem;
-    }
+.navbar a {
+    margin: 0 2.3rem;
+}
+
+.navbar-dark a{
+    color: #fff;
+}
 
 .input-field h1 {
     color: #fff;

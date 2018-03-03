@@ -1,4 +1,4 @@
-﻿import Vue from 'vue'
+import Vue from 'vue'
 import axios from 'axios'
 import router from './router'
 import store from './store'
@@ -13,7 +13,7 @@ const app = new Vue({
     store,
     router,
     ...App
-})
+}).$mount('#app')
 
 export {
     app,
