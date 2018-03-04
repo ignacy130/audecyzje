@@ -2,22 +2,23 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
+.navbar {
+  position: relative;
+}
+
 .view {
-  height: 100vh;
+  height: 104vh;
   width: 100%;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("./alexey-topolyanskiy-270795.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("./alexey-topolyanskiy-270795.jpg");
+  margin-top: -5rem;
 }
 
-.navbar {
+.transparent {
   background-color: transparent !important;
-}
-
-.navbar a {
-  margin: 0 2.3rem;
 }
 
 .input-field h1 {
@@ -28,8 +29,9 @@ body {
   font-family: 'Oswald', sans-serif;
 }
 
-.input-field h2 {
+.input-field h6 {
   color: #fff;
+  font-size: 1rem;
 }
 
 .btn-warning {
@@ -70,7 +72,6 @@ footer li img {
   height: 50px;
 }
 
-
 /* Search Page */
 
 .jumbotron {
@@ -97,28 +98,55 @@ footer li img {
   font-size: 1rem;
 }
 
-/* .card div ul {
-  cursor: pointer;
-}
-
-.card div ul:hover {
-  font-size: 106%
-}
-
-.color-blue {
-  color: #007BFF;
-} */
-
 .hide {
   display: none;
 }
-
 
 /* Media Queries */
 
 @media (max-width: 464px) {
   .navbar a {
-    margin: 0;
+    margin: -6px 0 0 0;
+    padding: 0;
+  }
+  button.navbar-toggler {
+    padding: 0;
+  }
+  .view {
+    margin-top: -8rem;
+  }
+  .input-field {
+    margin-top: 4rem;
+  }
+}
+
+@media (min-width: 465px) {
+  .btn-warning {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 465px) and (max-width: 991px) {
+  .view {
+    margin-top: -14rem;
+  }
+  .input-field {
+    margin-top: 10rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .navbar-brand {
+    position: absolute;
+    left: 40%;
+    display: block;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 1200px) {
+  .stats .card-body {
+    padding: 0.5rem;
   }
 }
 
@@ -129,8 +157,20 @@ footer li img {
   }
 }
 
-@media (min-width: 576px) and (max-width: 1200px) {
-  .stats .card-body {
-    padding: 0.5rem;
+@media (min-width: 1150px) and (max-width: 1300px) {
+  .navbar a {
+    margin: 0 1.1rem;
+  }
+}
+
+@media (min-width: 1201px) {
+  .input-field {
+    margin-top: 5rem;
+  }
+}
+
+@media (min-width: 1301px) {
+  .navbar a {
+    margin: 0 2rem;
   }
 }
