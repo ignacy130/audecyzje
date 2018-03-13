@@ -21,11 +21,19 @@ namespace Audecyzje.API.Controllers
         {
             return await _documentService.GetAll();
         }
-        [HttpGet("GetByLegalBasis/{legalBasics}")]
+
+		[HttpGet("GetByDecisionNumber/{number}")]
+		public async Task<IEnumerable<DocumentDto>> GetByDecisionNumber(string number)
+		{
+			return await _documentService.GetByDecisionNumber(number);
+		}
+
+		[HttpGet("GetByLegalBasis/{legalBasis}")]
         public async Task<IEnumerable<DocumentDto>> GetByLegalBasis(string legalBasis)
         {
             return await _documentService.GetByLegalBasis(legalBasis);
         }
+
         [HttpGet("GetByAdres/{address}")]
         public async Task<IEnumerable<DocumentDto>> GetByAddress(string address)
         {

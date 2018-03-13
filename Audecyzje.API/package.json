@@ -1,0 +1,39 @@
+{
+	"name": "Audecyzje.API",
+	"private": true,
+	"version": "0.0.0",
+	"scripts": {
+		"build": "webpack",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"devDependencies": {
+		"@types/webpack-env": "^1.13.0",
+		"aspnet-webpack": "^2.0.1",
+		"awesome-typescript-loader": "^3.0.0",
+		"bootstrap": "^4.0.0",
+		"css-loader": "^0.28.1",
+		"event-source-polyfill": "^0.0.7",
+		"extract-text-webpack-plugin": "^2.0.0-rc",
+		"file-loader": "^0.9.0",
+		"isomorphic-fetch": "^2.2.1",
+		"jquery": "^3.1.1",
+		"style-loader": "^0.13.1",
+		"typescript": "^2.3.2",
+		"ts-loader": "^2.0.3",
+		"url-loader": "^0.5.7",
+		"vue": "^2.2.2",
+		"vue-loader": "^12.0.3",
+		"vue-property-decorator": "^5.0.1",
+		"vue-router": "^2.3.0",
+		"vue-template-compiler": "^2.5.2",
+		"webpack": "^2.5.0",
+		"webpack-hot-middleware": "^2.12.2"
+	},
+	"dependencies": {
+		"vue": "^2.5.2",
+		"vue-class-component": "^6.0.0",
+		"vue-property-decorator": "^6.0.0",
+		"vue-router": "^3.0.1",
+		"popper.js": "^1.12.9"
+	}
+}

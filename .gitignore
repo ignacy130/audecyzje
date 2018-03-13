@@ -2,3 +2,11 @@
 bin/
 obj/
 Audecyzje.WebQuickDemo/Resources/txtmjnall/
+Audecyzje.API/node_modules
+/node_modules
+*.js.map
+wwwroot/lib 
+Audecyzje.API/wwwroot/dist
+Audecyzje\.API/ClientApp/boot\.js
+
+Audecyzje\.API/ClientApp/components/app/app\.js
