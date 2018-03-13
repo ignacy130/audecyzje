@@ -4,6 +4,7 @@ body {
 
 .navbar {
   position: relative;
+  background-color: transparent !important;
 }
 
 .view {
@@ -15,10 +16,6 @@ body {
   background-attachment: fixed;
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("./alexey-topolyanskiy-270795.jpg");
   margin-top: -5rem;
-}
-
-.transparent {
-  background-color: transparent !important;
 }
 
 .input-field h1 {
@@ -77,6 +74,87 @@ footer li img {
 .jumbotron {
   border-radius: 0%;
   background-color: #fff;
+  margin-bottom: 0;
+  padding: 0 1rem;
+}
+
+.jumbotron .card-body {
+  padding: 0;
+}
+
+.input-group .form-control {
+  border: none;
+  border-bottom: 1px solid #ced4da;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 1px;
+  border-radius: 5px;
+  background: #979797;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #FCE603;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #FCE603;
+  cursor: pointer;
+}
+
+.fa-lg,
+.fa-2x {
+  color: #9B9B9B;
+}
+
+.fa-search:hover {
+  cursor: pointer;
+}
+
+.address {
+  background-color: #FCE603;
+}
+
+.jumbotron .card {
+  border: #fff;
+}
+
+.card .address h5 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.5rem;
+}
+
+.jumbotron .card p {
+  font-size: 0.9rem;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.row .col-md-10 p {
+  margin: 0;
+  line-height: 1.1rem;
+}
+
+.row .col-md-9 p {
+  margin: 5px;
+  line-height: 1.1rem;
 }
 
 .map-responsive {
@@ -94,10 +172,6 @@ footer li img {
   position: absolute;
 }
 
-.jumbotron .card p {
-  font-size: 1rem;
-}
-
 .hide {
   display: none;
 }
@@ -105,18 +179,20 @@ footer li img {
 /* Media Queries */
 
 @media (max-width: 464px) {
-  .navbar a {
-    margin: -6px 0 0 0;
-    padding: 0;
-  }
   button.navbar-toggler {
     padding: 0;
   }
   .view {
-    margin-top: -8rem;
+    margin-top: -14rem;
   }
   .input-field {
-    margin-top: 4rem;
+    margin-top: 10rem;
+  }
+}
+
+@media (max-width: 366px) {
+  .view {
+    margin-top: -16rem;
   }
 }
 
@@ -136,6 +212,18 @@ footer li img {
   }
 }
 
+@media (max-width: 767px) {
+  .map-responsive {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .input-card {
+    padding-right: 0;
+  }
+}
+
 @media (min-width: 992px) {
   .navbar-brand {
     position: absolute;
@@ -144,13 +232,13 @@ footer li img {
   }
 }
 
-@media (min-width: 576px) and (max-width: 1200px) {
+@media (min-width: 576px) and (max-width: 1199px) {
   .stats .card-body {
     padding: 0.5rem;
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1199px) {
   .view {
     height: 100%;
     padding-bottom: 5%;
@@ -163,7 +251,7 @@ footer li img {
   }
 }
 
-@media (min-width: 1201px) {
+@media (min-width: 1200px) {
   .input-field {
     margin-top: 5rem;
   }
