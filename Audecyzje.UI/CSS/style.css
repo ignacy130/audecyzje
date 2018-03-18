@@ -120,6 +120,28 @@ footer li img {
   cursor: pointer;
 }
 
+.card.card-body {
+  position: relative;
+}
+
+.success-img {
+  position: relative;
+}
+
+.fa-times.fa-2x {
+  color: #222;
+  background-color: #fff;
+  box-shadow: 0 5px 15px 0;
+  position: absolute;
+  padding: 6px;
+  border-radius: 50%;
+  width: 2rem;
+}
+
+.fa-times.fa-2x:hover {
+  cursor: pointer;
+}
+
 .fa-lg,
 .fa-2x {
   color: #9B9B9B;
