@@ -59,20 +59,41 @@
           width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
       </div>
 
-      <!-- Input Group -->
+      <!-- Results Group -->
       <div class="input-card col-md-4 order-md-1">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Wpisz adres warszawskiej nieruchomości" aria-label="Recipient's username"
-            aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <i class="fas fa-search fa-lg my-auto mx-3"></i>
+
+        <!-- Results Card -->
+        <div class="card card-body hide" id="results">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Wpisz adres warszawskiej nieruchomości" aria-label="Recipient's username"
+              aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <i class="fas fa-search fa-lg my-auto mx-3"></i>
+            </div>
+          </div>
+          <div class="container slidecontainer my-4">
+            <p>Decyzje wydane w latach:</p>
+            <input type="range" min="1950" max="2017" value="2000" class="slider" id="myRange">
+          </div>
+          <hr>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-3">
+                <img class="img-fluid mb-4" src="http://lorempixel.com/92/80" alt="">
+              </div>
+              <div class="col-md-9">
+                <p class="font-weight-bold">Marszałkowska 1</p>
+                <p>Ilość lokali: 15</p>
+                <p>Ostatnia liczba lokatorów: 43</p>
+              </div>
+            </div>
           </div>
         </div>
 
         <!-- Success Card -->
         <div class="card card-body" id="success">
-          <hr>
-          <img class="img-fluid" src="http://lorempixel.com/459/203" alt="">
+          <img class="img-fluid success-img" src="http://lorempixel.com/459/203" alt="">
+          <i class="fas fa-times fa-2x ml-3 mt-3" href="#"></i>
           <div class="address py-3">
             <h5 class="mt-4 ml-4">Marszałkowska 1</h5>
             <p class="mb-4 ml-4">Śródmieście, Warszawa</p>
@@ -112,6 +133,13 @@
 
         <!-- Error Card -->
         <div class="card card-body hide" id="error">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Wpisz adres warszawskiej nieruchomości" aria-label="Recipient's username"
+              aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <i class="fas fa-search fa-lg my-auto mx-3"></i>
+            </div>
+          </div>
           <div class="container slidecontainer my-4">
             <p>Decyzje wydane w latach:</p>
             <input type="range" min="1950" max="2017" value="2000" class="slider" id="myRange">
@@ -122,26 +150,6 @@
           </div>
         </div>
 
-        <!-- Results Card -->
-        <div class="card card-body hide" id="results">
-          <div class="container slidecontainer my-4">
-            <p>Decyzje wydane w latach:</p>
-            <input type="range" min="1950" max="2017" value="2000" class="slider" id="myRange">
-          </div>
-          <hr>
-          <div class="container">
-            <div class="row">
-              <div class="col-md-3">
-                <img class="img-fluid mb-4" src="http://lorempixel.com/92/80" alt="">
-              </div>
-              <div class="col-md-9">
-                <p class="font-weight-bold">Marszałkowska 1</p>
-                <p>Ilość lokali: 15</p>
-                <p>Ostatnia liczba lokatorów: 43</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
