@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Lato|Oswald:400,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato|Oswald:400,700|Open+Sans:400,700" rel="stylesheet">
   <!-- Font Awesome -->
   <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
   <!-- CSS  -->
@@ -22,25 +22,27 @@
 
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Społeczny Audyt Reprywatyzacji</a>
+    <a class="navbar-brand mx-auto" href="#">Społeczny Audyt Reprywatyzacji</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav mx-auto">
-        <li class="nav-item">
+    <div class="collapse navbar-collapse justify-content-between" id="navbarText">
+      <ul class="navbar-nav">
+        <li class="nav-item mx-2">
           <a class="nav-link" href="../Audecyzje.UI.Home/index.html">Strona Główna</a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item active mx-2">
           <a class="nav-link" href="../Audecyzje.UI.SearchPage/index.html">Mapa Reprywatyzacji
             <span class="sr-only">(current)</span>
           </a>
         </li>
-        <li class="nav-item">
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item mx-2">
           <a class="nav-link" href="#">Baza Wiedzy</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item mx-2">
           <a class="nav-link" href="#">Kontakt</a>
         </li>
       </ul>
@@ -48,282 +50,106 @@
   </nav>
 
   <!-- Form -->
-  <div class="jumbotron form px-4 mx-auto">
+  <div class="jumbotron form pt-4 mx-auto">
     <div class="row">
-      <div class="col-md-4">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Wpisz adres warszawskiej nieruchomości" aria-label="Recipient's username"
-            aria-describedby="basic-addon2">
-          <!-- <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false"></button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <form class="px-4 py-3">
-                <div class="form-group">
-                  <label for="exampleDropdownFormEmail1">Rok/Lata</label>
-                  <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="1950-2017">
-                </div>
-                <div class="form-group">
-                  <label for="exampleDropdownFormPassword1">Dzielnica</label>
-                  <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Wola">
-                </div>
-                <div class="form-check mb-3">
-                  <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                  <label class="form-check-label" for="dropdownCheck">
-                    Zaznacz
-                  </label>
-                </div>
-                <button type="submit" class="btn btn-primary">Znajdź</button>
-              </form>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Lorem ipsum dolor sit amet</a>
-            </div>
-          </div> -->
-          <div class="input-group-append">
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
-              aria-controls="collapseExample">Szukaj</button>
-          </div>
-          <div class="collapse" id="collapseExample">
 
-            <!-- Success Card -->
-            <div class="card card-body" id="success">
-              <img class="img-fluid mb-4" src="http://lorempixel.com/400/200" alt="">
-              <div class="row">
-                <div class="col-md-2">
-                  <i class="fas fa-file-pdf fa-lg"></i>
-                </div>
-                <div class="col-md-10">
-                  <p>Decyzja nr xxxx</p>
-                  <p>Wydana 12 stycznia 2012 r.</p>
-                  <p>przez xxxx</p>
-                  <p>Rodzaj nieruchomości: xxxx</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-2">
-                  <i class="fas fa-home fa-lg"></i>
-                </div>
-                <div class="col-md-10">
-                  <p>Ilość lokali: xxxx</p>
-                  <p>Ilość lokatorów na dzień x: xxx</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-2">
-                  <i class="fas fa-exclamation-circle fa-lg"></i>
-                </div>
-                <div class="col-md-10">
-                  <p>Zwróć uwagę na:</p>
-                  <p>Tag 1
-                    <a href="url">co to znaczy?</a>
-                  </p>
-                  <p>Tag 2
-                    <a href="url">co to znaczy?</a>
-                  </p>
-                </div>
-              </div>
-<!-- <div class="row">
-                <div class="col-md-2">
-                  <i class="fas fa-comment-alt fa-lg"></i>
-                </div>
-                <div class="col-md-10">
-                  <p>Komentarze</p>
-                  <p class="font-weight-bold">Janusz Komentatorski</p>
-                  <p class="text-justify">Ambitioni dedisse scripsisse iudicaretur. Cras mattis iudicium purus sit amet fermentum. Donec sed odio
-                    operae, eu vulputate felis rhoncus. Praeterea iter est quasdam res quas ex communi. At nos hinc posthac,
-                    sitientis piros Afros. Petierunt uti sibi concilium totius Galliae in diem certam indicere. Cras mattis
-                    iudicium purus sit amet fermentum.
-                  </p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col">
-                  <ul class="list-inline">
-                    <li class="list-inline-item">
-                      <i class="fas fa-plus-circle fa-lg color-blue"></i>
-                    </li>
-                    <li class="list-inline-item">
-                      <p>Dodaj komentarz</p>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col">
-                  <ul class="list-inline">
-                    <li class="list-inline-item">
-                      <i class="fas fa-users fa-lg color-blue"></i>
-                    </li>
-                    <li class="list-inline-item">
-                      <p>Historie lokatorów</p>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-6">
-                  <ul class="list-inline">
-                    <li class="list-inline-item">
-                      <i class="fas fa-file-alt fa-lg color-blue"></i>
-                    </li>
-                    <li class="list-inline-item">
-                      <p>Zobacz artykuły</p>
-                    </li>
-                  </ul>
-                </div>
-              </div> -->
-            </div>
-
-            <!-- Error Card -->
-            <div class="card card-body hide" id="error">
-              <img class="img-fluid mb-4" src="http://lorempixel.com/400/200" alt="">
-              <div class="row">
-                <div class="col-md-2">
-                  <i class="fas fa-frown fa-lg"></i>
-                </div>
-                <div class="col-md-10">
-                  <p class="text-justify">Nie mamy żadnej decyzji dotyczącej tego adresu.</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-2">
-                  <i class="fab fa-wpforms fa-lg"></i>
-                </div>
-                <div class="col-md-10">
-                  <p class="text-justify">Jeśli chcesz złożyć wniosek do xxxx skorzystaj z szablonu i wyślij go do ...
-                  </p>
-                  <button type="button" class="btn btn-primary btn-lg btn-block mb-4">Uzupełnij formularz</button>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col">
-                  <ul class="list-inline">
-                    <li class="list-inline-item">
-                      <i class="fas fa-plus-circle fa-lg color-blue"></i>
-                    </li>
-                    <li class="list-inline-item">
-                      <p>Dodaj komentarz</p>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col">
-                  <ul class="list-inline">
-                    <li class="list-inline-item">
-                      <i class="fas fa-users fa-lg color-blue"></i>
-                    </li>
-                    <li class="list-inline-item">
-                      <p>Historie lokatorów</p>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-6">
-                  <ul class="list-inline">
-                    <li class="list-inline-item">
-                      <i class="fas fa-file-alt fa-lg color-blue"></i>
-                    </li>
-                    <li class="list-inline-item">
-                      <p>Zobacz artykuły</p>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <!-- District Card -->
-            <div class="card card-body hide" id="district">
-              <img class="img-fluid mb-4" src="http://lorempixel.com/400/200" alt="">
-              <div class="row">
-                <div class="col-md-2">
-                  <i class="fas fa-file-pdf fa-lg"></i>
-                </div>
-                <div class="col-md-10">
-                  <p>X wydanych decyzji
-                    <a href="">Pokaż</a>
-                  </p>
-                  <p>W latach:</p>
-                  <div class="btn-group">
-                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      1950
-                    </button>
-                    <div class="dropdown-menu">
-                      ...
-                    </div>
-                  </div>
-                  <div class="btn-group">
-                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      2017
-                    </button>
-                    <div class="dropdown-menu">
-                      ...
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row mt-3">
-                <div class="col-md-2">
-                  <i class="fas fa-home fa-lg"></i>
-                </div>
-                <div class="col-md-10">
-                  <p>Ilość lokali: xxxx</p>
-                  <p>Ilość lokatorów na dzień x: xxx</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-2">
-                  <i class="fas fa-exclamation-circle fa-lg"></i>
-                </div>
-                <div class="col-md-10">
-                  <p>Zwróć uwagę na:</p>
-                  <p>Tag 1
-                    <a href="url">co to znaczy?</a>
-                  </p>
-                  <p>Tag 2
-                    <a href="url">co to znaczy?</a>
-                  </p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col">
-                  <ul class="list-inline">
-                    <li class="list-inline-item">
-                      <i class="fas fa-plus-circle fa-lg color-blue"></i>
-                    </li>
-                    <li class="list-inline-item">
-                      <p>Dodaj komentarz</p>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col">
-                  <ul class="list-inline">
-                    <li class="list-inline-item">
-                      <i class="fas fa-users fa-lg color-blue"></i>
-                    </li>
-                    <li class="list-inline-item">
-                      <p>Historie lokatorów</p>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-6">
-                  <ul class="list-inline">
-                    <li class="list-inline-item">
-                      <i class="fas fa-file-alt fa-lg color-blue"></i>
-                    </li>
-                    <li class="list-inline-item">
-                      <p>Zobacz artykuły</p>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-      <div class="col-md-8 map-responsive">
+      <!-- Responsive Map -->
+      <div class="col-md-8 map-responsive order-md-12 mb-5">
         <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d9775.077946251844!2d21.01258967137917!3d52.22940567198604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spl!2spl!4v1517337615480"
           width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+      </div>
+
+      <!-- Results Group -->
+      <div class="input-card col-md-4 order-md-1">
+
+        <!-- Results Card -->
+        <div class="card card-body hide" id="results">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Wpisz adres warszawskiej nieruchomości" aria-label="Recipient's username"
+              aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <i class="fas fa-search fa-lg my-auto mx-3"></i>
+            </div>
+          </div>
+          <div class="container slidecontainer my-4">
+            <p>Decyzje wydane w latach:</p>
+            <input type="range" min="1950" max="2017" value="2000" class="slider" id="myRange">
+          </div>
+          <hr>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-3">
+                <img class="img-fluid mb-4" src="http://lorempixel.com/92/80" alt="">
+              </div>
+              <div class="col-md-9">
+                <p class="font-weight-bold">Marszałkowska 1</p>
+                <p>Ilość lokali: 15</p>
+                <p>Ostatnia liczba lokatorów: 43</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Success Card -->
+        <div class="card card-body" id="success">
+          <img class="img-fluid success-img" src="http://lorempixel.com/459/203" alt="">
+          <i class="fas fa-times fa-2x ml-3 mt-3" href="#"></i>
+          <div class="address py-3">
+            <h5 class="mt-4 ml-4">Marszałkowska 1</h5>
+            <p class="mb-4 ml-4">Śródmieście, Warszawa</p>
+          </div>
+          <div class="card-content">
+            <div class="row mx-auto mt-5">
+              <div class="col-md-2">
+                <i class="fas fa-home fa-2x mb-2"></i>
+              </div>
+              <div class="col-md-10">
+                <p>Liczba lokali: 15</p>
+                <p>Liczba lokatorów na dzień 31.12.2017 r.: 43</p>
+              </div>
+            </div>
+            <div class="row mx-auto mt-4">
+              <div class="col-md-2">
+                <i class="fas fa-file-pdf fa-2x mb-2 ml-1"></i>
+              </div>
+              <div class="col-md-10">
+                <p>Decyzja nr: 123456</p>
+                <p>Wydana 12.12.2001 r. przez Urząd Miasta Stołecznego Warszawa</p>
+                <p>Rodzaj nieruchomości: xxx</p>
+              </div>
+            </div>
+            <div class="row mx-auto my-4">
+              <div class="col-md-2">
+                <i class="fas fa-file-pdf fa-2x mb-2 ml-1"></i>
+              </div>
+              <div class="col-md-10">
+                <p>Decyzja nr: 123456</p>
+                <p>Wydana 12.12.2001 r. przez Urząd Miasta Stołecznego Warszawa</p>
+                <p>Rodzaj nieruchomości: xxx</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Error Card -->
+        <div class="card card-body hide" id="error">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Wpisz adres warszawskiej nieruchomości" aria-label="Recipient's username"
+              aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <i class="fas fa-search fa-lg my-auto mx-3"></i>
+            </div>
+          </div>
+          <div class="container slidecontainer my-4">
+            <p>Decyzje wydane w latach:</p>
+            <input type="range" min="1950" max="2017" value="2000" class="slider" id="myRange">
+          </div>
+          <hr>
+          <div class="container">
+            <p>Nie znaleziono wyników dla podanego adresu.</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -341,10 +167,10 @@
         <a href="../Audecyzje.UI.Regulations/index.htm">Regulamin</a>
       </p>
       <ul class="col-sm-5">
-        <li class="col-sm-2">
+        <li class="mx-2">
           <img class="img-fluid" src="http://lorempixel.com/50/50" alt="">
         </li>
-        <li class="col-sm-2">
+        <li class="mx-2">
           <img class="img-fluid" src="http://lorempixel.com/50/50" alt="">
         </li>
       </ul>
