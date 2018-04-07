@@ -43,11 +43,11 @@ namespace Audecyzje.Client
             services.AddMvc();
             services.AddTransient(c => AutoMapperConfig.Initialize());
             services.AddTransient<IDocumentRepository, DocumentRepository>();
-            
-            //services.Scan(selector =>
-            //{
-            //    selector.FromAssemblyOf<Service>().AddClasses().AsImplementedInterfaces().WithTransientLifetime();
-            //});
+
+            services.Scan(selector =>
+            {
+                selector.FromAssemblyOf<Service>().AddClasses().AsImplementedInterfaces().WithTransientLifetime();
+            });
 
             services.AddCors(x =>
             {
@@ -90,15 +90,21 @@ namespace Audecyzje.Client
             app.UseCors("AllowAll");
             app.UseStaticFiles();
 
+            app.MapWhen(x => !x.Request.Path.Value.StartsWith("/api"), builder =>
+            {
+                builder.UseMvc(routes =>
+                {
+                    routes.MapSpaFallbackRoute(
+                        name: "spa-fallback",
+                        defaults: new { controller = "Home", action = "Index" });
+                });
+            });
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-
-                routes.MapSpaFallbackRoute(
-                    name: "spa-fallback",
-                    defaults: new { controller = "Home", action = "Index" });
             });
 
             app.UseSwaggerUI(c =>
