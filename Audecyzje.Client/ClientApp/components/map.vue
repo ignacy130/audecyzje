@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Wpisz adres warszawskiej nieruchomości" aria-label="Recipient's username"
+                        <input type="text" v-model="query" class="form-control" placeholder="Wpisz adres warszawskiej nieruchomości" aria-label="Recipient's username"
                           aria-describedby="basic-addon2"/>
                             <!-- <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
@@ -33,13 +33,13 @@
             </div>
           </div> -->
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+                                <button v-on:click="search" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
                                   aria-controls="collapseExample">Szukaj</button>
                             </div>
                             
                         </div>
-                    <div class="" v-if="forecasts">
-                        <div v-for="decision in forecasts">
+                    <div class="" v-if="decisions">
+                        <div v-for="decision in decisions">
                             <!-- Success Card -->
                             <div class="card card-body" id="success">
                                 <img class="img-fluid mb-4" src="" alt=""/>
@@ -294,32 +294,21 @@
 export default {
     data() {
         return {
-            forecasts: null
+            decisions: null,
+            query: ""
         }
     },
 
     methods: {
-    },
-
-    async created() {
-        // ES2017 async/await syntax via babel-plugin-transform-async-to-generator
-        // TypeScript can also transpile async/await down to ES5
-        try {
-            let response = await this.$http.get('/api/document/getbydecisionnumber/1234')
-            console.log(response.data);
-            this.forecasts = response.data;
+         search: async function(event){
+            try {
+            let response = await this.$http.get('/api/document/getbydecisionnumber/'+this.query)
+            this.decisions = response.data;
         } catch (error) {
             console.log(error)
         }
-        // Old promise-based approach
-        //this.$http
-        //    .get('/api/SampleData/WeatherForecasts')
-        //    .then(response => {
-        //        console.log(response.data)
-        //        this.forecasts = response.data
-        //    })
-        //    .catch((error) => console.log(error))*/
-    }
+        }
+    },
 }
 </script>
 
