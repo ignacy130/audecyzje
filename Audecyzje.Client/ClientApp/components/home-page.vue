@@ -6,7 +6,7 @@
                 <div class="text-center input-field py-5">
                     <h1 class="text-center">Dostęp do ponad 2000 decyzji reprywatyzacyjnych wydanych w Warszawie w latach 1950-2017</h1>
                     <div class="input-group my-4">
-                        <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="Wpisz adres warszawskiej nieruchomości">
+                        <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="Wpisz adres warszawskiej nieruchomości"/>
                             <button type="button" class="btn btn-warning btn-lg">Sprawdź</button>
                         </div>
                     <h2 class="text-center">
@@ -81,6 +81,7 @@
 export default {
     data() {
         return {
+            isHome: true
         }
     },
 }

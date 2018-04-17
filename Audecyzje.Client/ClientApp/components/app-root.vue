@@ -22,9 +22,9 @@
 
     export default {
     data() {
-    return {
-        isHome: true,
-    }
+        return {
+            
+        }
     }
     }
 </script>

@@ -1,24 +1,26 @@
 <template>
     <nav class="navbar navbar-expand-lg bg-dark" v-bind:class="{ 'navbar-dark': isHome }">
-        <a class="navbar-brand" href="#">Społeczny Audyt Reprywatyzacji</a>
+        <a class="navbar-brand mx-auto" href="#">Społeczny Audyt Reprywatyzacji</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav mx-auto">
-                <li class="nav-item active">
+        <div class="collapse navbar-collapse justify-content-between" id="navbarText">
+            <ul class="navbar-nav">
+                <li class="nav-item active mx-2">
                     <a class="nav-link" href=".">
                         Strona Główna
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mx-2">
                     <a class="nav-link" href="/map">Mapa Reprywatyzacji</a>
                 </li>
-                <li class="nav-item">
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item mx-2">
                     <a class="nav-link" href="#">Baza Wiedzy</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mx-2">
                     <a class="nav-link" href="#">Kontakt</a>
                 </li>
             </ul>
@@ -27,21 +29,22 @@
 </template>
 
 <script>
-import { routes } from '../routes'
+    import { routes } from '../routes'
 
-export default {
+    export default {
     data() {
-        return {
-            routes,
-            collapsed : true
-        }
+    return {
+    isHome: this.$route.path === "/",
+    routes,
+    collapsed : true
+    }
     },
     methods: {
-        toggleCollapsed: function(event){
-            this.collapsed = !this.collapsed;
-        }
+    toggleCollapsed: function(event){
+    this.collapsed = !this.collapsed;
     }
-}
+    }
+    }
 </script>
 
 <style>
