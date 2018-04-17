@@ -1,5 +1,5 @@
 <template>
-    <footer class="container pt-5">
+    <footer class="container pt-5" v-bind:class="{ 'hide': isMap }">
         <div class="row">
             <p class="col-sm-3">
                 Copyright &copy; 2017
@@ -26,6 +26,7 @@
     export default {
     data() {
     return {
+    isMap: this.$route.path === "/map",
     }
     },
     }
