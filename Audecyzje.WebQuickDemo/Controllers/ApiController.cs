@@ -22,16 +22,27 @@ namespace Audecyzje.WebQuickDemo.Controllers
         
         //GET: api/Api/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(string id)
+        public JsonResult Get(string id)
         {
-            return JsonConvert.SerializeObject(_context.Descisions.Where(d=> d.DecisionNumber == id));
+			var l = _context.Descisions.Take(10).ToList();
+
+			return new JsonResult(l);
         }
 
-        [HttpGet]
+		[Route("getpage")]
+		public JsonResult GetPage(int number)
+		{
+			var l = _context.Descisions.Skip(number*100).Take(100).ToList();
+
+			return new JsonResult(l);
+		}
+
+
+		[HttpGet]
         [Route("alldecisions")]
-        public string GetAll()
+        public JsonResult GetAll()
         {
-            return JsonConvert.SerializeObject(_context.Descisions.ToList());
+            return new JsonResult(_context.Descisions.ToAsyncEnumerable().ToList());
         }
     }
 }

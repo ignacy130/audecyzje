@@ -25,8 +25,8 @@ namespace Audecyzje.WebQuickDemo
         {
             services.AddMvc();
             services.AddDbContext<WarsawContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-        }
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), sqlServerOptions => sqlServerOptions.CommandTimeout(60).EnableRetryOnFailure()));
+		}
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
