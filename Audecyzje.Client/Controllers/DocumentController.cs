@@ -22,7 +22,14 @@ namespace Audecyzje.Client.Controllers
             return await _documentService.GetAll();
         }
 
-		[HttpGet("GetByDecisionNumber/{number}")]
+        [HttpGet]
+        [Route("search")]
+        public async Task<IEnumerable<DocumentDto>> Search(string query)
+        {
+            return await _documentService.Search(query);
+        }
+
+        [HttpGet("GetByDecisionNumber/{number}")]
 		public async Task<IEnumerable<DocumentDto>> GetByDecisionNumber(string number)
 		{
 			return await _documentService.GetByDecisionNumber(number);

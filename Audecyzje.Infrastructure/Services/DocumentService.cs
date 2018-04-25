@@ -8,6 +8,7 @@ using Audecyzje.Infrastructure.Dtos;
 using Audecyzje.Infrastructure.Services.Interfaces;
 using AutoMapper;
 using Audecyzje.Core.Domain;
+using System.Text.RegularExpressions;
 
 namespace Audecyzje.Infrastructure.Services
 {
@@ -47,5 +48,27 @@ namespace Audecyzje.Infrastructure.Services
             var listOfDocuments = await _documentRepository.GetByLocalization(address);
             return _mapper.Map<List<DocumentDto>>(listOfDocuments);
         }
-    }
+
+		public async Task<IEnumerable<DocumentDto>> SearchInContent(string query)
+		{
+			var listOfDocuments = (await _documentRepository.GetAll()).Where(d => d.Content.Contains(query));
+			return _mapper.Map<List<DocumentDto>>(listOfDocuments);
+		}
+
+		public async Task<IEnumerable<DocumentDto>> Search(string query)
+		{
+			var decisionNumberRegex = new Regex(@"[0-9]{1,100}\/GK\/DW\/[0-9]{4}");
+			if (decisionNumberRegex.IsMatch(query))
+			{
+				return await GetByDecisionNumber(query);
+			}
+			else 
+			{
+				var addressResults = await GetByAddress(query);
+				var fulltextResults = await SearchInContent(query);
+				addressResults = addressResults.Concat(fulltextResults);
+				return addressResults;
+			}
+		}
+	}
 }
