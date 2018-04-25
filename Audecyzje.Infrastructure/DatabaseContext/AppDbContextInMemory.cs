@@ -15,7 +15,7 @@ namespace Audecyzje.Infrastructure.DatabaseContext
                 Content = "tresc dokumentu",
                 Date = DateTime.Today,
                 LegalBasis = "Podstawy prawne",
-                DecisionNumber = "1234",
+                DecisionNumber = "13/GK/DW/1007",
                 SubmissionDate = DateTime.Today,
 
             };
@@ -58,7 +58,7 @@ namespace Audecyzje.Infrastructure.DatabaseContext
                 Content = "tresc dokumentu",
                 Date = DateTime.Today,
                 LegalBasis = "Podstawy prawne",
-                DecisionNumber = "5111",
+                DecisionNumber = "17/GK/DW/2007",
                 SubmissionDate = DateTime.Today,
 
             };
@@ -91,7 +91,7 @@ namespace Audecyzje.Infrastructure.DatabaseContext
             });
             context.Decisions.Add(new Decision()
             {
-                Content = "tresc ",
+                Content = "content ",
                 Id = 1,
                 IsApproved = true
             });
