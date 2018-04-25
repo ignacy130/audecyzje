@@ -22,9 +22,9 @@ namespace Audecyzje.WebQuickDemo.Controllers
         
         //GET: api/Api/5
         [HttpGet("{id}", Name = "Get")]
-        public JsonResult Get(string id)
+        public JsonResult Get(int id)
         {
-			var l = _context.Descisions.Take(10).ToList();
+			var l = _context.Descisions.SingleOrDefault(x => x.ID == id);
 
 			return new JsonResult(l);
         }
@@ -42,7 +42,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
         [Route("alldecisions")]
         public JsonResult GetAll()
         {
-            return new JsonResult(_context.Descisions.ToAsyncEnumerable().ToList());
+            return new JsonResult(_context.Descisions.ToList());
         }
     }
 }
