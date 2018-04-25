@@ -5,8 +5,9 @@
             <div class="row">
                 <div class="col-md-4 input-card order-md-1">
                     <div class="input-group mb-3">
-                        <input type="text" v-model="query" class="form-control" placeholder="Wpisz adres warszawskiej nieruchomości" aria-label="Recipient's username"
+                        <input type="text" v-model="query" v-on:keyup.enter="search" class="form-control" placeholder="Wpisz adres warszawskiej nieruchomości" aria-label="Recipient's username"
                           aria-describedby="basic-addon2"/>
+                        
                             <!-- <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false"></button>
@@ -38,8 +39,11 @@
                             </div>
                             
                         </div>
-                    <div class="" v-if="decisions">
-                        <div v-for="decision in decisions">
+                    <div v-if="searching && !searchPerformed" class="text-center py-2 px-2">
+                        <i class="far fa-file-alt fa-spin fa-2x"></i>
+                    </div>
+                    <div id="decisions-list" v-if="decisions.length>0">
+                        <div v-for="decision in decisions" >
                             <!-- Success Card -->
                             <div class="card card-body" id="success">
                                 <img class="img-fluid success-img" src="" alt=""/>
@@ -233,6 +237,7 @@
                         </div>
 
                     </div>
+                    <div v-if="searchPerformed && decisions.length <= 0">Brak wyników</div>
                 </div>
                 <div class="col-md-8 map-responsive mb-5 order-md-12">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d9775.077946251844!2d21.01258967137917!3d52.22940567198604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spl!2spl!4v1517337615480"
@@ -244,25 +249,29 @@
 </template>
 
 <script>
-export default {
+    export default {
     data() {
-        return {
-            decisions: null,
-            query: ""
-        }
+    return {
+    decisions: null,
+    query: "",
+    searchPerformed: false,
+    searching: false,
+    }
     },
-
     methods: {
-         search: async function(event){
-            try {
-            let response = await this.$http.get('/api/document/getbydecisionnumber/'+this.query)
-            this.decisions = response.data;
-        } catch (error) {
-            console.log(error)
-        }
-        }
+    search: async function(event){
+    this.searching = true;
+    this.searchPerformed = false;
+    try {
+    let response = await this.$http.get('/api/document/search/?query='+encodeURIComponent(this.query))
+    this.decisions = response.data;
+    } catch (error) {
+    console.log(error)
+    }
+    this.searchPerformed = true;
+    }
     },
-}
+    }
 </script>
 
 <style>

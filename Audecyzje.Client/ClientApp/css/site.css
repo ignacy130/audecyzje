@@ -207,6 +207,11 @@ footer li img {
         position: absolute;
     }
 
+#decisions-list{
+    overflow-y: scroll;
+    height: 500px;
+}
+
 .jumbotron .card p {
   font-size: 1rem;
 }
