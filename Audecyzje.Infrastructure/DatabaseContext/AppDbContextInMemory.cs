@@ -26,7 +26,7 @@ namespace Audecyzje.Infrastructure.DatabaseContext
                 City = "Warszawa",
                 Number = "5",
                 PostalCode = "01-476",
-                Street = "Nowogrodzka"
+                Street = "Nowogrodzka 22"
             };
             context.Localizations.Add(localizationOne);
             documentOne.Localizations.Add(localizationOne);
@@ -36,7 +36,7 @@ namespace Audecyzje.Infrastructure.DatabaseContext
                 City = "Warszawa",
                 Number = "6",
                 PostalCode = "01-476",
-                Street = "Nowogrodzka"
+                Street = "Nowogrodzka 44"
             };
             context.Localizations.Add(localizationOne);
             documentOne.Localizations.Add(localizationOne);
@@ -47,7 +47,7 @@ namespace Audecyzje.Infrastructure.DatabaseContext
                 City = "Warszawa",
                 Number = "6",
                 PostalCode = "01-476",
-                Street = "Niepodleglosci"
+                Street = "Niepodleglości 12"
             };
             context.Localizations.Add(localizationOne);
             documentOne.Localizations.Add(localizationOne);

@@ -7,8 +7,8 @@
                     <div class="input-group mb-3">
                         <input type="text" v-model="query" v-on:keyup.enter="search" class="form-control" placeholder="Wpisz adres warszawskiej nieruchomości" aria-label="Recipient's username"
                           aria-describedby="basic-addon2"/>
-                        
-                            <!-- <div class="dropdown">
+
+                        <!-- <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false"></button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -33,16 +33,16 @@
               <a class="dropdown-item" href="#">Lorem ipsum dolor sit amet</a>
             </div>
           </div> -->
-                            <div class="input-group-append">
-                                <button v-on:click="search" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
-                                  aria-controls="collapseExample">Szukaj</button>
-                            </div>
-                            
+                        <div class="input-group-append">
+                            <button v-on:click="search" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+                              aria-controls="collapseExample">Szukaj</button>
                         </div>
+
+                    </div>
                     <div v-if="searching && !searchPerformed" class="text-center py-2 px-2">
                         <i class="far fa-file-alt fa-spin fa-2x"></i>
                     </div>
-                    <div id="decisions-list" v-if="decisions.length>0">
+                    <div id="decisions-list" v-if="decisions && decisions.length>0">
                         <div v-for="decision in decisions" >
                             <!-- Success Card -->
                             <div class="card card-body" id="success">
@@ -237,22 +237,41 @@
                         </div>
 
                     </div>
-                    <div v-if="searchPerformed && decisions.length <= 0">Brak wyników</div>
+                    <div v-if="searchPerformed && decisions && decisions.length <= 0">Brak wyników
+                    </div>
+
                 </div>
                 <div class="col-md-8 map-responsive mb-5 order-md-12">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d9775.077946251844!2d21.01258967137917!3d52.22940567198604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spl!2spl!4v1517337615480"
-                      width="600" height="450" frameborder="0" style="border:0" allowfullscreen=""></iframe>
+                    <GmapMap
+                      :center="{lat:10, lng:10}"
+                      :zoom="7"
+                      map-type-id="terrain"
+                      style="width: 600px; height: 450px">
+                        <GmapMarker
+                                :key="index"
+                                v-for="(m, index) in markers"
+                                :position="m.position"
+                                :clickable="true"
+                                :draggable="true"
+                                @click="center=m.position"
+                              />
+                    </GmapMap>
+                    <!--<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d9775.077946251844!2d21.01258967137917!3d52.22940567198604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spl!2spl!4v1517337615480"
+                      width="600" height="450" frameborder="0" style="border:0" allowfullscreen=""></iframe>-->
                 </div>
             </div>
         </div>
     </div>
 </template>
 
+
 <script>
+    import { loaded } from 'vue2-google-maps';
     export default {
     data() {
     return {
-    decisions: null,
+    decisions: [],
+    markers: [new google.maps.LatLng(52, 21)],
     query: "",
     searchPerformed: false,
     searching: false,

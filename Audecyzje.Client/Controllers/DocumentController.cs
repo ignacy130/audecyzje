@@ -41,7 +41,7 @@ namespace Audecyzje.Client.Controllers
             return await _documentService.GetByLegalBasis(legalBasis);
         }
 
-        [HttpGet("GetByAdres/{address}")]
+        [HttpGet("GetByAddress/{address}")]
         public async Task<IEnumerable<DocumentDto>> GetByAddress(string address)
         {
             return await _documentService.GetByAddress(address);
