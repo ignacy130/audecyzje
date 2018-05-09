@@ -25,10 +25,33 @@ module.exports = (env) => {
         },
         module: {
             rules: [
-                { test: /\.vue$/, include: /ClientApp/, use: 'vue-loader' },
-                { test: /\.js$/, include: /ClientApp/, use: 'babel-loader' },
-                { test: /\.css$/, use: isDevBuild ? ['style-loader', 'css-loader'] : ExtractTextPlugin.extract({ use: 'css-loader' }) },
-                { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' }
+                {
+                    test: /\.css$/,
+                    use: [
+                        'vue-style-loader',
+                        'css-loader'
+                    ],
+                },
+                {
+                    test: /\.vue$/,
+                    loader: 'vue-loader',
+                    options: {
+                        loaders: {
+                        },
+                    },
+                },
+                {
+                    test: /\.js$/,
+                    loader: 'babel-loader',
+                    exclude: /node_modules/
+                },
+                {
+                    test: /\.(png|jpg|gif|svg)$/,
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]?[hash]'
+                    }
+                }
             ]
         },
         plugins: [
