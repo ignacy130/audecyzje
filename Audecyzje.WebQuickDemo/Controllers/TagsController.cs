@@ -23,7 +23,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
         // GET: Tags
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Tags.Include(t=> t.LinkedDecisions).ThenInclude(link=> link.Decision).ToListAsync());
+            return View(await _context.Tags.Include(t => t.LinkedDecisions).ThenInclude(link => link.Decision).ToListAsync());
         }
 
         public async Task<IActionResult> ClearAllTagRelations()
@@ -59,6 +59,13 @@ namespace Audecyzje.WebQuickDemo.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> RecreateTags()
+        {
+            await ClearAllTagRelations();
+            await CheckAllDecisionsContentWithTagsRegexp();
+            return RedirectToAction("Index");
+        }
         // GET: Tags/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -68,7 +75,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
             }
 
             var tag = await _context.Tags
-                .Include(t => t.LinkedDecisions).ThenInclude(link=> link.Decision)
+                .Include(t => t.LinkedDecisions).ThenInclude(link => link.Decision)
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (tag == null)
             {
@@ -95,12 +102,50 @@ namespace Audecyzje.WebQuickDemo.Controllers
             {
                 _context.Add(tag);
                 await _context.SaveChangesAsync();
+                await RecreateSingleTag(tag.ID);
                 return RedirectToAction(nameof(Index));
             }
             return View(tag);
         }
 
         // GET: Tags/Edit/5
+
+        public async Task<IActionResult> RecreateSingleTag(int? id)
+        {
+
+            Tag tag = await _context.Tags.SingleAsync(x => x.ID == id);
+            if (tag != null)
+            {
+                var decisions = _context.Descisions.ToList();
+                var newDecisionTags = new List<DecisionTag>();
+                foreach (var dec in decisions)
+                {
+                    var regexp = tag.RegExp;
+                    if (Regex.IsMatch(dec.Content, regexp))
+                    {
+                        DecisionTag dt = new DecisionTag()
+                        {
+                            DecisionID = dec.ID,
+                            TagID = tag.ID
+                        };
+                        newDecisionTags.Add(dt);
+                    }
+                }
+                var existing = _context.DecisionTags.Where(x => x.TagID == tag.ID);
+                if (existing.Count() == 0)
+                {
+                    _context.AddRange(newDecisionTags);
+                }
+                else
+                {
+                    _context.DecisionTags.RemoveRange(existing);
+                    await _context.SaveChangesAsync();
+                    _context.DecisionTags.AddRange(newDecisionTags);
+                }
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Index");
+        }
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
