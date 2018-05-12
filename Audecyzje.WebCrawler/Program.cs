@@ -23,10 +23,11 @@ namespace Audecyzje.WebCrawler
             if (CheckAccesToFolders())
             {
 
-                DownloadDirectUrls();
+                DownloadDirectUrlsBefor2016();
+                //DownloadDirectUrlsAfter2016();
+
                 //DownloadFiles();
                 //For downloading files use JDownloader http://jdownloader.org/download/index
-
             }
             else
             {
@@ -44,7 +45,7 @@ namespace Audecyzje.WebCrawler
             }
         }
 
-        private static void DownloadDirectUrls()
+        private static void DownloadDirectUrlsAfter2016()
         {
             List<string> linksToPages = new List<string>();
             HtmlDocument page = new HtmlDocument();
@@ -66,6 +67,46 @@ namespace Audecyzje.WebCrawler
             var domain = "https://bip.warszawa.pl";
 
             using (StreamWriter sw = new StreamWriter(File.Open(DirectUrlsFileName, FileMode.Create), Encoding.Unicode))
+            {
+
+                foreach (var link in linksToPages)
+                {
+                    var pageString = client.DownloadString(domain + link);
+                    page.LoadHtml(pageString);
+                    var nodes = page.DocumentNode.SelectNodes("//a[@href]");
+                    foreach (var node in nodes)
+                    {
+                        var nodevalue = node.Attributes["href"].Value;
+                        if (nodevalue.Contains("NR/rdonlyres"))
+                        {
+                            sw.WriteLine(domain + HttpUtility.HtmlDecode(nodevalue));
+                        }
+                    }
+                }
+            }
+        }
+        private static void DownloadDirectUrlsBefor2016()
+        {
+            List<string> linksToPages = new List<string>();
+            HtmlDocument page = new HtmlDocument();
+            WebClient client = new WebClient();
+            for (int i = 1; i < 2; i++)
+            {
+                var pageString = client.DownloadString(UrlDecisonsBefore2016 + "?page=" + i);
+                page.LoadHtml(pageString);
+                var nodes = page.DocumentNode.SelectNodes("//a[@href]");
+                foreach (var node in nodes)
+                {
+                    var nodevalue = node.Attributes["href"].Value;
+                    if (nodevalue.Contains("SD/decyzje_1998_2016/20") && !nodevalue.Contains("default.htm"))
+                    {
+                        linksToPages.Add(nodevalue);
+                    }
+                }
+            }
+            var domain = "https://bip.warszawa.pl";
+
+            using (StreamWriter sw = new StreamWriter(File.Open(DirectUrlsFileName + "_before2016", FileMode.Create), Encoding.Unicode))
             {
 
                 foreach (var link in linksToPages)
