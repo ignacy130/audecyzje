@@ -45,7 +45,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
                 foreach (var dec in decisions)
                 {
                     var regexp = tag.RegExp;
-                    if (Regex.IsMatch(dec.Content, regexp))
+                    if (Regex.IsMatch(dec.Content, regexp, RegexOptions.IgnoreCase))
                     {
                         DecisionTag dt = new DecisionTag()
                         {
@@ -121,7 +121,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
                 foreach (var dec in decisions)
                 {
                     var regexp = tag.RegExp;
-                    if (Regex.IsMatch(dec.Content, regexp))
+                    if (Regex.IsMatch(dec.Content, regexp, RegexOptions.IgnoreCase))
                     {
                         DecisionTag dt = new DecisionTag()
                         {

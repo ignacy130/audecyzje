@@ -1,0 +1,93 @@
+﻿@model PaginatedList<Audecyzje.WebQuickDemo.Models.Decision>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h2>Decyzje</h2>
+
+<p>
+	<a asp-action="Create">Utwórz nową</a>
+</p>
+<form asp-action="Search" method="get">
+	<div class="form-actions no-color">
+		<p>
+			Szukaj <input type="text" name="query" value="@ViewData["query"]" /> w pierwszych
+			<input type="text" name="inFirstCharacters" value="@ViewData["inFirstCharacters"]" /> znakach
+			lub w ostatnich <input type="text" name="inLastCharacters" value="@ViewData["inLastCharacters"]" /> znakach
+			<input type="submit" value="Search" class="btn btn-default" />
+		</p>
+	</div>
+</form>
+
+Strony
+@for (int i = 1; i < Model.TotalPages; i++)
+{
+	var styleClass = "";
+	if (i == Model.PageIndex)
+	{
+		styleClass = "btn-warning";
+
+	}
+
+	var searchString = string.Empty;
+	if (string.IsNullOrEmpty(Context.Request.Query["query"]))
+	{
+		searchString = "SearchString" + @Context.Request.Query["query"];
+	}
+	<a class="btn btn-primary @styleClass" href="/Decisions/Search/?page=@i">@i</a>
+}
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				<a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Decision Number</a>
+			</th>
+			<th>
+				Decision Content
+			</th>
+			<th>
+				<a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Submission Date</a>
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.DecisionNumber)
+			</td>
+			<td style="white-space: pre;">
+				@Html.DisplayFor(modelItem => item.Content)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.SubmissionDate)
+			</td>
+			<td>
+				<a asp-action="Edit" asp-route-id="@item.ID">Edytuj</a> |
+				<a asp-action="Details" asp-route-id="@item.ID">Szczegóły</a> |
+				<a asp-action="Delete" class="text-danger" asp-route-id="@item.ID">Usuń</a>
+			</td>
+		</tr>
+		}
+	</tbody>
+</table>
+Strony
+@for (int i = 1; i < Model.TotalPages; i++)
+{
+	var styleClass = "";
+	if (i == Model.PageIndex)
+	{
+		styleClass = "btn-warning";
+
+	}
+	var searchString = string.Empty;
+	if (string.IsNullOrEmpty(Context.Request.Query["query"]))
+	{
+		searchString = "SearchString" + @Context.Request.Query["query"];
+	}
+<a class="btn btn-primary @styleClass" href="/Decisions/Search/?page=@i">@i</a>
+}

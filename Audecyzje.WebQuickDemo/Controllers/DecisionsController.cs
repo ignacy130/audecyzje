@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Audecyzje.WebQuickDemo.Data;
 using Audecyzje.WebQuickDemo.Models;
+using Audecyzje.WebQuickDemo.Helpers;
+using System.Globalization;
 
 namespace Audecyzje.WebQuickDemo.Controllers
 {
@@ -42,17 +44,8 @@ namespace Audecyzje.WebQuickDemo.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-				if (page == null || page == 0)
-				{
-					decisions = decisions.Where(s => s.Content.Contains(searchString)
-										   || s.DecisionNumber.Contains(searchString));
-					ViewData["page null 0"] = "ok";
-				}
-				else
-				{
-					decisions = decisions.Where(s => s.Content.Contains(searchString)
-										   || s.DecisionNumber.Contains(searchString));
-				}
+				decisions = decisions.Where(s => new CultureInfo("pl").CompareInfo.IndexOf(s.Content, searchString, CompareOptions.IgnoreCase) >= 0
+												|| new CultureInfo("pl").CompareInfo.IndexOf(s.DecisionNumber, searchString, CompareOptions.IgnoreCase) >= 0);
             }
 
             switch (sortOrder)
@@ -74,8 +67,37 @@ namespace Audecyzje.WebQuickDemo.Controllers
             return View(await PaginatedList<Decision>.CreateAsync(decisions.AsNoTracking(), page ?? 1, pageSize));
         }
 
-        // GET: Decisions/Details/5
-        public async Task<IActionResult> Details(int? id)
+
+		public async Task<IActionResult> Search(string query, int inFirstCharacters, int inLastCharacters, int? page)
+		{
+			ViewData["query"] = query;
+			ViewData["inFirstCharacters"] = inFirstCharacters;
+			ViewData["inLastCharacters"] = inLastCharacters;
+
+			
+			var decisions = from s in _context.Descisions
+							select s;
+			if (!string.IsNullOrEmpty(query))
+			{
+				if (inFirstCharacters > 0)
+				{
+					decisions = decisions.Where(d => new CultureInfo("pl").CompareInfo.IndexOf(d.Content, query, CompareOptions.IgnoreCase) >= 0);
+				}
+				if (inLastCharacters > 0)
+				{
+					decisions = decisions.Where(d => new CultureInfo("pl").CompareInfo.IndexOf(d.Content.Substring(d.Content.Length-inLastCharacters, 999), query, CompareOptions.IgnoreCase) >= 0);
+				}
+			}
+			else
+			{
+				decisions = decisions.Take(0);
+			}
+			var pageSize = 10;
+			return View("Search", await PaginatedList<Decision>.CreateAsync(decisions.AsNoTracking(), page ?? 1, pageSize));
+		}
+
+		// GET: Decisions/Details/5
+		public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
