@@ -16,7 +16,6 @@ namespace Audecyzje.WebCrawler
         static string UrlDecisonsBefore2016 = @"https://bip.warszawa.pl/Menu_podmiotowe/biura_urzedu/SD/decyzje_1998_2016/default.htm";
 
         static string DirectUrlsFileName = @"C:\Users\ya\Documents\SourceCode\audecyzje\Audecyzje.WebCrawler\Resources\DirectUrls.txt";
-        static string FolderForFiles = @"C:\Users\ya\Documents\SourceCode\audecyzje\Audecyzje.WebCrawler\Resources\Downloaded";
         static string LogFile = @"C:\Users\ya\Documents\SourceCode\audecyzje\Audecyzje.WebCrawler\Resources\LogFile.txt";
 
         static void Main(string[] args)
@@ -24,8 +23,9 @@ namespace Audecyzje.WebCrawler
             if (CheckAccesToFolders())
             {
 
-                //DownloadDirectUrls();
-                DownloadFiles();
+                DownloadDirectUrls();
+                //DownloadFiles();
+                //For downloading files use JDownloader http://jdownloader.org/download/index
 
             }
             else
@@ -34,26 +34,6 @@ namespace Audecyzje.WebCrawler
             }
             Console.WriteLine("Program finished its work. Press any key to finish");
             Console.ReadKey();
-        }
-
-        private static void DownloadFiles()
-        {
-            var fileLinks = File.ReadAllLines(DirectUrlsFileName);
-            WebClient client = new WebClient();
-            foreach (var line in fileLinks)
-            {
-                var link = HttpUtility.HtmlDecode(line);
-                var fileName = link.Split('/')[link.Split('/').Length - 1];
-                try
-                {
-                    client.DownloadFile(Uri.EscapeUriString(link), fileName);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error with url:" + link);
-                    AddLog("Error with url:" + link);
-                }
-            }
         }
 
         private static void AddLog(string message)
@@ -69,7 +49,7 @@ namespace Audecyzje.WebCrawler
             List<string> linksToPages = new List<string>();
             HtmlDocument page = new HtmlDocument();
             WebClient client = new WebClient();
-            for (int i = 1; i < 2; i++)
+            for (int i = 1; i < 11; i++)
             {
                 var pageString = client.DownloadString(UrlDecisonsAfter2016 + "?page=" + i);
                 page.LoadHtml(pageString);
@@ -83,7 +63,6 @@ namespace Audecyzje.WebCrawler
                     }
                 }
             }
-            //StringBuilder sb = new StringBuilder();
             var domain = "https://bip.warszawa.pl";
 
             using (StreamWriter sw = new StreamWriter(File.Open(DirectUrlsFileName, FileMode.Create), Encoding.Unicode))
@@ -110,8 +89,6 @@ namespace Audecyzje.WebCrawler
         {
             try
             {
-                Directory.CreateDirectory(FolderForFiles);
-                var testfile = Path.Combine(FolderForFiles, "testfile");
                 if (!File.Exists(DirectUrlsFileName))
                 {
                     File.Create(DirectUrlsFileName);
@@ -120,8 +97,6 @@ namespace Audecyzje.WebCrawler
                 {
                     File.OpenRead(DirectUrlsFileName).Close();
                 }
-                File.Create(testfile).Close();
-                File.Delete(testfile);
             }
             catch (Exception ex)
             {
