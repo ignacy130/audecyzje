@@ -5,6 +5,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 using System.Xml;
 
 namespace Audecyzje.WebCrawler
@@ -14,16 +15,17 @@ namespace Audecyzje.WebCrawler
         static string UrlDecisonsAfter2016 = @"https://bip.warszawa.pl/Menu_podmiotowe/biura_urzedu/SD/decyzje/default.htm";
         static string UrlDecisonsBefore2016 = @"https://bip.warszawa.pl/Menu_podmiotowe/biura_urzedu/SD/decyzje_1998_2016/default.htm";
 
-        static string DirectUrlsFileName = @"C:\Users\janbu\Desktop\Repos\AuDecyzje\Audecyzje.WebCrawler\Resources\DirectUrls.txt";
-        static string FolderForFiles = @"C:\Users\janbu\Desktop\Repos\AuDecyzje\Audecyzje.WebCrawler\Resources\Downloaded";
+        static string DirectUrlsFileName = @"C:\Users\ya\Documents\SourceCode\audecyzje\Audecyzje.WebCrawler\Resources\DirectUrls.txt";
+        static string FolderForFiles = @"C:\Users\ya\Documents\SourceCode\audecyzje\Audecyzje.WebCrawler\Resources\Downloaded";
+        static string LogFile = @"C:\Users\ya\Documents\SourceCode\audecyzje\Audecyzje.WebCrawler\Resources\LogFile.txt";
 
         static void Main(string[] args)
         {
             if (CheckAccesToFolders())
             {
 
-                DownloadDirectUrls();
-
+                //DownloadDirectUrls();
+                DownloadFiles();
 
             }
             else
@@ -32,6 +34,34 @@ namespace Audecyzje.WebCrawler
             }
             Console.WriteLine("Program finished its work. Press any key to finish");
             Console.ReadKey();
+        }
+
+        private static void DownloadFiles()
+        {
+            var fileLinks = File.ReadAllLines(DirectUrlsFileName);
+            WebClient client = new WebClient();
+            foreach (var line in fileLinks)
+            {
+                var link = HttpUtility.HtmlDecode(line);
+                var fileName = link.Split('/')[link.Split('/').Length - 1];
+                try
+                {
+                    client.DownloadFile(Uri.EscapeUriString(link), fileName);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error with url:" + link);
+                    AddLog("Error with url:" + link);
+                }
+            }
+        }
+
+        private static void AddLog(string message)
+        {
+            using (StreamWriter sw = File.AppendText(LogFile))
+            {
+                sw.WriteLine(message);
+            }
         }
 
         private static void DownloadDirectUrls()
@@ -69,33 +99,11 @@ namespace Audecyzje.WebCrawler
                         var nodevalue = node.Attributes["href"].Value;
                         if (nodevalue.Contains("NR/rdonlyres"))
                         {
-                            //nodevalue = WebUtility.UrlDecode(nodevalue);
-                            //sb.AppendLine(domain + nodevalue);
-                            sw.WriteLine(domain + DecodeString(nodevalue));
+                            sw.WriteLine(domain + HttpUtility.HtmlDecode(nodevalue));
                         }
                     }
                 }
             }
-            //File.WriteAllText(DirectUrlsFileName, sb.ToString());
-        }
-        static string DecodeString(string unicodeString)
-        {
-            
-            Encoding newCoding = Encoding.Unicode;
-            Encoding oldCoding = Encoding.UTF32;
-
-            // Convert the string into a byte array.
-            byte[] unicodeBytes = oldCoding.GetBytes(unicodeString);
-
-            // Perform the conversion from one encoding to the other.
-            byte[] asciiBytes = Encoding.Convert(oldCoding, newCoding, unicodeBytes);
-
-            // Convert the new byte[] into a char[] and then into a string.
-            char[] asciiChars = new char[newCoding.GetCharCount(asciiBytes, 0, asciiBytes.Length)];
-            newCoding.GetChars(asciiBytes, 0, asciiBytes.Length, asciiChars, 0);
-            string newString = new string(asciiChars);
-
-            return newString;
         }
 
         static bool CheckAccesToFolders()
