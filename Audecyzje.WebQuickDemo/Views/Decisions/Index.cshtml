@@ -12,7 +12,7 @@
 <form asp-action="Index" method="get">
 	<div class="form-actions no-color">
 		<p>
-			Szukaj po nazwie: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+			Szukaj w treści: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
 			<input type="submit" value="Search" class="btn btn-default" /> |
 			<a asp-action="Index">Powrót do listy decyzji</a>
 		</p>
@@ -27,6 +27,12 @@ Strony
 	{
 		styleClass = "btn-warning";
 
+	}
+
+	var searchString = string.Empty;
+	if (string.IsNullOrEmpty(Context.Request.Query["SearchString"]))
+	{
+		searchString = "SearchString" + @Context.Request.Query["SearchString"];
 	}
 	<a class="btn btn-primary @styleClass" href="/Decisions/Index/?page=@i">@i</a>
 }
@@ -53,7 +59,7 @@ Strony
 				<td>
 					@Html.DisplayFor(modelItem => item.DecisionNumber)
 				</td>
-				<td>
+				<td style="white-space: pre;">
 					@Html.DisplayFor(modelItem => item.Content)
 				</td>
 				<td>
@@ -76,6 +82,11 @@ Strony
 	{
 		styleClass = "btn-warning";
 
+	}
+	var searchString = string.Empty;
+	if (string.IsNullOrEmpty(Context.Request.Query["SearchString"]))
+	{
+		searchString = "SearchString" + @Context.Request.Query["SearchString"];
 	}
 	<a class="btn btn-primary @styleClass" href="/Decisions/Index/?page=@i">@i</a>
 }

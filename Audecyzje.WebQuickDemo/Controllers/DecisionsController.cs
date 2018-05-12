@@ -25,8 +25,8 @@ namespace Audecyzje.WebQuickDemo.Controllers
             ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
-
-            if (searchString != null)
+			int pageSize = 10;
+			if (searchString != null)
             {
                 page = 1;
             }
@@ -37,15 +37,24 @@ namespace Audecyzje.WebQuickDemo.Controllers
 
             ViewData["CurrentFilter"] = searchString;
 
-            //return View(await _context.Descisions.ToListAsync());
-
             var decisions = from s in _context.Descisions
-                           select s;
+                            select s;
+
             if (!String.IsNullOrEmpty(searchString))
             {
-                decisions = decisions.Where(s => s.Content.Contains(searchString)
-                                       || s.DecisionNumber.Contains(searchString));
+				if (page == null || page == 0)
+				{
+					decisions = decisions.Where(s => s.Content.Contains(searchString)
+										   || s.DecisionNumber.Contains(searchString));
+					ViewData["page null 0"] = "ok";
+				}
+				else
+				{
+					decisions = decisions.Where(s => s.Content.Contains(searchString)
+										   || s.DecisionNumber.Contains(searchString));
+				}
             }
+
             switch (sortOrder)
             {
                 case "name_desc":
@@ -61,7 +70,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
                     decisions = decisions.OrderBy(s => s.ID);
                     break;
             }
-            int pageSize = 10;
+            
             return View(await PaginatedList<Decision>.CreateAsync(decisions.AsNoTracking(), page ?? 1, pageSize));
         }
 
