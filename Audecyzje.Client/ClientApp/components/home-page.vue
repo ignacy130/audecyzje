@@ -10,7 +10,7 @@
                             <button type="button" class="btn btn-warning btn-lg">Sprawdź</button>
                         </div>
                     <h2 class="text-center">
-                        Lorem ipsum dolor sit amet augue. Praesent gravida pulvinar. Nulla facilisi. Etiam vel nulla. Curabitur scelerisque
+                        Lorem Lorem ipsum dolor sit amet augue. Praesent gravida pulvinar. Nulla facilisi. Etiam vel nulla. Curabitur scelerisque
                         tellus augue, ullamcorper ut, condimentum urna, placerat tempor ac, suscipit in, vulputate tortor id felis.
                     </h2>
                 </div>
