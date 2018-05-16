@@ -34,9 +34,9 @@
                           </div>
                         </div> -->
                         <div class="input-group-append">
-                            <button v-on:click="search" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+                            <button v-on:click="search" class="btn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
                                     aria-controls="collapseExample">
-                                Szukaj
+                                <i class="fas fa-search"></i>
                             </button>
                         </div>
 
@@ -279,7 +279,7 @@
             return {
                 zoom: 13,
                 center: [52.2297, 21.0122],
-                url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+                url: 'https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png',
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                 markers: [],
                 geosearchOptions: {

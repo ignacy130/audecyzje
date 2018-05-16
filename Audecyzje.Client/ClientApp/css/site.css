@@ -19,12 +19,31 @@ body {
     margin-top: -5rem;
 }
 
+.input-card .input-group {
+    border: 1px solid #999;
+    border-width: 0 0 1px 0;
+}
+
+.input-card .input-group .form-control {
+    border: none;
+}
+
+.input-card .input-group-append .btn {
+    color: #999;
+    border: none;
+    background-color: transparent;
+}
+
 .navbar {
     background-color: transparent !important;
 }
 
 .navbar-dark a{
     color: #fff;
+}
+
+.navbar-nav .nav-item a.nav-link, .navbar-brand{
+    color: #000;
 }
 
 .input-field h1 {
