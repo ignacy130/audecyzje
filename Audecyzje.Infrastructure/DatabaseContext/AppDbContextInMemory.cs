@@ -10,7 +10,7 @@ namespace Audecyzje.Infrastructure.DatabaseContext
         {
             var documentOne = new Document()
             {
-                Localization = "lokalizacja",
+                Localization = "Nowogrodzka 22",
                 Localizations = new List<Localization>(),
                 Content = "tresc dokumentu",
                 Date = DateTime.Today,
@@ -26,7 +26,7 @@ namespace Audecyzje.Infrastructure.DatabaseContext
                 City = "Warszawa",
                 Number = "5",
                 PostalCode = "01-476",
-                Street = "Nowogrodzka 22"
+                Street = "Nowogrodzka 22, Warszawa"
             };
             context.Localizations.Add(localizationOne);
             documentOne.Localizations.Add(localizationOne);
