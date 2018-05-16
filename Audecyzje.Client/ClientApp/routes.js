@@ -1,5 +1,5 @@
 import CounterExample from 'components/counter-example'
-import Map from 'components/map'
+import Map from 'components/map-page'
 import HomePage from 'components/home-page'
 
 export const routes = [
