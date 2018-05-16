@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import * as VueGoogleMaps from 'vue2-google-maps'
 import axios from 'axios'
 import router from './router'
 import store from './store'
@@ -16,11 +15,7 @@ const app = new Vue({
     ...App
 }).$mount('#app')
 
-Vue.use(VueGoogleMaps, {
-    load: {
-        key: 'AIzaSyBcgaA5gO94SiGg6Ak-rz0tIXgT3g_K2fU'
-    },
-})
+
 
 export {
     app,

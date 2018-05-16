@@ -10,11 +10,15 @@
   "dependencies": {
     "axios": "^0.15.3",
     "core-js": "^2.4.1",
+    "css-element-queries": "^1.0.2",
     "font-awesome": "^4.6.3",
+    "leaflet-geosearch": "^2.6.0",
     "vue": "^2.1.8",
-    "vue-template-compiler": "^2.1.8",
     "vue-router": "^2.1.1",
     "vue-server-renderer": "^2.1.8",
+    "vue-template-compiler": "^2.1.8",
+    "vue2-leaflet": "^1.0.2",
+    "vue2-leaflet-geosearch": "^1.0.1",
     "vuex": "^2.1.1",
     "vuex-router-sync": "^4.0.1"
   },

@@ -6,36 +6,38 @@
                 <div class="col-md-4 input-card order-md-1">
                     <div class="input-group mb-3">
                         <input type="text" v-model="query" v-on:keyup.enter="search" class="form-control" placeholder="Wpisz adres warszawskiej nieruchomości" aria-label="Recipient's username"
-                          aria-describedby="basic-addon2"/>
+                               aria-describedby="basic-addon2" />
 
                         <!-- <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false"></button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <form class="px-4 py-3">
-                <div class="form-group">
-                  <label for="exampleDropdownFormEmail1">Rok/Lata</label>
-                  <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="1950-2017">
-                </div>
-                <div class="form-group">
-                  <label for="exampleDropdownFormPassword1">Dzielnica</label>
-                  <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Wola">
-                </div>
-                <div class="form-check mb-3">
-                  <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                  <label class="form-check-label" for="dropdownCheck">
-                    Zaznacz
-                  </label>
-                </div>
-                <button type="submit" class="btn btn-primary">Znajdź</button>
-              </form>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Lorem ipsum dolor sit amet</a>
-            </div>
-          </div> -->
+                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"></button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <form class="px-4 py-3">
+                              <div class="form-group">
+                                <label for="exampleDropdownFormEmail1">Rok/Lata</label>
+                                <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="1950-2017">
+                              </div>
+                              <div class="form-group">
+                                <label for="exampleDropdownFormPassword1">Dzielnica</label>
+                                <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Wola">
+                              </div>
+                              <div class="form-check mb-3">
+                                <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                                <label class="form-check-label" for="dropdownCheck">
+                                  Zaznacz
+                                </label>
+                              </div>
+                              <button type="submit" class="btn btn-primary">Znajdź</button>
+                            </form>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Lorem ipsum dolor sit amet</a>
+                          </div>
+                        </div> -->
                         <div class="input-group-append">
                             <button v-on:click="search" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
-                              aria-controls="collapseExample">Szukaj</button>
+                                    aria-controls="collapseExample">
+                                Szukaj
+                            </button>
                         </div>
 
                     </div>
@@ -43,10 +45,10 @@
                         <i class="far fa-file-alt fa-spin fa-2x"></i>
                     </div>
                     <div id="decisions-list" v-if="decisions && decisions.length>0">
-                        <div v-for="decision in decisions" >
+                        <div v-for="decision in decisions">
                             <!-- Success Card -->
                             <div class="card card-body" id="success">
-                                <img class="img-fluid success-img" src="" alt=""/>
+                                <img class="img-fluid success-img" src="" alt="" />
                                 <svg class="svg-inline--fa fa-times fa-w-12 fa-2x ml-3 mt-3" href="#" aria-hidden="true" data-fa-processed="" data-prefix="fas" data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
                                     <path fill="currentColor" d="M323.1 441l53.9-53.9c9.4-9.4 9.4-24.5 0-33.9L279.8 256l97.2-97.2c9.4-9.4 9.4-24.5 0-33.9L323.1 71c-9.4-9.4-24.5-9.4-33.9 0L192 168.2 94.8 71c-9.4-9.4-24.5-9.4-33.9 0L7 124.9c-9.4 9.4-9.4 24.5 0 33.9l97.2 97.2L7 353.2c-9.4 9.4-9.4 24.5 0 33.9L60.9 441c9.4 9.4 24.5 9.4 33.9 0l97.2-97.2 97.2 97.2c9.3 9.3 24.5 9.3 33.9 0z"></path>
                                 </svg>
@@ -88,7 +90,7 @@
 
                         <!-- Error Card -->
                         <div class="card card-body hide" id="error">
-                            <img class="img-fluid mb-4" src="http://lorempixel.com/400/200" alt=""/>
+                            <img class="img-fluid mb-4" src="http://lorempixel.com/400/200" alt="" />
                             <div class="row">
                                 <div class="col-md-2">
                                     <i class="fas fa-frown fa-lg"></i>
@@ -146,7 +148,7 @@
 
                         <!-- District Card -->
                         <div class="card card-body hide" id="district">
-                            <img class="img-fluid mb-4" src="http://lorempixel.com/400/200" alt=""/>
+                            <img class="img-fluid mb-4" src="http://lorempixel.com/400/200" alt="" />
                             <div class="row">
                                 <div class="col-md-2">
                                     <i class="fas fa-file-pdf fa-lg"></i>
@@ -237,27 +239,15 @@
                         </div>
 
                     </div>
-                    <div v-if="searchPerformed && decisions && decisions.length <= 0">Brak wyników
+                    <div v-if="searchPerformed && decisions && decisions.length <= 0">
+                        Brak wyników
                     </div>
 
                 </div>
                 <div class="col-md-8 map-responsive mb-5 order-md-12">
-                    <GmapMap
-                      :center="{lat:10, lng:10}"
-                      :zoom="7"
-                      map-type-id="terrain"
-                      style="width: 600px; height: 450px">
-                        <GmapMarker
-                                :key="index"
-                                v-for="(m, index) in markers"
-                                :position="m.position"
-                                :clickable="true"
-                                :draggable="true"
-                                @click="center=m.position"
-                              />
-                    </GmapMap>
+                    <map-component></map-component>
                     <!--<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d9775.077946251844!2d21.01258967137917!3d52.22940567198604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spl!2spl!4v1517337615480"
-                      width="600" height="450" frameborder="0" style="border:0" allowfullscreen=""></iframe>-->
+                    width="600" height="450" frameborder="0" style="border:0" allowfullscreen=""></iframe>-->
                 </div>
             </div>
         </div>
@@ -266,30 +256,30 @@
 
 
 <script>
-    import { loaded } from 'vue2-google-maps';
+    import Vue from 'vue'
+
     export default {
-    data() {
-    return {
-    decisions: [],
-    markers: [new google.maps.LatLng(52, 21)],
-    query: "",
-    searchPerformed: false,
-    searching: false,
-    }
-    },
-    methods: {
-    search: async function(event){
-    this.searching = true;
-    this.searchPerformed = false;
-    try {
-    let response = await this.$http.get('/api/document/search/?query='+encodeURIComponent(this.query))
-    this.decisions = response.data;
-    } catch (error) {
-    console.log(error)
-    }
-    this.searchPerformed = true;
-    }
-    },
+        data() {
+            return {
+                decisions: [],
+                query: "",
+                searchPerformed: false,
+                searching: false,
+            }
+        },
+        methods: {
+            search: async function (event) {
+                this.searching = true;
+                this.searchPerformed = false;
+                try {
+                    let response = await this.$http.get('/api/document/search/?query=' + encodeURIComponent(this.query))
+                    this.decisions = response.data;
+                } catch (error) {
+                    console.log(error)
+                }
+                this.searchPerformed = true;
+            },
+        },
     }
 </script>
 
