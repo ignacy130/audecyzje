@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -15,17 +16,26 @@ namespace Audecyzje.WebCrawler
         static string UrlDecisonsAfter2016 = @"https://bip.warszawa.pl/Menu_podmiotowe/biura_urzedu/SD/decyzje/default.htm";
         static string UrlDecisonsBefore2016 = @"https://bip.warszawa.pl/Menu_podmiotowe/biura_urzedu/SD/decyzje_1998_2016/default.htm";
 
-        static string DirectUrlsFileName = @"C:\Users\ya\Documents\SourceCode\audecyzje\Audecyzje.WebCrawler\Resources\DirectUrls.txt";
+        static string DirectUrlsAfter2016FileName = @"C:\Users\ya\Documents\SourceCode\audecyzje\Audecyzje.WebCrawler\Resources\DirectUrls.txt";
+        static string DirectUrlsBefore2016FileName = @"C:\Users\ya\Documents\SourceCode\audecyzje\Audecyzje.WebCrawler\Resources\DirectUrls_before2016.txt";
+        static string DirectUrlsBefore2016ComparedFileName = @"C:\Users\ya\Documents\SourceCode\audecyzje\Audecyzje.WebCrawler\Resources\DirectUrls_compared_before2016.txt";
+        static string DirectUrlsAfter2016ComparedFileName = @"C:\Users\ya\Documents\SourceCode\audecyzje\Audecyzje.WebCrawler\Resources\DirectUrls_compared.txt";
         static string LogFile = @"C:\Users\ya\Documents\SourceCode\audecyzje\Audecyzje.WebCrawler\Resources\LogFile.txt";
+
+        static string ExisitingFilesHomeDir = @"C:\Users\ya\Documents\SourceCode\audecyzje\Audecyzje.WebCrawler\Resources\txtmjnall";
 
         static void Main(string[] args)
         {
             if (CheckAccesToFolders())
             {
 
-                DownloadDirectUrlsBefor2016();
+                //DownloadDirectUrlsBefor2016();
                 //DownloadDirectUrlsAfter2016();
-
+                CompareExistingFilesWithNewUrls();
+                var files = File.ReadAllLines(DirectUrlsAfter2016FileName);
+                var files2 = File.ReadAllLines(DirectUrlsAfter2016ComparedFileName);
+                var files3 = File.ReadAllLines(DirectUrlsBefore2016FileName);
+                var files4 = File.ReadAllLines(DirectUrlsBefore2016ComparedFileName);
                 //DownloadFiles();
                 //For downloading files use JDownloader http://jdownloader.org/download/index
             }
@@ -35,6 +45,36 @@ namespace Audecyzje.WebCrawler
             }
             Console.WriteLine("Program finished its work. Press any key to finish");
             Console.ReadKey();
+        }
+
+        private static void CompareExistingFilesWithNewUrls()
+        {
+            using (StreamWriter sw = new StreamWriter(File.Open(DirectUrlsAfter2016ComparedFileName, FileMode.Create)))
+            {
+                var newUrls = File.ReadAllLines(DirectUrlsAfter2016FileName);
+                var oldFiles = Directory.GetFiles(ExisitingFilesHomeDir + "\\mjn2016txtonly").Select(x=> Path.GetFileNameWithoutExtension(x));
+
+                foreach (var url in newUrls)
+                {
+                    if (!oldFiles.Contains(Path.GetFileNameWithoutExtension(url)))
+                    {
+                        sw.WriteLine(url);
+                    }
+                }
+            }
+
+            using (StreamWriter sw = new StreamWriter(File.Open(DirectUrlsBefore2016ComparedFileName, FileMode.Create)))
+            {
+                var newUrls = File.ReadAllLines(DirectUrlsBefore2016FileName);
+                var oldFiles = Directory.GetFiles(ExisitingFilesHomeDir + "\\mjntxtonly").Select(x => Path.GetFileNameWithoutExtension(x));
+                foreach (var url in newUrls)
+                {
+                    if (!oldFiles.Contains(Path.GetFileNameWithoutExtension(url)))
+                    {
+                        sw.WriteLine(url);
+                    }
+                }
+            }
         }
 
         private static void AddLog(string message)
@@ -66,7 +106,7 @@ namespace Audecyzje.WebCrawler
             }
             var domain = "https://bip.warszawa.pl";
 
-            using (StreamWriter sw = new StreamWriter(File.Open(DirectUrlsFileName, FileMode.Create), Encoding.Unicode))
+            using (StreamWriter sw = new StreamWriter(File.Open(DirectUrlsAfter2016FileName, FileMode.Create), Encoding.Unicode))
             {
 
                 foreach (var link in linksToPages)
@@ -90,7 +130,7 @@ namespace Audecyzje.WebCrawler
             List<string> linksToPages = new List<string>();
             HtmlDocument page = new HtmlDocument();
             WebClient client = new WebClient();
-            for (int i = 1; i < 2; i++)
+            for (int i = 1; i < 210; i++)
             {
                 var pageString = client.DownloadString(UrlDecisonsBefore2016 + "?page=" + i);
                 page.LoadHtml(pageString);
@@ -106,7 +146,7 @@ namespace Audecyzje.WebCrawler
             }
             var domain = "https://bip.warszawa.pl";
 
-            using (StreamWriter sw = new StreamWriter(File.Open(DirectUrlsFileName + "_before2016", FileMode.Create), Encoding.Unicode))
+            using (StreamWriter sw = new StreamWriter(File.Open(DirectUrlsBefore2016FileName, FileMode.Create), Encoding.Unicode))
             {
 
                 foreach (var link in linksToPages)
@@ -130,13 +170,13 @@ namespace Audecyzje.WebCrawler
         {
             try
             {
-                if (!File.Exists(DirectUrlsFileName))
+                if (!File.Exists(DirectUrlsAfter2016FileName))
                 {
-                    File.Create(DirectUrlsFileName);
+                    File.Create(DirectUrlsAfter2016FileName);
                 }
                 else
                 {
-                    File.OpenRead(DirectUrlsFileName).Close();
+                    File.OpenRead(DirectUrlsAfter2016FileName).Close();
                 }
             }
             catch (Exception ex)
