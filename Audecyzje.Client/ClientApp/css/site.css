@@ -23,7 +23,7 @@ body {
     background-color: transparent !important;
 }
 
-.navbar-dark a{
+.navbar-dark a {
     color: #fff;
 }
 
@@ -223,6 +223,51 @@ footer li img {
 .hide {
   display: none;
 }
+
+/*** SUBPAGES ***/
+
+.subpage-view {
+  margin: 2rem 0;
+}
+
+.definition {
+  border: 2px solid #000;
+  padding: 2em;
+}
+
+.definition > p {
+  margin: 1.5rem 0;
+  font-size: 15px;
+  text-align: justify;
+}
+
+.quote {
+  display: flex;
+  justify-content: flex-between;
+}
+
+.quote img {
+  height: 60px;
+}
+
+.quote > p {
+  padding-left: 1.5rem;
+  margin: 0;
+  text-align: justify;
+}
+
+.side-image {
+  background:  url(/Images/alexey-topolyanskiy-270795.jpg) no-repeat center;
+  height: auto;
+  width: 100%;
+  background-size: cover;
+  background-position: 10px top;
+}
+
+
+
+
+
 
 /* Media Queries */
 
