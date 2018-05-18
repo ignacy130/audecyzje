@@ -18,7 +18,7 @@
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item mx-2">
-                    <a class="nav-link" href="#">Baza Wiedzy</a>
+                    <a class="nav-link" href="baza-wiedzy">Baza Wiedzy</a>
                 </li>
                 <li class="nav-item mx-2">
                     <a class="nav-link" href="#">Kontakt</a>
