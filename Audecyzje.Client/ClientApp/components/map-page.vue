@@ -34,9 +34,9 @@
                           </div>
                         </div> -->
                         <div class="input-group-append">
-                            <button v-on:click="search" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+                            <button v-on:click="search" class="btn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
                                     aria-controls="collapseExample">
-                                Szukaj
+                                <i class="fas fa-search"></i>
                             </button>
                         </div>
 
@@ -54,7 +54,7 @@
                                 </svg>
                                 <!-- <i class="fas fa-times fa-2x ml-3 mt-3" href="#"></i> -->
                                 <div class="address py-3">
-                                    <h5 class="mt-4 ml-4">Marszałkowska 1</h5>
+                                    <h5 class="mt-4 ml-4">{{decision.localization}}</h5>
                                     <p class="mb-4 ml-4">Śródmieście, Warszawa</p>
                                 </div>
                                 <div class="card-content">
@@ -245,9 +245,13 @@
 
                 </div>
                 <div class="col-md-8 map-responsive mb-5 order-md-12">
-                    <map-component></map-component>
-                    <!--<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d9775.077946251844!2d21.01258967137917!3d52.22940567198604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spl!2spl!4v1517337615480"
-                    width="600" height="450" frameborder="0" style="border:0" allowfullscreen=""></iframe>-->
+                    <l-map :zoom="zoom" :center="center" style="height: 1000px; width: 1000px;">
+                        <v-geosearch :options="geosearchOptions"></v-geosearch>
+                        <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+                        <div v-for="marker in markers">
+                            <marker-popup :position="marker.position" :text="marker.text" :title="marker.title"></marker-popup>
+                        </div>
+                    </l-map>
                 </div>
             </div>
         </div>
@@ -257,10 +261,30 @@
 
 <script>
     import Vue from 'vue'
+    import { LMap, LTileLayer } from 'vue2-leaflet';
+    import { OpenStreetMapProvider } from 'leaflet-geosearch';
+    import { VGeosearch } from 'vue2-leaflet-geosearch';
+    import MarkerPopup from './map-popup';
+
+    const provider = new OpenStreetMapProvider();
 
     export default {
+        components: {
+            LMap,
+            LTileLayer,
+            VGeosearch,
+            MarkerPopup
+        },
         data() {
             return {
+                zoom: 13,
+                center: [52.2297, 21.0122],
+                url: 'https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png',
+                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+                markers: [],
+                geosearchOptions: {
+                    provider: provider,
+                },
                 decisions: [],
                 query: "",
                 searchPerformed: false,
@@ -269,11 +293,21 @@
         },
         methods: {
             search: async function (event) {
+                event.preventDefault();
+                var searchQuery = this.query;
                 this.searching = true;
                 this.searchPerformed = false;
                 try {
-                    let response = await this.$http.get('/api/document/search/?query=' + encodeURIComponent(this.query))
+                    let response = await this.$http.get('/api/document/search/?query=' + encodeURIComponent(searchQuery))
                     this.decisions = response.data;
+
+                    var m = [];
+                    for (var i = 0; i < this.decisions.length;i++) {
+                        var results = await this.$http.get('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(this.decisions[i].localization + ", Warszawa, Polska"));
+                        var first = results.data[0];
+                        m.push({ position: L.latLng(first.lat, first.lon), text: this.decisions[i].decisionNumber, title: this.decisions[i].decisionNumber });
+                    }
+                    this.markers = m;
                 } catch (error) {
                     console.log(error)
                 }
@@ -284,4 +318,5 @@
 </script>
 
 <style>
+    @import "~leaflet/dist/leaflet.css";
 </style>

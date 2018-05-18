@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2026
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audecyzje.Core", "Audecyzje.Core\Audecyzje.Core.csproj", "{8D56697B-91C1-411F-BCC2-1431DCE80BAE}"
 EndProject
@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audecyzje.WebQuickDemo", "A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audecyzje.Client", "Audecyzje.Client\Audecyzje.Client.csproj", "{5818FCED-83B8-4ED4-AA47-594D038C6210}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audecyzje.WebCrawler", "Audecyzje.WebCrawler\Audecyzje.WebCrawler.csproj", "{CA366B7C-BB6B-4D6E-AD1E-873E80D02B77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Audecyzje.WebCrawler", "Audecyzje.WebCrawler\Audecyzje.WebCrawler.csproj", "{CA366B7C-BB6B-4D6E-AD1E-873E80D02B77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
