@@ -23,6 +23,7 @@ namespace Audecyzje.WebCrawler
         static string LogFile = @"C:\Users\ya\Documents\SourceCode\audecyzje\Audecyzje.WebCrawler\Resources\LogFile.txt";
 
         static string ExisitingFilesHomeDir = @"C:\Users\ya\Documents\SourceCode\audecyzje\Audecyzje.WebCrawler\Resources\txtmjnall";
+        static string PDFFilesHomeDir = @"E:\Repra\test";
 
         static void Main(string[] args)
         {
@@ -38,6 +39,8 @@ namespace Audecyzje.WebCrawler
                 var files4 = File.ReadAllLines(DirectUrlsBefore2016ComparedFileName);
                 //DownloadFiles();
                 //For downloading files use JDownloader http://jdownloader.org/download/index
+                //// AfterDownload-->
+                //ExtractImagesFromPDFs();
             }
             else
             {
@@ -45,6 +48,17 @@ namespace Audecyzje.WebCrawler
             }
             Console.WriteLine("Program finished its work. Press any key to finish");
             Console.ReadKey();
+        }
+
+        private static void ExtractImagesFromPDFs()
+        {
+            var filepaths = Directory.GetFiles(PDFFilesHomeDir);
+            foreach (var filepath in filepaths)
+            {
+                var filename = Path.GetFileNameWithoutExtension(filepath);
+                Directory.CreateDirectory(Path.Combine(PDFFilesHomeDir, filename));
+                File.Move(filepath, Path.Combine(PDFFilesHomeDir, filename, filename + ".pdf"));
+            }
         }
 
         private static void CompareExistingFilesWithNewUrls()
