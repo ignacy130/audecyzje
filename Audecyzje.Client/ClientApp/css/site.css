@@ -44,6 +44,10 @@ body {
   font-size: 1rem;
 }
 
+.btn {
+  border-radius: 0;
+}
+
 .btn-warning {
     background-color: #FCE603;
     border: #FCE603;
