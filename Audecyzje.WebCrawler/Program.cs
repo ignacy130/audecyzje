@@ -32,15 +32,19 @@ namespace Audecyzje.WebCrawler
 
                 //DownloadDirectUrlsBefor2016();
                 //DownloadDirectUrlsAfter2016();
-                CompareExistingFilesWithNewUrls();
-                var files = File.ReadAllLines(DirectUrlsAfter2016FileName);
-                var files2 = File.ReadAllLines(DirectUrlsAfter2016ComparedFileName);
-                var files3 = File.ReadAllLines(DirectUrlsBefore2016FileName);
-                var files4 = File.ReadAllLines(DirectUrlsBefore2016ComparedFileName);
+                //CompareExistingFilesWithNewUrls();
+                //var files = File.ReadAllLines(DirectUrlsAfter2016FileName);
+                //var files2 = File.ReadAllLines(DirectUrlsAfter2016ComparedFileName);
+                //var files3 = File.ReadAllLines(DirectUrlsBefore2016FileName);
+                //var files4 = File.ReadAllLines(DirectUrlsBefore2016ComparedFileName);
                 //DownloadFiles();
                 //For downloading files use JDownloader http://jdownloader.org/download/index
                 //// AfterDownload-->
-                //ExtractImagesFromPDFs();
+                //ConvertCharsPLtoEN();
+                //PutFilesInSubfolders();
+                ////----OCR -> powershellscript
+                //GetTextToHomeFolder();
+                DeconvertCharsENtoPL();
             }
             else
             {
@@ -50,14 +54,64 @@ namespace Audecyzje.WebCrawler
             Console.ReadKey();
         }
 
-        private static void ExtractImagesFromPDFs()
+        private static void ConvertCharsPLtoEN()
         {
             var filepaths = Directory.GetFiles(PDFFilesHomeDir);
+            foreach (var filepath in filepaths)
+            {
+                var filename = Path.GetFileName(filepath);
+                filename = filename.Replace("ą", "aX").Replace("Ą", "AX")
+                                   .Replace("ć", "cX").Replace("Ć", "CX")
+                                   .Replace("ę", "eX").Replace("Ę", "EX")
+                                   .Replace("ł", "lX").Replace("Ł", "LX")
+                                   .Replace("ń", "nX").Replace("Ń", "NX")
+                                   .Replace("ó", "oX").Replace("Ó", "OX")
+                                   .Replace("ż", "zZ").Replace("Ż", "ZZ")
+                                   .Replace("ź", "zX").Replace("Ź", "ZX");
+                File.Move(filepath, Path.Combine(PDFFilesHomeDir, filename));
+            }
+        }
+
+        private static void DeconvertCharsENtoPL()
+        {
+            var filepaths = Directory.GetFiles(PDFFilesHomeDir);
+            foreach (var filepath in filepaths)
+            {
+                var filename = Path.GetFileName(filepath);
+                filename = filename.Replace("aX", "ą").Replace("AX", "Ą")
+                                   .Replace("cX", "ć").Replace("CX", "Ć")
+                                   .Replace("eX", "ę").Replace("EX", "Ę")
+                                   .Replace("lX", "ł").Replace("LX", "Ł")
+                                   .Replace("nX", "ń").Replace("NX", "Ń")
+                                   .Replace("oX", "ó").Replace("OX", "Ó")
+                                   .Replace("zZ", "ż").Replace("ZZ", "Ż")
+                                   .Replace("zX", "ź").Replace("ZX", "Ź");
+                File.Move(filepath, Path.Combine(PDFFilesHomeDir, filename));
+            }
+        }
+
+        private static void PutFilesInSubfolders()
+        {
+            var filepaths = Directory.GetFiles(PDFFilesHomeDir).Where(x => x.Contains(".pdf"));
             foreach (var filepath in filepaths)
             {
                 var filename = Path.GetFileNameWithoutExtension(filepath);
                 Directory.CreateDirectory(Path.Combine(PDFFilesHomeDir, filename));
                 File.Move(filepath, Path.Combine(PDFFilesHomeDir, filename, filename + ".pdf"));
+            }
+        }
+        private static void GetTextToHomeFolder()
+        {
+            var directory = Directory.GetDirectories(PDFFilesHomeDir);
+            foreach (var dir in directory)
+            {
+                var files = Directory.GetFiles(dir).Where(x => x.Contains(".txt.txt"));
+                StringBuilder sb = new StringBuilder();
+                foreach (var file in files)
+                {
+                    sb.Append(File.ReadAllText(file));
+                }
+                File.WriteAllText(Path.Combine(PDFFilesHomeDir, dir.Split('/')[dir.Split('/').Length - 1] + ".txt"), sb.ToString());
             }
         }
 
@@ -66,7 +120,7 @@ namespace Audecyzje.WebCrawler
             using (StreamWriter sw = new StreamWriter(File.Open(DirectUrlsAfter2016ComparedFileName, FileMode.Create)))
             {
                 var newUrls = File.ReadAllLines(DirectUrlsAfter2016FileName);
-                var oldFiles = Directory.GetFiles(ExisitingFilesHomeDir + "\\mjn2016txtonly").Select(x=> Path.GetFileNameWithoutExtension(x));
+                var oldFiles = Directory.GetFiles(ExisitingFilesHomeDir + "\\mjn2016txtonly").Select(x => Path.GetFileNameWithoutExtension(x));
 
                 foreach (var url in newUrls)
                 {
