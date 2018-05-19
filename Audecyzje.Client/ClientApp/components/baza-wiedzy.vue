@@ -11,7 +11,7 @@
                     </p>
                     <div class="quote">
                         <img src="../img/quote-1.svg" alt="quote">
-                        <p>
+                        <p class="quote-text-small">
                             Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Morbi scelerisque luctus velit. Praesent in mauris eu tortor porttitor accumsan. Mauris dolor felis, sagittis at, luctus sed, aliquam non, tellus. Proin pede metus, vulputate nec, fermentum fringilla, vehicula vitae, justo. In enim a arcu imperdiet malesuada. Vivamus luctus egestas leo.
                         </p>
                     </div>
@@ -114,10 +114,10 @@
             </tabs> 
             <div class="row">
                 <div class="bottom-el">
-                     <img src="../img/sad.svg" alt="sad">
+                     <img class="sad" src="../img/sad.svg" alt="sad">
                      <div class="copy">
                         <h4>
-                        Jesteś osobą poszkowaną w wyniku reprywatyzacji?
+                        Jesteś osobą poszkodowaną w wyniku reprywatyzacji?
                         </h4>
                         <p>
                             Zobacz jak prawidłowo przeanalizować decyzję.

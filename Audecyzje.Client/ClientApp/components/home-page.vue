@@ -55,7 +55,7 @@
                 <div class="col-sm mb-4">
                     <h5 class="font-weight-bold">Reprywatyzacja w Twojej dzielnicy</h5>
                     <p>Lorem ipsum dolor sit amet augue. Praesent gravida pulvinar. Nulla facilisi. Etiam vel nulla.</p>
-                    <a href="">Przeglądaj ></a>
+                    <router-link to="lokatorzy">Przeglądaj ></router-link>
                 </div>
                 <div class="col-sm mb-4">
                     <h5 class="font-weight-bold">Raporty i opracowania</h5>
@@ -65,7 +65,7 @@
                 <div class="col-sm mb-4">
                     <h5 class="font-weight-bold">Baza wiedzy o reprywatyzacji</h5>
                     <p>Lorem ipsum dolor sit amet augue. Praesent gravida pulvinar. Nulla facilisi. Etiam vel nulla.</p>
-                    <a href="">Przeglądaj ></a>
+                    <router-link to="baza-wiedzy">Przeglądaj ></router-link>
                 </div>
                 <div class="col-sm mb-4">
                     <h5 class="font-weight-bold">Kontakt/ źródła opracowań</h5>
@@ -78,6 +78,7 @@
 </template>
 
 <script>
+
 export default {
     data() {
         return {
