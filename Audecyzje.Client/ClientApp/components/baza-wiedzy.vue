@@ -2,7 +2,7 @@
     <div class="subpage-view">
         <div class="container">
             <div class="row">
-                <div class="definition col-7">
+                <div class="definition col-12 col-lg-7">
                     <h2>
                         Czym jest reprywatyzacja
                     </h2>
@@ -24,16 +24,16 @@
                         Najważniejsze informacje
                     </h2>  
                 </div>
-                 <div class="col-6">
-                    <div class="fact margin-bottom-5">
+                 <div class="col-12 col-lg-6">
+                    <div class="fact">
                         <img src="../img/time-1.svg" alt="time">
                         <p>
                             Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit.
                         </p>
                     </div>    
                 </div>
-                <div class="col-6">
-                    <div class="fact margin-bottom-5">
+                <div class="col-12 col-lg-6">
+                    <div class="fact">
                         <img src="../img/city.svg" alt="city">
                         <p>
                             Lorem ipsum dolor sit amet, sint tritani pri id, pro veri delenit at, ius ex nibh quaestio. At sit nemore accusata urbanitas, te decore possit pri. Eu placerat neglegentur mei, vel id dicat ancillae. Eos postea prompta id.
@@ -42,7 +42,7 @@
                 </div>  
             </div>
             <div class="row">
-                 <div class="col-6">
+                 <div class="col-12 col-lg-6">
                     <div class="fact">
                         <img src="../img/team-1.svg" alt="team">
                         <p>
@@ -50,7 +50,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-lg-6">
                     <div class="fact">
                         <img src="../img/megaphone-1.svg" alt="megaphone">
                         <p>
@@ -59,28 +59,141 @@
                     </div>  
                 </div> 
             </div>
-             <div class="row">
+            <div class="row">
                 <div class="col-12">
                     <h2 class="section-header">
                         Główne fakapy reprywatyzacyjne
                     </h2>  
                 </div>
-                <div class="col-12">
-
-                </div>
             </div>
+            <tabs>
+                <tab name='Parki' :selected='true'>
+                   <h4>
+                       Opis zjawiska
+                    </h4>
+                    <p>
+                        Lorem ipsum dolor sit amet, sint tritani pri id, pro veri delenit at, ius ex nibh quaestio. At sit nemore accusata urbanitas, te decore possit pri. Eu placerat neglegentur mei, vel id dicat ancillae. Eos postea prompta id. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Morbi scelerisque luctus velit. Praesent in mauris eu tortor porttitor accumsan. Mauris dolor felis, sagittis at, luctus sed, aliquam non, tellus. Proin pede metus, vulputate nec.
+                    </p>
+                   <h4>
+                       Skala zjawiska
+                    </h4>
+                    <p>
+                        Lorem ipsum dolor sit amet, sint tritani pri id, pro veri delenit at, ius ex nibh quaestio. At sit nemore accusata urbanitas, te decore possit pri. Eu placerat neglegentur mei, vel id dicat ancillae. Eos postea prompta id. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit.
+                    </p>
+                   <h4>
+                       Co możemy zrobić?
+                    </h4>
+                    <p>
+                        Lorem ipsum dolor sit amet, sint tritani pri id, pro veri delenit at, ius ex nibh quaestio. At sit nemore accusata urbanitas, te decore possit pri. Eu placerat neglegentur mei, vel id dicat ancillae. Eos postea prompta id.
+                    </p>
+                </tab>
+                <tab name='Szkoły'>
+                   <h4>
+                       Opis zjawiska
+                    </h4>
+                    <p>
+                        Lorem ipsum dolor sit amet, sint tritani pri id, pro veri delenit at, ius ex nibh quaestio. At sit nemore accusata urbanitas, te decore possit pri. Eu placerat neglegentur mei, vel id dicat ancillae. Eos postea prompta id. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Morbi scelerisque luctus velit. Praesent in mauris eu tortor porttitor accumsan. Mauris dolor felis, sagittis at, luctus sed, aliquam non, tellus. Proin pede metus, vulputate nec.
+                    </p>
+                </tab>
+                <tab name='Handel roszczeniami'>
+                    <h4>
+                       Skala zjawiska
+                    </h4>
+                    <p>
+                        Lorem ipsum dolor sit amet, sint tritani pri id, pro veri delenit at, ius ex nibh quaestio. At sit nemore accusata urbanitas, te decore possit pri. Eu placerat neglegentur mei, vel id dicat ancillae. Eos postea prompta id. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit.
+                    </p>
+                </tab>
+                <tab name='Mieszkańcy na bruku'>
+                    <h4>
+                       Co możemy zrobić?
+                    </h4>
+                    <p>
+                        Lorem ipsum dolor sit amet, sint tritani pri id, pro veri delenit at, ius ex nibh quaestio. At sit nemore accusata urbanitas, te decore possit pri. Eu placerat neglegentur mei, vel id dicat ancillae. Eos postea prompta id.
+                    </p>
+                </tab>
+            </tabs> 
+            <div class="row">
+                <div class="bottom-el">
+                     <img src="../img/sad.svg" alt="sad">
+                     <div class="copy">
+                        <h4>
+                        Jesteś osobą poszkowaną w wyniku reprywatyzacji?
+                        </h4>
+                        <p>
+                            Zobacz jak prawidłowo przeanalizować decyzję.
+                        </p>
+                     </div>
+                     <button type="button" class="btn btn-warning btn-lg">Sprawdź</button>
+                </div>
+            </div> 
         </div>
-    </div>
+    </div>  
 </template>
 <script>
+import Vue from 'vue'
+
+
 export default {
     data() {
         return {
 
         }
     }
-    }
-</script>
-<style>
+}
 
-</style>
+Vue.component('tabs',{
+  template:`
+  <div class="row">
+    <div class="tabs col-12 col-lg-3">
+      <ul>
+        <li v-for='tab in tabs' :class="{'is-active': tab.isActive}">
+          <a :href='tab.href' @click='selectedTab(tab)'>{{tab.name}}</a>
+        </li>
+      </ul>
+    </div>
+    <div class='tab-detail col-12 col-lg-9'>
+      <slot></slot>
+    </div>
+  </div>
+`,
+  data(){
+    return {
+        tabs:[]
+    };
+  },
+  created(){
+    this.tabs = this.$children
+  },
+  methods:{
+    selectedTab(selectedTab){
+      this.tabs.forEach( tab =>{ 
+        tab.isActive = (tab.name == selectedTab.name) }      
+       )
+    }
+  }
+})
+
+Vue.component('tab',{
+  template:`
+    <div v-show='isActive'><slot></slot></div>
+  `,
+  props:{
+    name:{required:true},
+    selected:{default:false}
+  },
+  data(){
+    return {    
+        isActive:false
+      }
+  },
+  computed:{
+     href(){
+       return '#'+this.name.toLowerCase().replace(/ /g,'-');
+     }
+  },
+  mounted(){
+    this.isActive = this.selected
+  }
+})
+
+</script>
