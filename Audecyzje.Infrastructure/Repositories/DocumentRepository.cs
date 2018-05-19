@@ -5,21 +5,46 @@ using System.Threading.Tasks;
 using Audecyzje.Core.Domain;
 using Audecyzje.Core.Repositories;
 using Audecyzje.Infrastructure.DatabaseContext;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Audecyzje.Infrastructure.Repositories
 {
     public class DocumentRepository : Repository<Document>, IDocumentRepository
     {
         private readonly AppDbContext _context;
+		private IMemoryCache _cache;
 
-        public DocumentRepository(AppDbContext context) : base(context)
+		public DocumentRepository(AppDbContext context, IMemoryCache memoryCache) : base(context)
         {
             _context = context;
+			_cache = memoryCache;
         }
+
+		enum CacheKeys
+		{
+			Documents
+		}
+
+		public async Task<ICollection<Document>> GetCachedDocuments()
+		{
+			ICollection<Document> documents;
+
+			if (!_cache.TryGetValue(CacheKeys.Documents, out documents))
+			{
+				documents = await GetAll();
+
+				var cacheEntryOptions = new MemoryCacheEntryOptions()
+											.SetSlidingExpiration(TimeSpan.FromHours(1));
+
+				_cache.Set(CacheKeys.Documents, documents, cacheEntryOptions);
+			}
+
+			return documents;
+		}
 
         public async Task<List<Document>> GetByLocalization(string address)
         {
-            var documents = await GetAll();
+            var documents = await GetCachedDocuments();
             var resultTmpListOfDocuments = new Dictionary<Document, int>();
             var splitedAddress = address.Split(" ", StringSplitOptions.None);
             // wyszukiwanie w kazdym dokumencie
@@ -71,7 +96,7 @@ namespace Audecyzje.Infrastructure.Repositories
 
         public async Task<List<Document>> GetByDecisionNumber(string decisionNumber)
         {
-            var documents = await GetAll();
+            var documents = await GetCachedDocuments();
             var searchResult = documents
                                         .Where(doc => doc.DecisionNumber == decisionNumber)
                                         .Select(doc => doc)
@@ -82,7 +107,7 @@ namespace Audecyzje.Infrastructure.Repositories
 
         public async Task<List<Document>> GetByDecisionDate(DateTime dateTime)
         {
-            var documents = await GetAll();
+            var documents = await GetCachedDocuments();
             var searchResult = documents
                                         .Where(doc => doc.Date == dateTime)
                                         .Select(doc => doc)
@@ -93,7 +118,7 @@ namespace Audecyzje.Infrastructure.Repositories
 
         public async Task<List<Document>> GetByLegalBasis(string legalBasis)
         {
-            var documents = await GetAll();
+            var documents = await GetCachedDocuments();
             var searchResult = documents
                                         .Where(doc => doc.LegalBasis == legalBasis)
                                         .Select(doc => doc)
