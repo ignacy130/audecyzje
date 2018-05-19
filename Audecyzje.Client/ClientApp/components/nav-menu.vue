@@ -46,7 +46,6 @@
     }
 </script>
 <style>
-
     .slide-enter-active, .slide-leave-active {
         transition: max-height .35s
     }

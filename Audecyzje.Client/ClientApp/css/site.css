@@ -212,13 +212,13 @@ footer li img {
     height: 0;
 }
 
-    .map-responsive iframe {
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: 100%;
-        position: absolute;
-    }
+.map-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
 
 #decisions-list{
     overflow-y: scroll;
@@ -231,6 +231,16 @@ footer li img {
 
 .hide {
   display: none;
+}
+
+/*** utilities ***/
+
+.margin-top-5 {
+  margin-top: 5px;
+}
+
+.margin-bottom-5 {
+  margin-bottom: 5px
 }
 
 /*** SUBPAGES ***/
@@ -274,18 +284,18 @@ footer li img {
   height: auto;
   width: 100%;
   background-size: cover;
-  background-position: 10px top;
+  background-position: 5px top;
 }
 
 .fact {
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
   padding: 0 20px;
 }
 
 .fact img {
   height: 50px;
+  margin-top: 5px;
   margin-right: 20px;
 }
 
