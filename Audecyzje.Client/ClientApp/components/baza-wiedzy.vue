@@ -16,22 +16,22 @@
                 </div>
                 <div class="side-image col-5"></div>
             </div>  
-            <h2>Najważniejsze informacje</h2>  
             <div class="row">
-                <div class="col-6">
+                <div class="col-12">
+                    <h2 class="section-header">
+                        Najważniejsze informacje
+                    </h2>  
+                </div>
+            </div>
+            <div class="row">
+                 <div class="col-6">
                     <div class="fact">
                         <img src="../img/time.svg" alt="time">
                         <p>
                             Lorem ipsum dolor sit amet, sint tritani pri id, pro veri delenit at, ius ex nibh quaestio. At sit nemore accusata urbanitas, te decore possit pri. Eu placerat neglegentur mei, vel id dicat ancillae. Eos postea prompta id.
                         </p>
                     </div>    
-                    <div class="fact">
-                        <img src="../img/team.svg" alt="team">
-                        <p>
-                            Lorem ipsum dolor sit amet, sint tritani pri id, pro veri delenit at, ius ex nibh quaestio. At sit nemore accusata urbanitas, te decore possit pri. Eu placerat neglegentur mei, vel id dicat ancillae. Eos postea prompta id.
-                        </p>
-                    </div>
-                </div>  
+                </div>
                 <div class="col-6">
                     <div class="fact">
                         <img src="../img/firewall.svg" alt="firewall">
@@ -39,14 +39,26 @@
                             Lorem ipsum dolor sit amet, sint tritani pri id, pro veri delenit at, ius ex nibh quaestio. At sit nemore accusata urbanitas, te decore possit pri. Eu placerat neglegentur mei, vel id dicat ancillae. Eos postea prompta id.
                         </p>
                     </div>
+                </div>  
+            </div>
+            <div class="row">
+                 <div class="col-6">
+                    <div class="fact">
+                        <img src="../img/team.svg" alt="team">
+                        <p>
+                            Lorem ipsum dolor sit amet, sint tritani pri id, pro veri delenit at, ius ex nibh quaestio. At sit nemore accusata urbanitas, te decore possit pri. Eu placerat neglegentur mei, vel id dicat ancillae. Eos postea prompta id.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-6">
                     <div class="fact">
                         <img src="../img/megaphone.svg" alt="megaphone">
                         <p>
                             Lorem ipsum dolor sit amet, sint tritani pri id, pro veri delenit at, ius ex nibh quaestio. At sit nemore accusata urbanitas, te decore possit pri. Eu placerat neglegentur mei, vel id dicat ancillae. Eos postea prompta id.
                         </p>
-                    </div>
-                </div>  
-            </div> 
+                    </div>  
+                </div> 
+            </div>
         </div>
     </div>
 </template>

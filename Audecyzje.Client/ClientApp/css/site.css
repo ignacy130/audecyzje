@@ -7,6 +7,15 @@ body {
   background-color: transparent !important;
 }
 
+.navbar a {
+  color: #000;
+  transition: 0.3s;
+}
+
+.navbar a:hover {
+  color: blue;
+}
+
 .view {
     height: 104vh;
     width: 100%;
@@ -230,8 +239,8 @@ footer li img {
   margin: 2rem 0;
 }
 
-.subpage-view .row {
-  margin: 3rem 0;
+.section-header {
+  margin: 4rem 0 2rem 0;
 }
 
 .definition {
@@ -271,14 +280,12 @@ footer li img {
 .fact {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   margin-bottom: 1rem;
   padding: 0 20px;
 }
 
 .fact img {
   height: 50px;
-  margin-top: -15px;
   margin-right: 20px;
 }
 
