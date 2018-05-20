@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="side-image col-5"></div>
-                <div class="definition col-12 col-lg-7">
+                <div class="subpage-intro col-12 col-lg-7">
                     <h2>
                         Jak czytać dezycję
                     </h2>
@@ -33,7 +33,7 @@
                                     3
                                 </span>
                             </div>
-                            <p>Znajdź nieprawidłowości</p>
+                            <p>Znajdź nieprawidłowości w decyzji</p>
                         </div>
                         <br>
                         <button type="button" class="btn btn-warning btn-lg">
@@ -48,9 +48,9 @@
                         Sprawdź czy decyzja jest ok
                     </h2>  
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-lg-6">
                     <p>
-                        Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada fames ac turpis velit, rhoncus eu, luctus et interdum adipiscing wisi. Aliquam erat ac ipsum.
+                        Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna.
                     </p>  
                 </div>
             </div>

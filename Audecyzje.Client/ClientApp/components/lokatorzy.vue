@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="side-image col-5"></div>
-                <div class="definition col-12 col-lg-7">
+                <div class="subpage-intro subpage-intro-br col-12 col-lg-7">
                     <h2>
                         Reprywatyzacja a lokatorzy
                     </h2>

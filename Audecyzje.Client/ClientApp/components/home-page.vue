@@ -9,10 +9,10 @@
                         <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="Wpisz adres warszawskiej nieruchomości"/>
                             <button type="button" class="btn btn-warning btn-lg">Sprawdź</button>
                         </div>
-                    <h2 class="text-center">
+                    <h3 class="text-center">
                         Lorem Lorem ipsum dolor sit amet augue. Praesent gravida pulvinar. Nulla facilisi. Etiam vel nulla. Curabitur scelerisque
                         tellus augue, ullamcorper ut, condimentum urna, placerat tempor ac, suscipit in, vulputate tortor id felis.
-                    </h2>
+                    </h3>
                 </div>
             </div>
         </div>

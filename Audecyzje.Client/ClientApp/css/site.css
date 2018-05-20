@@ -2,6 +2,10 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
+*:focus {
+  outline: none;
+}
+
 .navbar {
   position: relative;
   background-color: transparent !important;
@@ -44,7 +48,7 @@ body {
     font-family: 'Oswald', sans-serif;
 }
 
-.input-field h2 {
+.input-field h3 {
     color: #fff;
 }
 
@@ -293,15 +297,17 @@ footer li img {
   width: 100%;
 }
 
-.definition {
-  border: 2px solid #000;
+.subpage-intro {
   padding: 2em;
 }
 
-.definition > p {
+.subpage-intro-br {
+  border: 2px solid #000;
+}
+
+.subpage-intro > p {
   margin: 1.5rem 0;
   font-size: 15px;
-  text-align: justify;
 }
 
 .quote {
@@ -315,7 +321,6 @@ footer li img {
 .quote > p {
   padding-left: 1.5rem;
   margin: 0;
-  text-align: justify;
 }
 
 .quote-text-big {
@@ -338,10 +343,6 @@ footer li img {
 .fact img {
   height: 50px;
   margin-right: 20px;
-}
-
-.fact p {
-  text-align: justify;
 }
 
 .decision-step {
@@ -531,6 +532,10 @@ footer li img {
 
 @media (max-width: 991px) {
 
+  p, .copy {
+    text-align: left;
+  }
+
   h2, .section-header {
     text-align: center;
   }
@@ -579,6 +584,11 @@ footer li img {
 }
 
 @media (min-width: 992px) {
+
+  p, .copy {
+    text-align: justify;
+  }
+
   .navbar-brand {
     position: absolute;
     left: 40%;
