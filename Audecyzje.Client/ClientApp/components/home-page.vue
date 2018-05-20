@@ -60,7 +60,7 @@
                 <div class="col-sm mb-4">
                     <h5 class="font-weight-bold">Raporty i opracowania</h5>
                     <p>Lorem ipsum dolor sit amet augue. Praesent gravida pulvinar. Nulla facilisi. Etiam vel nulla.</p>
-                    <a href="">Przeglądaj ></a>
+                   <router-link to="decyzja">Przeglądaj ></router-link>
                 </div>
                 <div class="col-sm mb-4">
                     <h5 class="font-weight-bold">Baza wiedzy o reprywatyzacji</h5>
@@ -78,6 +78,7 @@
 </template>
 
 <script>
+import { routes } from '../routes'
 
 export default {
     data() {

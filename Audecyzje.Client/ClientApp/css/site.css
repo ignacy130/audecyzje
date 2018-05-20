@@ -344,6 +344,37 @@ footer li img {
   text-align: justify;
 }
 
+.decision-step {
+  display: flex;
+  align-items: center;
+}
+
+.decision-step .step-nr {
+  position: relative;
+  height: 60px;
+  width: 60px;
+  background-color: #979797;
+  border-radius: 100px;
+  margin: 10px 20px 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all .2s ease-in-out;
+}
+
+.decision-step:hover .step-nr {
+  transform: scale(1.05);
+}
+
+.decision-step .step-nr span {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.decision-step p {
+  margin-bottom: 0;
+}
+
 .tabs ul {
   list-style-type: none;
   padding: 0;
@@ -499,6 +530,11 @@ footer li img {
 }
 
 @media (max-width: 991px) {
+
+  h2, .section-header {
+    text-align: center;
+  }
+
   .side-image {
     display: none;
   }
