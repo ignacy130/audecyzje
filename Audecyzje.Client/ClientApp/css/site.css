@@ -21,7 +21,7 @@ h1, h2, h3, h4, h5, h6 {
   color: blue;
 }
 
-.view {
+.broad-view {
     height: 104vh;
     width: 100%;
     color: #fff;
@@ -322,11 +322,6 @@ footer li img {
   width: 100%;
 }
 
-.definition {
-  border: 2px solid #000;
-  padding: 2em;
-}
-
 .definition > p {
   margin: 1.5rem 0;
   font-size: 15px;
@@ -349,13 +344,6 @@ footer li img {
 
 .quote-text-big {
   font-size: 1.5rem;
-}
-
-.side-image {
-  background:  url(/Images/alexey-topolyanskiy-270795.jpg) no-repeat center;
-  height: auto;
-  width: 100%;
-  background-size: cover;
 }
 
 .fact {

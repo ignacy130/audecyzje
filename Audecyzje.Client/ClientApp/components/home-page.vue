@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- Input Field -->
-        <div class="view">
+        <div class="broad-view">
             <div class="container pt-5">
                 <div class="text-center input-field py-5">
                     <h1 class="bold-header text-center">Dostęp do ponad 2000 decyzji reprywatyzacyjnych wydanych w Warszawie w latach 1950-2017</h1>

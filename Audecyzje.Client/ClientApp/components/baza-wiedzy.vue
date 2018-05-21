@@ -1,19 +1,8 @@
 <template>
     <div class="subpage-view">
-        <div class="view">
-            <div class="container pt-5">
-                <div class="text-center input-field py-5">
-                    <h1 class="bold-header text-center">Dostęp do ponad 2000 decyzji reprywatyzacyjnych wydanych w Warszawie w latach 1950-2017</h1>
-                    <div class="input-group my-4">
-                        <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="Wpisz adres warszawskiej nieruchomości" />
-                        <button type="button" class="btn btn-warning btn-lg">Sprawdź</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="definition col-12 col-lg-7">
+        <div class="broad-view">
+            <div class="row mx-5 mt-5">
+                <div class="definition col-12 col-lg-7 py-5">
                     <h2 class="bold-header">
                         Czym jest reprywatyzacja
                     </h2>
@@ -21,14 +10,15 @@
                         Lorem ipsum dolor sit amet, sint tritani pri id, pro veri delenit at, ius ex nibh quaestio. At sit nemore accusata urbanitas, te decore possit pri. Eu placerat neglegentur mei, vel id dicat ancillae. Eos postea prompta id.
                     </p>
                     <div class="quote">
-                        <img src="../img/quote-1.svg" alt="quote">
+                        <h1>&quot;</h1>
                         <p class="quote-text-small">
                             Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Morbi scelerisque luctus velit. Praesent in mauris eu tortor porttitor accumsan. Mauris dolor felis, sagittis at, luctus sed, aliquam non, tellus. Proin pede metus, vulputate nec, fermentum fringilla, vehicula vitae, justo. In enim a arcu imperdiet malesuada. Vivamus luctus egestas leo.
                         </p>
                     </div>
                 </div>
-                <div class="side-image col-5"></div>
             </div>
+        </div>
+        <div class="container">
             <div class="row">
                 <div class="col-12">
                     <h2 class="section-header bold-header">
@@ -212,3 +202,9 @@ Vue.component('tab',{
 })
 
 </script>
+<style>
+    .broad-view {
+        height: 50vh;
+        margin-top: 0;
+    }
+</style>
