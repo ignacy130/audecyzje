@@ -1,5 +1,5 @@
 <template>
-    <div class="subpage-view">
+    <div id="knowledge-base" class="subpage-view">
         <div class="broad-view">
             <div class="row mx-5 mt-5">
                 <div class="definition col-12 col-lg-7 py-5">
@@ -203,7 +203,7 @@ Vue.component('tab',{
 
 </script>
 <style>
-    .broad-view {
+    #knowledge-base .broad-view {
         height: 50vh;
         margin-top: 0;
     }
