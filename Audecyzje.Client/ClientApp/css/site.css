@@ -2,6 +2,11 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: bold;
+}
+
 .navbar {
   position: relative;
   background-color: transparent !important;
@@ -19,6 +24,7 @@ body {
 .view {
     height: 104vh;
     width: 100%;
+    color: #fff;
     background-color: #333;
     background-size: cover;
     background-repeat: no-repeat;
@@ -36,11 +42,31 @@ body {
     color: #fff;
 }
 
-.input-field h1 {
-    color: #fff;
+.bold-header {
     font-weight: 700;
     line-height: 4.5rem;
     font-size: 3rem;
+    font-family: 'Oswald', sans-serif;
+}
+
+h2.bold-header {
+    font-weight: 700;
+    line-height: 4rem;
+    font-size: 2.5rem;
+    font-family: 'Oswald', sans-serif;
+}
+
+h3.bold-header {
+    font-weight: 700;
+    line-height: 3.5rem;
+    font-size: 2rem;
+    font-family: 'Oswald', sans-serif;
+}
+
+h4.bold-header {
+    font-weight: 700;
+    line-height: 3rem;
+    font-size: 1.5rem;
     font-family: 'Oswald', sans-serif;
 }
 
@@ -68,7 +94,6 @@ body {
     background-color: transparent;
 }
 
-
 .btn {
   border-radius: 0;
 }
@@ -76,6 +101,10 @@ body {
 .btn-warning {
     background-color: #FCE603;
     border: #FCE603;
+}
+
+.card-shadow {
+    box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2);
 }
 
 .stats .card {
@@ -382,25 +411,35 @@ footer li img {
 }
 
 .tabs ul li {
-  border: 2px solid #000;
-  background-color: lightgrey;
   color: #000;
-  display: flex;
   align-items: center;
   cursor: pointer;
+  text-align: right;
+  border-bottom: 1px solid #ddd;
+  margin: 0;
+  padding: 0;
 }
 
-.tabs ul li.is-active {
-  background-color: #fff;
-}
+    .tabs ul li.is-active {
+        background-color: #FCE603;
+        font-weight: 700;
+    }
 
-.tabs ul li a {
-  color: #000;
-}
+    .tabs ul li a {
+        color: #000;
+        font-size: 1.2rem;
+        text-align: right;
+        display: block;
+        text-decoration: none;
+        padding: 15px;
+    }
 
-.tab-detail {
-  border: 2px solid #000;
-  padding: 2rem;
+    .tabs ul li a:hover {
+        font-weight: 700;
+    }
+
+.tab-detail{
+    background-color: #fff;
 }
 
 .bottom-el {
@@ -592,11 +631,6 @@ footer li img {
   .tabs {
     padding-right: 0.1rem;
     padding-left: 0;
-  }
-  
-  .tabs ul li {
-    margin-bottom: 0.1rem;
-    padding: 15px;
   }
   
   .tabs ul li:last-of-type {
