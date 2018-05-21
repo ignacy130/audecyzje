@@ -4,7 +4,54 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Oswald', sans-serif;
-    font-weight: bold;
+    line-height: 2.2rem;
+}
+
+.bold-header {
+  font-weight: 700;
+  line-height: 4.5rem;
+  font-size: 3rem;
+  font-family: 'Oswald', sans-serif;
+}
+
+h2.bold-header {
+  font-weight: 700;
+  line-height: 4rem;
+  font-size: 2.5rem;
+  font-family: 'Oswald', sans-serif;
+}
+
+h3.bold-header {
+  font-weight: 700;
+  line-height: 3.5rem;
+  font-size: 2rem;
+  font-family: 'Oswald', sans-serif;
+}
+
+h4.bold-header {
+  font-weight: 700;
+  line-height: 3rem;
+  font-size: 1.5rem;
+  font-family: 'Oswald', sans-serif;
+}
+
+.hide {
+  display: none;
+}
+
+/*** HOME STYLE ***/
+
+.broad-view {
+  height: 104vh;
+  width: 100%;
+  color: #fff;
+  background-color: #333;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("~/Images/alexey-topolyanskiy-270795.jpg");
+  margin-top: -5rem;
 }
 
 .navbar {
@@ -21,53 +68,12 @@ h1, h2, h3, h4, h5, h6 {
   color: blue;
 }
 
-.broad-view {
-    height: 104vh;
-    width: 100%;
-    color: #fff;
-    background-color: #333;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("~/Images/alexey-topolyanskiy-270795.jpg");
-    margin-top: -5rem;
-}
-
 .navbar {
     background-color: transparent !important;
 }
 
 .navbar-dark a {
     color: #fff;
-}
-
-.bold-header {
-    font-weight: 700;
-    line-height: 4.5rem;
-    font-size: 3rem;
-    font-family: 'Oswald', sans-serif;
-}
-
-h2.bold-header {
-    font-weight: 700;
-    line-height: 4rem;
-    font-size: 2.5rem;
-    font-family: 'Oswald', sans-serif;
-}
-
-h3.bold-header {
-    font-weight: 700;
-    line-height: 3.5rem;
-    font-size: 2rem;
-    font-family: 'Oswald', sans-serif;
-}
-
-h4.bold-header {
-    font-weight: 700;
-    line-height: 3rem;
-    font-size: 1.5rem;
-    font-family: 'Oswald', sans-serif;
 }
 
 .input-field h2 {
@@ -112,7 +118,7 @@ h4.bold-header {
 }
 
 .stats .card-body {
-    padding: 3rem;
+  padding: 3rem 2rem;
 }
 
 .stats .card-title {
@@ -120,6 +126,8 @@ h4.bold-header {
     font-weight: 700;
     font-size: 4rem;
     font-family: 'Oswald', sans-serif;
+    margin-bottom: 2rem;
+    line-height: 4rem;
 }
 
 .stats {
@@ -140,7 +148,7 @@ footer li img {
     height: 50px;
 }
 
-/* Search Page */
+/* SEARCH PAGE STYLES */
 
 .jumbotron {
   border-radius: 0%;
@@ -274,21 +282,7 @@ footer li img {
   font-size: 1rem;
 }
 
-.hide {
-  display: none;
-}
-
-/*** utilities ***/
-
-.no-margin-top {
-  margin-top: 0 !important;
-}
-
-.no-margin-bottom {
-  margin-bottom: 0 !important;
-}
-
-/*** SUBPAGES ***/
+/*** SUBPAGES STYLES ***/
 
 .subpage-view {
   margin: 2rem 0;
@@ -402,23 +396,23 @@ footer li img {
   padding: 0;
 }
 
-    .tabs ul li.is-active {
-        background-color: #FCE603;
-        font-weight: 700;
-    }
+.tabs ul li.is-active {
+    background-color: #FCE603;
+    font-weight: 700;
+}
 
-    .tabs ul li a {
-        color: #000;
-        font-size: 1.2rem;
-        text-align: right;
-        display: block;
-        text-decoration: none;
-        padding: 15px;
-    }
+.tabs ul li a {
+    color: #000;
+    font-size: 1.2rem;
+    text-align: right;
+    display: block;
+    text-decoration: none;
+    padding: 15px;
+}
 
-    .tabs ul li a:hover {
-        font-weight: 700;
-    }
+.tabs ul li a:hover {
+    font-weight: 700;
+}
 
 .tab-detail{
     background-color: #fff;
@@ -459,15 +453,31 @@ footer li img {
   width: 100%;
 }
 
-/* Media Queries */
-
-@media (max-width: 366px) {
-  .view {
-    margin-top: -16rem;
-  }
-}
+/* MEDIA QUERIES */
 
 @media (max-width: 464px) {
+
+  .bold-header {
+    line-height: 3rem;
+    font-size: 1.8rem;
+  }
+  
+  h2.bold-header {
+    line-height: 4rem;
+    font-size: 2.5rem;
+  }
+  
+  h3.bold-header {
+    line-height: 3.5rem;
+    font-size: 2rem;
+  }
+  
+  h4,
+  h4.bold-header {
+    line-height: 2rem;
+    font-size: 1.2rem;
+  }
+
   button.navbar-toggler {
     padding: 0;
   }
@@ -475,12 +485,50 @@ footer li img {
     margin-top: -14rem;
   }
   .input-field {
-    margin-top: 10rem;
+    margin-top: 1rem;
   }
 
   .navbar-toggler-icon {
     display: none;
   } 
+
+  .stats {
+    margin-top: -2rem;
+  }
+}
+
+@media (max-width: 321px) {
+
+  .bold-header {
+    line-height: 2.5rem;
+    font-size: 1.5rem;
+  }
+
+  .view {
+    margin-top: -16rem;
+  }
+  
+  .input-field {
+    margin-top: -0.5rem;
+  }
+
+  h4,
+  h4.bold-header {
+    line-height: 1.6rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 366px) {
+
+  .bold-header {
+    line-height: 2.5rem;
+    font-size: 1.5rem;
+  }
+
+  .view {
+    margin-top: -16rem;
+  }
 }
 
 @media (min-width: 465px) {
@@ -495,12 +543,16 @@ footer li img {
     margin-top: -14rem;
   }
   .input-field {
-    margin-top: 10rem;
+    margin-top: 2rem;
   }
 
 }
 
 @media (max-width: 767px) {
+
+  p, .copy {
+    text-align: left;
+  }
 
   .subpage-view {
     padding: 0 5px;
@@ -545,16 +597,19 @@ footer li img {
 }
 
 @media (max-width: 768px) {
+
+  .input-card {
+    padding-right: 0;
+  }
+}
+
+@media (min-width: 768px) {
   .input-card {
     padding-right: 0;
   }
 }
 
 @media (max-width: 991px) {
-
-  p, .copy {
-    text-align: left;
-  }
 
   h2, .section-header {
     text-align: center;
@@ -605,14 +660,14 @@ footer li img {
 
 @media (min-width: 992px) {
 
-  p, .copy {
-    text-align: justify;
-  }
-
   .navbar-brand {
     position: absolute;
     left: 40%;
     display: block;
+  }
+
+  .input-field {
+    margin-top: 5rem;
   }
 
   .quote img {
@@ -631,7 +686,7 @@ footer li img {
 
 @media (min-width: 576px) and (max-width: 1199px) {
   .stats .card-body {
-    padding: 0.5rem;
+    padding: 2rem;
   }
 
   .bottom-el {
@@ -653,9 +708,6 @@ footer li img {
 }
 
 @media (min-width: 1200px) {
-  .input-field {
-    margin-top: 5rem;
-  }
 
   .sidebar .sidebar-inner {
     padding: 0 3rem 1rem 3rem;

@@ -9,10 +9,10 @@
                         <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="Wpisz adres warszawskiej nieruchomości"/>
                             <button type="button" class="btn btn-warning btn-lg">Sprawdź</button>
                         </div>
-                    <h3 class="text-center">
+                    <h4 class="text-center">
                         Lorem Lorem ipsum dolor sit amet augue. Praesent gravida pulvinar. Nulla facilisi. Etiam vel nulla. Curabitur scelerisque
                         tellus augue, ullamcorper ut, condimentum urna, placerat tempor ac, suscipit in, vulputate tortor id felis.
-                    </h3>
+                    </h4>
                 </div>
             </div>
         </div>
@@ -25,22 +25,28 @@
                         <div class="card">
                             <div class="card-body">
                                 <h1 class="card-title text-center">20 tys.</h1>
-                                <p class="card-text">Aż tyle osób straciło dach nad głową w wyniku reprywatyzacji.</p>
-                                <p>To 1% mieszkańców Warszawy.</p>
+                                <div>
+                                    <p class="card-text">Aż tyle osób straciło dach nad głową w wyniku reprywatyzacji.</p>
+                                    <p>To 1% mieszkańców Warszawy.</p>
+                                </div>
                             </div>
                         </div>
                         <div class="card">
                             <div class="card-body">
                                 <h1 class="card-title text-center">450</h1>
-                                <p class="card-text">Tyle nieruchomości zostało przekazanych w latach 1950-2017.</p>
-                                <p>To 3% budynkow w Warszawie.</p>
+                                <div>
+                                    <p class="card-text">Tyle nieruchomości zostało przekazanych w latach 1950-2017.</p>
+                                    <p>To 3% budynkow w Warszawie.</p>
+                                </div>
                             </div>
                         </div>
                         <div class="card">
                             <div class="card-body">
                                 <h1 class="card-title text-center">15 mln</h1>
-                                <p class="card-text">To łączna wartość zreprywatyzowanych nieruchomości w stolicy.</p>
-                                <p>To 5% budżetu rocznego Warszawy.</p>
+                                <div>
+                                    <p class="card-text">To łączna wartość zreprywatyzowanych nieruchomości w stolicy.</p>
+                                    <p>To 5% budżetu rocznego Warszawy.</p>
+                                </div>
                             </div>
                         </div>
                     </div>

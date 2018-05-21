@@ -2,7 +2,7 @@
     <div id="knowledge-base" class="subpage-view">
         <div class="broad-view">
             <div class="row mx-5 mt-5">
-                <div class="definition col-12 col-lg-7 py-5">
+                <div class="definition col-12 col-lg-10 col-xl-7 offset-xl-1 py-5 pl-0">
                     <h2 class="bold-header">
                         Czym jest reprywatyzacja
                     </h2>
@@ -204,7 +204,7 @@ Vue.component('tab',{
 </script>
 <style>
     #knowledge-base .broad-view {
-        height: 50vh;
+        height: 100%;
         margin-top: 0;
     }
 </style>
