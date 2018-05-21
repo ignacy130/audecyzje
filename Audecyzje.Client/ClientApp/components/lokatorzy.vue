@@ -34,7 +34,7 @@
                 </div>
                  <div class="col-lg-4">
                     <div class="sidebar">
-                        <h5>Zobacz również</h5>
+                        <h5 class="ml-5">Zobacz również</h5>
                         <div class="sidebar-inner"> 
                             <p>Wyniki z audytu reprywatyzacji</p>
                             <button type="button" class="btn btn-warning">

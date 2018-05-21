@@ -329,7 +329,7 @@ footer li img {
 }
 
 .sidebar {
-  border: 2px solid #000;
+  border: 1px solid #000;
   padding: 1rem;
 }
 
@@ -453,7 +453,7 @@ footer li img {
 
 .bottom-el {
   margin: 4rem 0 0 0;
-  border: 2px solid #000;
+  border: 1px solid #000;
   width: 100%;
   padding: 2rem 3rem;
   display: flex;
