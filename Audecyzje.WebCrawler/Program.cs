@@ -36,16 +36,19 @@ namespace Audecyzje.WebCrawler
                 //var files2 = File.ReadAllLines(DirectUrlsAfter2016ComparedFileName);
                 //var files3 = File.ReadAllLines(DirectUrlsBefore2016FileName);
                 //var files4 = File.ReadAllLines(DirectUrlsBefore2016ComparedFileName);
-                
+
                 /////---DownloadFiles();
                 //For downloading files use JDownloader http://jdownloader.org/download/index
                 //// AfterDownload-->
                 //TranslateFilepathsPLtoEN();
                 //PutFilesInSubfolders();
-                
-                ////----OCR -> powershellscript
-                GetTextToHomeFolder();
-                TranslateFilepathsENtoPL();
+
+                ////----OCR -> powershellscript --> check resources
+                //GetTextToHomeFolder();
+                //TranslateFilepathsENtoPL();
+
+                ///Additional helper methods
+                //TranslateAllNestedDirsAndFileENtoPL(PDFFilesHomeDir);
             }
             else
             {
@@ -53,6 +56,32 @@ namespace Audecyzje.WebCrawler
             }
             Console.WriteLine("Program finished its work. Press any key to finish");
             Console.ReadKey();
+        }
+
+        private static void TranslateAllNestedDirsAndFileENtoPL(string workingDirectory)
+        {
+            foreach (var dir in Directory.GetDirectories(workingDirectory))
+            {
+                var dirname = Path.GetFileNameWithoutExtension(dir);
+                var newName = GetStringENtoPL(dirname);
+                if (newName != dirname)
+                {
+                    Directory.Move(dir, Path.Combine(Path.GetDirectoryName(dir), newName));
+                }
+            }
+
+            foreach (var dir in Directory.GetDirectories(workingDirectory))
+            {
+                foreach (var filepath in Directory.GetFiles(dir))
+                {
+                    var filename = Path.GetFileName(filepath);
+                    var newName = GetStringENtoPL(filename);
+                    if (newName != filename)
+                    {
+                        File.Move(filepath, Path.Combine(dir, newName));
+                    }
+                }
+            }
         }
 
         private static string GetStringPLtoEN(string toReplace)
