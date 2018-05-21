@@ -23,13 +23,12 @@ namespace Audecyzje.WebCrawler
         static string LogFile = @"C:\Users\ya\Documents\SourceCode\audecyzje\Audecyzje.WebCrawler\Resources\LogFile.txt";
 
         static string ExisitingFilesHomeDir = @"C:\Users\ya\Documents\SourceCode\audecyzje\Audecyzje.WebCrawler\Resources\txtmjnall";
-        static string PDFFilesHomeDir = @"E:\Repra\test";
+        static string PDFFilesHomeDir = @"E:\Repra";
 
         static void Main(string[] args)
         {
             if (CheckAccesToFolders())
             {
-
                 //DownloadDirectUrlsBefor2016();
                 //DownloadDirectUrlsAfter2016();
                 //CompareExistingFilesWithNewUrls();
@@ -37,14 +36,16 @@ namespace Audecyzje.WebCrawler
                 //var files2 = File.ReadAllLines(DirectUrlsAfter2016ComparedFileName);
                 //var files3 = File.ReadAllLines(DirectUrlsBefore2016FileName);
                 //var files4 = File.ReadAllLines(DirectUrlsBefore2016ComparedFileName);
-                //DownloadFiles();
+                
+                /////---DownloadFiles();
                 //For downloading files use JDownloader http://jdownloader.org/download/index
                 //// AfterDownload-->
-                //ConvertCharsPLtoEN();
+                //TranslateFilepathsPLtoEN();
                 //PutFilesInSubfolders();
+                
                 ////----OCR -> powershellscript
-                //GetTextToHomeFolder();
-                DeconvertCharsENtoPL();
+                GetTextToHomeFolder();
+                TranslateFilepathsENtoPL();
             }
             else
             {
@@ -54,38 +55,49 @@ namespace Audecyzje.WebCrawler
             Console.ReadKey();
         }
 
-        private static void ConvertCharsPLtoEN()
+        private static string GetStringPLtoEN(string toReplace)
+        {
+            return toReplace.Replace("ą", "aX").Replace("Ą", "AX")
+                             .Replace("ć", "cX").Replace("Ć", "CX")
+                             .Replace("ę", "eX").Replace("Ę", "EX")
+                             .Replace("ł", "lX").Replace("Ł", "LX")
+                             .Replace("ń", "nX").Replace("Ń", "NX")
+                             .Replace("ó", "oX").Replace("Ó", "OX")
+                             .Replace("ś", "sX").Replace("Ś", "SX")
+                             .Replace("ż", "zZ").Replace("Ż", "ZZ")
+                             .Replace("ź", "zX").Replace("Ź", "ZX");
+        }
+        private static string GetStringENtoPL(string toReplace)
+        {
+            return toReplace.Replace("aX", "ą").Replace("AX", "Ą")
+                            .Replace("cX", "ć").Replace("CX", "Ć")
+                            .Replace("eX", "ę").Replace("EX", "Ę")
+                            .Replace("lX", "ł").Replace("LX", "Ł")
+                            .Replace("nX", "ń").Replace("NX", "Ń")
+                            .Replace("oX", "ó").Replace("OX", "Ó")
+                            .Replace("sX", "ś").Replace("SX", "Ś")
+                            .Replace("zZ", "ż").Replace("ZZ", "Ż")
+                            .Replace("zX", "ź").Replace("ZX", "Ź");
+        }
+
+        private static void TranslateFilepathsPLtoEN()
         {
             var filepaths = Directory.GetFiles(PDFFilesHomeDir);
             foreach (var filepath in filepaths)
             {
                 var filename = Path.GetFileName(filepath);
-                filename = filename.Replace("ą", "aX").Replace("Ą", "AX")
-                                   .Replace("ć", "cX").Replace("Ć", "CX")
-                                   .Replace("ę", "eX").Replace("Ę", "EX")
-                                   .Replace("ł", "lX").Replace("Ł", "LX")
-                                   .Replace("ń", "nX").Replace("Ń", "NX")
-                                   .Replace("ó", "oX").Replace("Ó", "OX")
-                                   .Replace("ż", "zZ").Replace("Ż", "ZZ")
-                                   .Replace("ź", "zX").Replace("Ź", "ZX");
+                filename = GetStringPLtoEN(filename);
                 File.Move(filepath, Path.Combine(PDFFilesHomeDir, filename));
             }
         }
 
-        private static void DeconvertCharsENtoPL()
+        private static void TranslateFilepathsENtoPL()
         {
             var filepaths = Directory.GetFiles(PDFFilesHomeDir);
             foreach (var filepath in filepaths)
             {
                 var filename = Path.GetFileName(filepath);
-                filename = filename.Replace("aX", "ą").Replace("AX", "Ą")
-                                   .Replace("cX", "ć").Replace("CX", "Ć")
-                                   .Replace("eX", "ę").Replace("EX", "Ę")
-                                   .Replace("lX", "ł").Replace("LX", "Ł")
-                                   .Replace("nX", "ń").Replace("NX", "Ń")
-                                   .Replace("oX", "ó").Replace("OX", "Ó")
-                                   .Replace("zZ", "ż").Replace("ZZ", "Ż")
-                                   .Replace("zX", "ź").Replace("ZX", "Ź");
+                filename = GetStringENtoPL(filename);
                 File.Move(filepath, Path.Combine(PDFFilesHomeDir, filename));
             }
         }
