@@ -6,6 +6,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Resources\txtmjnall\**" />
+    <EmbeddedResource Remove="Resources\txtmjnall\**" />
+    <None Remove="Resources\txtmjnall\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\DirectUrls.txt" />
+    <None Remove="Resources\DirectUrls_before2016.txt" />
+    <None Remove="Resources\DirectUrls_compared.txt" />
+    <None Remove="Resources\DirectUrls_compared_before2016.txt" />
+    <None Remove="Resources\LogFile.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Resources\" />
   </ItemGroup>
 

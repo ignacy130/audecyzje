@@ -3,16 +3,16 @@
         <!-- Input Field -->
         <div class="broad-view">
             <div class="container pt-5">
-                <div class="text-center input-field py-5">
-                    <h1 class="bold-header text-center">Dostęp do ponad 2000 decyzji reprywatyzacyjnych wydanych w Warszawie w latach 1950-2017</h1>
-                    <div class="input-group my-4">
+                <div class="text-center input-field py-4">
+                    <h1 class="bold-header text-center px-lg-5">Dostęp do ponad 2000 decyzji reprywatyzacyjnych wydanych w Warszawie w latach 1950-2017</h1>
+                    <div class="input-group my-4 my-lg-5">
                         <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="Wpisz adres warszawskiej nieruchomości"/>
                             <button type="button" class="btn btn-warning btn-lg">Sprawdź</button>
                         </div>
-                    <h2 class="text-center">
+                    <h5 class="text-center px-lg-5">
                         Lorem Lorem ipsum dolor sit amet augue. Praesent gravida pulvinar. Nulla facilisi. Etiam vel nulla. Curabitur scelerisque
-                        tellus augue, ullamcorper ut, condimentum urna, placerat tempor ac, suscipit in, vulputate tortor id felis.
-                    </h2>
+                        tellus augue, ullamcorper ut, condimentum urna, placerat tempor ac, suscipit in, vulputate tortor.
+                    </h5>
                 </div>
             </div>
         </div>
@@ -25,22 +25,28 @@
                         <div class="card">
                             <div class="card-body">
                                 <h1 class="card-title text-center">20 tys.</h1>
-                                <p class="card-text">Aż tyle osób straciło dach nad głową w wyniku reprywatyzacji.</p>
-                                <p>To 1% mieszkańców Warszawy.</p>
+                                <div>
+                                    <p class="card-text">Aż tyle osób straciło dach nad głową w wyniku reprywatyzacji.</p>
+                                    <p>To 1% mieszkańców Warszawy.</p>
+                                </div>
                             </div>
                         </div>
                         <div class="card">
                             <div class="card-body">
                                 <h1 class="card-title text-center">450</h1>
-                                <p class="card-text">Tyle nieruchomości zostało przekazanych w latach 1950-2017.</p>
-                                <p>To 3% budynkow w Warszawie.</p>
+                                <div>
+                                    <p class="card-text">Tyle nieruchomości zostało przekazanych w latach 1950-2017.</p>
+                                    <p>To 3% budynkow w Warszawie.</p>
+                                </div>
                             </div>
                         </div>
                         <div class="card">
                             <div class="card-body">
                                 <h1 class="card-title text-center">15 mln</h1>
-                                <p class="card-text">To łączna wartość zreprywatyzowanych nieruchomości w stolicy.</p>
-                                <p>To 5% budżetu rocznego Warszawy.</p>
+                                <div>
+                                    <p class="card-text">To łączna wartość zreprywatyzowanych nieruchomości w stolicy.</p>
+                                    <p>To 5% budżetu rocznego Warszawy.</p>
+                                </div>
                             </div>
                         </div>
                     </div>

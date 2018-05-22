@@ -1,17 +1,16 @@
 <template>
-    <div class="subpage-view">
-        <div class="container">
-            <div class="row">
-                <div class="side-image col-5"></div>
-                <div class="definition col-12 col-lg-7">
-                    <h2>
+    <div id="roomers" class="subpage-view">
+         <div class="broad-view">
+            <div class="row mx-4 mx-lg-5 mt-5">
+                <div class="definition col-12 col-lg-10 col-xl-7 offset-xl-1 py-5 pl-0">
+                    <h2 class="bold-header">
                         Reprywatyzacja a lokatorzy
                     </h2>
-                    <p>
+                    <p class="copy">
                         Lorem ipsum dolor sit amet, sint tritani pri id, pro veri delenit at, ius ex nibh quaestio. At sit nemore accusata urbanitas, te decore possit pri. Eu placerat neglegentur mei, vel id dicat ancillae. Eos postea prompta id.
                     </p>
                     <div class="quote">
-                        <img src="../img/quote-1.svg" alt="quote">
+                        <h1 class="mt-1">&quot;</h1>
                         <p class="quote-text-big">
                             Policzyliśmy:<br>
                             reprywatyzacja dotknęła<br>
@@ -19,7 +18,9 @@
                         </p>
                     </div>
                 </div>
-            </div>  
+            </div>
+        </div>
+        <div class="container">
             <div class="row">
                  <div class="col-12 col-lg-8">
                     <h2 class="section-header">
@@ -33,7 +34,7 @@
                 </div>
                  <div class="col-lg-4">
                     <div class="sidebar">
-                        <h5>Zobacz również</h5>
+                        <h5 class="ml-5">Zobacz również</h5>
                         <div class="sidebar-inner"> 
                             <p>Wyniki z audytu reprywatyzacji</p>
                             <button type="button" class="btn btn-warning">
@@ -99,5 +100,10 @@ export default {
         }
     }
 }
-
 </script>
+<style>
+    #roomers .broad-view {
+        height: 100%;
+        margin-top: 0;
+    }
+</style>
