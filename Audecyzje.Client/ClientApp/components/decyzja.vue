@@ -201,4 +201,35 @@ Vue.component('tab',{
     #decisions .tabs ul li a {
         font-size: 1rem;
     }
+
+    .decision-step {
+        display: flex;
+        align-items: center;
+    }
+
+    .decision-step .step-nr {
+        position: relative;
+        height: 45px;
+        width: 45px;
+        border: 1px solid #fff;
+        border-radius: 100px;
+        margin: 10px 20px 10px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all .2s ease-in-out;
+    }
+
+    .decision-step:hover .step-nr {
+        transform: scale(1.1);
+    }
+
+    .decision-step .step-nr span {
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .decision-step p {
+        margin-bottom: 0;
+    }
 </style>

@@ -207,4 +207,20 @@ Vue.component('tab',{
         height: 100%;
         margin-top: 0;
     }
+
+    .fact {
+        width: 100%;
+        display: flex;
+        padding: 0 20px;
+    }
+
+    .fact img {
+        height: 50px;
+        margin-right: 20px;
+        transition: all .2s ease-in-out;
+    }
+
+    .fact:hover img {
+        transform: scale(1.05);
+    }
 </style>

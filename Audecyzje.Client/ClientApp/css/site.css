@@ -35,11 +35,30 @@ h4.bold-header {
   font-family: 'Oswald', sans-serif;
 }
 
+button,
+.btn {
+  border-radius: 0;
+}
+
+button:focus, 
+button:active,
+.btn:focus, 
+.btn:active {
+  outline: none;
+  box-shadow: none;
+}
+
+
+.btn-warning {
+    background-color: #FCE603;
+    border: #FCE603;
+}
+
 .hide {
   display: none;
 }
 
-/*** HOME STYLE ***/
+/****** HOME ******/
 
 .broad-view {
   height: 104vh;
@@ -64,27 +83,20 @@ h4.bold-header {
   transition: 0.3s;
 }
 
-.navbar a:hover {
-  color: #FCE603;
-}
-
-.navbar a > .bottom-line {
+.navbar a > .line {
   display: block;
   width: 0;
-  border-bottom: 2px solid #fff;
+  border-bottom: 2px solid #000;
   transition: 0.3s;
+  padding-top: 1px;
 }
 
-.nav-item.active a > .bottom-line {
+.navbar a > .line.white-line {
+  border-bottom: 2px solid #fff;
+}
+
+.navbar a:hover > .line {
   width: 100%;
-}
-
-.navbar a:hover > .bottom-line {
-  width: 100%;
-}
-
-.navbar {
-    background-color: transparent !important;
 }
 
 .nav-link {
@@ -118,16 +130,6 @@ h4.bold-header {
     color: #999;
     border: none;
     background-color: transparent;
-}
-
-button,
-.btn {
-  border-radius: 0;
-}
-
-.btn-warning {
-    background-color: #FCE603;
-    border: #FCE603;
 }
 
 .card-shadow {
@@ -175,7 +177,7 @@ footer li img {
     height: 50px;
 }
 
-/* SEARCH PAGE STYLES */
+/****** SEARCH PAGE *******/
 
 .jumbotron {
   border-radius: 0%;
@@ -300,7 +302,7 @@ footer li img {
     position: absolute;
 }
 
-#decisions-list{
+#decisions-list {
     overflow-y: scroll;
     height: 500px;
 }
@@ -309,7 +311,7 @@ footer li img {
   font-size: 1rem;
 }
 
-/*** SUBPAGES STYLES ***/
+/****** SUBPAGES STYLES ******/
 
 .subpage-view {
   margin: 2rem 0;
@@ -323,27 +325,7 @@ footer li img {
   margin: 1rem 0;
 }
 
-.sidebar {
-  box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2);
-  padding: 1rem;
-}
-
-.sidebar .sidebar-inner {
-  padding: 0 1rem 1rem 1rem;
-}
-
-.sidebar .sidebar-inner p {
-  margin-top: 1rem;
-  text-align: center;
-  width: 100%;
-}
-
-.sidebar .sidebar-inner button {
-  margin: 0 auto;
-  width: 100%;
-}
-
-.definition > p {
+.intro > p {
   margin: 1.5rem 0;
   font-size: 15px;
 }
@@ -363,48 +345,6 @@ footer li img {
 
 .quote-text-big {
   font-size: 1.5rem;
-}
-
-.fact {
-  width: 100%;
-  display: flex;
-  padding: 0 20px;
-}
-
-.fact img {
-  height: 50px;
-  margin-right: 20px;
-}
-
-.decision-step {
-  display: flex;
-  align-items: center;
-}
-
-.decision-step .step-nr {
-  position: relative;
-  height: 45px;
-  width: 45px;
-  border: 1px solid #fff;
-  border-radius: 100px;
-  margin: 10px 20px 10px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all .2s ease-in-out;
-}
-
-.decision-step:hover .step-nr {
-  transform: scale(1.1);
-}
-
-.decision-step .step-nr span {
-  font-size: 1.1rem;
-  font-weight: 600;
-}
-
-.decision-step p {
-  margin-bottom: 0;
 }
 
 .tabs ul {
@@ -446,6 +386,26 @@ footer li img {
     background-color: #fff;
 }
 
+.sidebar {
+  box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+}
+
+.sidebar .sidebar-inner {
+  padding: 0 1rem 1rem 1rem;
+}
+
+.sidebar .sidebar-inner p {
+  margin-top: 1rem;
+  text-align: center;
+  width: 100%;
+}
+
+.sidebar .sidebar-inner button {
+  margin: 0 auto;
+  width: 100%;
+}
+
 .bottom-el {
   margin: 4rem 0 0 0;
   width: 100%;
@@ -483,7 +443,7 @@ footer li img {
   min-width: 220px;
 }
 
-/* MEDIA QUERIES */
+/****** MEDIA QUERIES ******/
 
 @media (max-width: 464px) {
 

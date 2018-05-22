@@ -10,13 +10,13 @@
                     <router-link class="nav-link" to="/">
                     Strona główna
                         <span class="sr-only">(current)</span>
-                        <span class="bottom-line pt-1"></span>
+                        <span class="line" v-bind:class="{ 'white-line' : isHome() }"></span>
                     </router-link>
                 </li>
                 <li class="nav-item mx-2">
                     <router-link class="nav-link" to="mapa">
                         Mapa Reprywatyzacji
-                        <span class="bottom-line pt-1"></span>
+                        <span class="line" v-bind:class="{ 'white-line' : isHome() }"></span>
                     </router-link>
                 </li>
             </ul>
@@ -24,13 +24,13 @@
                 <li class="nav-item mx-2">
                     <router-link class="nav-link" to="baza-wiedzy">
                         Baza Wiedzy
-                        <span class="bottom-line pt-1"></span>
+                        <span class="line" v-bind:class="{ 'white-line' : isHome() }"></span>
                     </router-link>
                 </li>
                 <li class="nav-item mx-2">
                     <router-link class="nav-link" to="kontakt">
                         Kontakt
-                        <span class="bottom-line pt-1"></span>
+                        <span class="line" v-bind:class="{ 'white-line' : isHome() }"></span>
                     </router-link>
                 </li>
             </ul>
