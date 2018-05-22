@@ -4,7 +4,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Oswald', sans-serif;
-    line-height: 2.2rem;
+    line-height: 2rem;
 }
 
 .bold-header {
@@ -30,7 +30,6 @@ h3.bold-header {
 
 h4.bold-header {
   font-weight: 700;
-  line-height: 3rem;
   font-size: 1.5rem;
   font-family: 'Oswald', sans-serif;
 }
@@ -124,6 +123,8 @@ button:active,
 
 .input-card .input-group .form-control {
     border: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
 .input-card .input-group-append .btn {
@@ -426,7 +427,7 @@ footer li img {
 }
 
 .bottom-el h4 {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   padding-left: 30px;
   display: inline-block;
   width: 100%;
@@ -449,7 +450,7 @@ footer li img {
 
   .bold-header {
     line-height: 3rem;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
   
   h2.bold-header {
@@ -468,6 +469,11 @@ footer li img {
     font-size: 1.2rem;
   }
 
+  h5,
+  h5.bold-header {
+    font-size: 1rem;
+  }
+
   button.navbar-toggler {
     padding: 0;
   }
@@ -481,6 +487,22 @@ footer li img {
   .navbar-toggler-icon {
     display: none;
   } 
+
+  .input-group .form-control {
+    width: 100%;
+    padding: 12px 0;
+    text-align: center;
+  
+  }
+
+  .input-group>.custom-select:not(:last-child), .input-group>.form-control:not(:last-child) {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0;
+  }
+
+  .input-group .btn {
+      width: 100%;
+  }
 
   .stats {
     margin-top: -2rem;
@@ -510,6 +532,10 @@ footer li img {
   h4.bold-header {
     line-height: 1.6rem;
     font-size: 1rem;
+  }
+
+  .stats {
+    margin-top: 1rem;
   }
 }
 
