@@ -62,29 +62,24 @@ h4.bold-header {
 .navbar a {
   color: #000;
   transition: 0.3s;
-  position: relative;
-  transition: 0.3s;
 }
 
 .navbar a:hover {
   color: #FCE603;
 }
 
-.navbar a:after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
+.navbar a > .bottom-line {
+  display: block;
   width: 0;
-  border-bottom: 3px solid #fff;
+  border-bottom: 2px solid #fff;
   transition: 0.3s;
 }
 
-.navbar-brand:after {
-  display: none;
+.nav-item.active a > .bottom-line {
+  width: 100%;
 }
 
-.navbar a:hover:after {
+.navbar a:hover > .bottom-line {
   width: 100%;
 }
 
@@ -404,7 +399,7 @@ footer li img {
 }
 
 .decision-step .step-nr span {
-  font-size: 20px;
+  font-size: 1.1rem;
   font-weight: 600;
 }
 
@@ -463,13 +458,11 @@ footer li img {
 }
 
 .bottom-el img.sad {
-    width: 80px;
-    height: 80px;
+    width: 60px;
 }
 
 .bottom-el img.file {
   width: 60px;
-  height: 60px;
 }
 
 .bottom-el h4 {
@@ -595,11 +588,13 @@ footer li img {
     text-align: center;
   }
 
-  .subpage-view {
-    padding: 0 5px;
-  }
   .map-responsive {
     margin-bottom: 1rem;
+  }
+
+  .subpage-view .container {
+    padding-right: 20px;
+    padding-left: 20px;
   }
 
   .quote > p {
@@ -643,6 +638,11 @@ footer li img {
 @media (min-width: 768px) {
   .input-card {
     padding-right: 0;
+  }
+
+  .subpage-view .container {
+    padding-right: 15px;
+    padding-left: 15px;
   }
 }
 
