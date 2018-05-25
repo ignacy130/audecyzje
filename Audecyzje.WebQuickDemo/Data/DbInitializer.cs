@@ -15,7 +15,7 @@ namespace Audecyzje.WebQuickDemo.Data
         public static void Initialize(WarsawContext context)
         {
             context.Database.EnsureCreated();
-            
+
             if (!context.Tags.Any())
             {
                 Tag tag = new Tag()
@@ -38,19 +38,6 @@ namespace Audecyzje.WebQuickDemo.Data
                 context.Add(tag3);
                 context.SaveChanges();
             }
-            //    Decision dec = new Decision()
-            //    {
-            //        Content = "Initial decision",
-            //        Localizations = new List<Localization>() { loc },
-
-            //    };
-            //    DecisionTag dg = new DecisionTag()
-            //    {
-            //        Tag = tag,
-            //        Decision = dec
-            //    };
-            //    context.Add(dg);
-            //}
 
             //LoadFilesToDb(context);
         }
@@ -58,22 +45,23 @@ namespace Audecyzje.WebQuickDemo.Data
         {
             var projectPath = Directory.GetParent(Assembly.GetExecutingAssembly().Location).Parent.Parent.Parent.FullName;
             var resourcesFolder = Path.Combine(projectPath, "Resources");
-            var mjnallFolder = Path.Combine(resourcesFolder, "txtmjnall");
+            var mjnallFolder = @"E:\mjntestypars";// Path.Combine(resourcesFolder, "txtmjnall");
             if (Directory.Exists(mjnallFolder))
             {
-                //LoadBefore2016(context, mjnallFolder);
+                LoadBefore2016(context, mjnallFolder);
 
-                LoadAfter2016(context, mjnallFolder);
+                //LoadAfter2016(context, mjnallFolder);
             }
         }
         private static void LoadBefore2016(WarsawContext context, string mjnallFolder)
         {
             CultureInfo provider = CultureInfo.InvariantCulture;
             var filePaths = Directory.GetFiles(Path.Combine(mjnallFolder, "mjntxtonly"));
+            DateTime uploadedDate = DateTime.Now;
             foreach (var filePath in filePaths)
             {
                 var filename = Path.GetFileName(filePath);
-                var GKDW = filename.Contains("GKDW");
+                var GK = filename.Contains("GK");
                 var CRWIP = filename.Contains("CRWIP") || filename.Contains("CRWiP");
                 var CRWIPbis = filename.Contains("CWRiP");// w minimum jednym pliku literówka...
                 var fileContent = File.ReadAllText(filePath);
@@ -85,16 +73,27 @@ namespace Audecyzje.WebQuickDemo.Data
                 var s2733 = filename.Contains("2733");
                 var randomEnding = s2689 || s2889 || s3490 || s2733;
 
-                if (GKDW)
+                string decisionNumber = "Failed to parse decision number";
+
+                if (GK)
                 {
                     var submissionDate = new DateTime();
                     var datestring = string.Empty;
                     var streetFull = "Failed to parse street";
+                    var indexGK = filename.IndexOf("GK");
                     try
                     {
-                        var ind = filename.IndexOf("GKDW");
+                        //Parsowanie numeru dla GK lub GKDW
+                        var decisonNumberStartIndex = 0;
+                        var decisonNumberEndIndex = indexGK + 4;
+                        if (filename.Contains("GKDW"))
+                        {
+                            decisonNumberEndIndex += 2;
+                        }
+                        decisionNumber = filename.Substring(decisonNumberStartIndex, decisonNumberEndIndex - decisonNumberStartIndex);
 
-                        var streetstartIndex = ind + 4 + 8 + 4;//pomijam gkdw, date, i powtorzony rok 
+                        //Parsowanie ulicy z nazwy
+                        var streetStartIndex = indexGK + 4 + 8 + 4;//pomijam gkdw, date, i powtorzony rok 
                         var streetEndIndex = filename.IndexOf('.'); // jeśli nic sie nie dzieje to do kropki
                         if (CRWIP)
                         {
@@ -108,8 +107,8 @@ namespace Audecyzje.WebQuickDemo.Data
                         {
                             streetEndIndex = streetEndIndex - 4;//cofamy od kropki 4 wstecz
                         }
-                        streetFull = filename.Substring(streetstartIndex, streetEndIndex - streetstartIndex);
-                        datestring = filename.Substring(ind + 4, 8);
+                        streetFull = filename.Substring(streetStartIndex, streetEndIndex - streetStartIndex);
+                        datestring = filename.Substring(indexGK + 4, 8);
                         submissionDate = DateTime.ParseExact(datestring, "yyyyddMM", provider);
                     }
                     catch (Exception ex)
@@ -126,80 +125,78 @@ namespace Audecyzje.WebQuickDemo.Data
                         {
                             Localizations = new List<Localization>() { loc },
                             SubmissionDate = submissionDate,
-                            Content = fileContent
+                            DecisionNumber = decisionNumber,
+                            Content = fileContent,
+                            UploadedTime = uploadedDate
                         };
                         context.Add(dec);
                         context.SaveChanges();
                     }
-
                 }
-                var GK = filename.Contains("GK");
-                // TODO
-                //if (GK && !GKDW)
-                //{
-                //    var submissionDate = new DateTime();
-                //    var datestring = string.Empty;
-                //    var streetFull = "Failed to parse street";
-                //    try
-                //    {
-                //        var ind = filename.IndexOf("GK");
+                else
+                {
+                    //Pozostałe decyzje
+                    decisionNumber = "impossible to parse dec number";
+                    string streetFull = "Failed to parse street";
+                    int streetStartIndex = IndexOfFirstLetter(filename);
 
-                //        var streetstartIndex = ind + 2 + 8 + 4;//pomijam gkdw, date, i powtorzony rok 
-                //        var streetEndIndex = filename.IndexOf('.'); // jeśli nic sie nie dzieje to do kropki
-                //        if (CRWIP)
-                //        {
-                //            streetEndIndex = filename.IndexOf("CRW");
-                //        }
-                //        if (CRWIPbis)
-                //        {
-                //            streetEndIndex = filename.IndexOf("CWR");
-                //        }
-                //        if (randomEnding && !(CRWIP || CRWIPbis))
-                //        {
-                //            streetEndIndex = streetEndIndex - 4;//cofamy od kropki 4 wstecz
-                //        }
-                //        streetFull = filename.Substring(streetstartIndex, streetEndIndex - streetstartIndex);
-                //        datestring = filename.Substring(ind + 4, 8);
-                //        submissionDate = DateTime.ParseExact(datestring, "yyyyddMM", provider);
-                //    }
-                //    catch (Exception ex)
-                //    {
+                    var datestring = filename.Substring(streetStartIndex - 8, 8);
+                    DateTime submissionDate = new DateTime();
+                    try
+                    {
+                        var streetEndIndex = filename.IndexOf('.'); // jeśli nic sie nie dzieje to do kropki
+                        if (CRWIP)
+                        {
+                            streetEndIndex = filename.IndexOf("CRW");
+                        }
+                        if (CRWIPbis)
+                        {
+                            streetEndIndex = filename.IndexOf("CWR");
+                        }
+                        if (randomEnding && !(CRWIP || CRWIPbis))
+                        {
+                            streetEndIndex = streetEndIndex - 4;//cofamy od kropki 4 wstecz
+                        }
 
-                //    }
-                //    finally
-                //    {
-                //        Localization loc = new Localization()
-                //        {
-                //            Street = streetFull
-                //        };
-                //        Decision dec = new Decision()
-                //        {
-                //            Localizations = new List<Localization>() { loc },
-                //            SubmissionDate = submissionDate,
-                //            Content = fileContent
-                //        };
-                //        context.Add(dec);
-                //        context.SaveChanges();
-                //    }
-                //}
-
-                //if (!GK && !GKDW)
-                //{
-                //    string s = "street nejm";
-                //    int streetStart = 0;
-                //    while (!Char.IsLetter(s[streetStart]))
-                //    {
-                //        ++streetStart;
-                //    }
-                //}
-
-                //int pos = 0;
-                //while (!Char.IsLetter(s[pos]))
-                //{
-                //    ++pos;
-                //}
+                        streetFull = filename.Substring(streetStartIndex, streetEndIndex - streetStartIndex);
+                        submissionDate = DateTime.ParseExact(datestring, "ddMMyyyy", provider);
+                    }
+                    finally
+                    {
+                        Localization loc = new Localization()
+                        {
+                            Street = streetFull
+                        };
+                        Decision dec = new Decision()
+                        {
+                            Localizations = new List<Localization>() { loc },
+                            SubmissionDate = submissionDate,
+                            DecisionNumber = decisionNumber,
+                            Content = fileContent,
+                            UploadedTime = uploadedDate
+                        };
+                        context.Add(dec);
+                        context.SaveChanges();
+                    }
+                }
             }
         }
+
+        private static int IndexOfFirstLetter(string filename)
+        {
+            var pos = -1;
+            var i = 0;
+            while (pos == -1)
+            {
+                if (!Char.IsDigit(filename[i]))
+                {
+                    pos = i;
+                }
+                i++;
+            }
+            return pos;
+        }
+
         private static void LoadAfter2016(WarsawContext context, string mjnallFolder)
         {
 
