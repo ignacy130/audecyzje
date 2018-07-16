@@ -5,34 +5,41 @@
             <div class="row">
                 <div class="col-md-4 input-card order-md-1">
                     <div class="input-group mb-3">
-                        <input type="text" v-model="query" v-on:keyup.enter="search" class="form-control" placeholder="Wpisz adres warszawskiej nieruchomości" aria-label="Recipient's username"
-                               aria-describedby="basic-addon2" />
+                        <vue-simple-suggest :list="suggestions"
+                                            :filter-by-query="true"
+                                            v-model="query"
+                                            v-on:keyup.enter="search"
+                                            class="form-control"
+                                            placeholder="Wpisz adres warszawskiej nieruchomości">
+                        </vue-simple-suggest>
+                        <!--<input type="text" v-model="query" v-on:keyup.enter="search" class="form-control" placeholder="Wpisz adres warszawskiej nieruchomości" aria-label="Recipient's username"
+                               aria-describedby="basic-addon2" />-->
 
                         <!-- <div class="dropdown">
-                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false"></button>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <form class="px-4 py-3">
-                              <div class="form-group">
-                                <label for="exampleDropdownFormEmail1">Rok/Lata</label>
-                                <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="1950-2017">
-                              </div>
-                              <div class="form-group">
-                                <label for="exampleDropdownFormPassword1">Dzielnica</label>
-                                <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Wola">
-                              </div>
-                              <div class="form-check mb-3">
-                                <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                                <label class="form-check-label" for="dropdownCheck">
-                                  Zaznacz
-                                </label>
-                              </div>
-                              <button type="submit" class="btn btn-primary">Znajdź</button>
-                            </form>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Lorem ipsum dolor sit amet</a>
-                          </div>
-                        </div> -->
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false"></button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <form class="px-4 py-3">
+          <div class="form-group">
+            <label for="exampleDropdownFormEmail1">Rok/Lata</label>
+            <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="1950-2017">
+          </div>
+          <div class="form-group">
+            <label for="exampleDropdownFormPassword1">Dzielnica</label>
+            <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Wola">
+          </div>
+          <div class="form-check mb-3">
+            <input type="checkbox" class="form-check-input" id="dropdownCheck">
+            <label class="form-check-label" for="dropdownCheck">
+              Zaznacz
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary">Znajdź</button>
+        </form>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Lorem ipsum dolor sit amet</a>
+      </div>
+    </div> -->
                         <div class="input-group-append">
                             <button v-on:click="search" class="btn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
                                     aria-controls="collapseExample">
@@ -245,6 +252,7 @@
 
                 </div>
                 <div class="col-md-8 map-responsive mb-5 order-md-12">
+                    
                     <l-map :zoom="zoom" :center="center" style="height: 1000px; width: 1000px;">
                         <v-geosearch :options="geosearchOptions"></v-geosearch>
                         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
@@ -265,6 +273,9 @@
     import { OpenStreetMapProvider } from 'leaflet-geosearch';
     import { VGeosearch } from 'vue2-leaflet-geosearch';
     import MarkerPopup from './map-popup';
+    import streets from '../resources/streets';
+    import VueSimpleSuggest from 'vue-simple-suggest';
+    import 'vue-simple-suggest/dist/styles.css';
 
     const provider = new OpenStreetMapProvider();
 
@@ -273,10 +284,12 @@
             LMap,
             LTileLayer,
             VGeosearch,
-            MarkerPopup
+            MarkerPopup,
+            VueSimpleSuggest
         },
         data() {
             return {
+                streetSearched: "",
                 zoom: 13,
                 center: [52.2297, 21.0122],
                 url: 'https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png',
@@ -289,12 +302,14 @@
                 query: "",
                 searchPerformed: false,
                 searching: false,
+                suggestions: streets
             }
         },
         methods: {
             search: async function (event) {
                 event.preventDefault();
                 var searchQuery = this.query;
+                console.log(this.query);
                 this.searching = true;
                 this.searchPerformed = false;
                 try {
@@ -313,6 +328,11 @@
                 }
                 this.searchPerformed = true;
             },
+            searchStreetChange: async function (event) {
+                console.log(this.query);
+                var results = await this.$http.get('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(this.query + ", Warszawa, Polska"));
+                console.log(results);
+            }
         },
     }
 </script>

@@ -739,3 +739,17 @@ footer li img {
     margin: 0 2rem;
   }
 }
+
+.highlight {
+    background-color: #FCE603;
+    padding: 3px;
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .card-columns {
+        column-count: 1;
+    }
+}
+
+

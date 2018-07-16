@@ -1,10 +1,10 @@
 <template>
     <nav class="navbar navbar-expand-lg bg-dark" v-bind:class="{ 'navbar-dark': isHome() }">
         <router-link class="navbar-brand mx-auto" to="/">Społeczny Audyt Reprywatyzacji</router-link>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <button v-on:click="toggleNavbar" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-between" id="navbarText">
+        <div class="navbar-collapse collapse justify-content-between" id="navbarText">
             <ul class="navbar-nav">
                 <li class="nav-item active mx-2">
                     <router-link class="nav-link" to="/">
@@ -44,12 +44,12 @@
         data() {
             return {
                 routes,
-                collapsed: true
+                show: false
             }
         },
         methods: {
-            toggleCollapsed: function (event) {
-                this.collapsed = !this.collapsed;
+            toggleNavbar: function (event) {
+                this.show = !this.show;
             },
             isHome: function() {
                 return this.$route.path === "/";

@@ -63,17 +63,17 @@ namespace Audecyzje.Infrastructure.Repositories
                     // Wyszukiwanie w każdej frazie danego adresu
                     foreach (var partOfSplitedAddress in splitedAddress)
                     {
-                        if (documentLocalization.Street.ToLower().Contains(partOfSplitedAddress))
+                        if (documentLocalization.Street.ToLower().Contains(partOfSplitedAddress.ToLower()))
                         {
                             fitCount++;
                             isMandatoryFit = true;
                         }
-                        if (documentLocalization.PostalCode.ToLower() == (partOfSplitedAddress))
+                        if (documentLocalization.PostalCode.ToLower() == (partOfSplitedAddress.ToLower()))
                         {
                             fitCount++;
                             isMandatoryFit = true;
                         }
-                        if (documentLocalization.Number.ToLower() == (partOfSplitedAddress))
+                        if (documentLocalization.Number.ToLower() == (partOfSplitedAddress.ToLower()))
                         {
                             fitCount++;
                         }

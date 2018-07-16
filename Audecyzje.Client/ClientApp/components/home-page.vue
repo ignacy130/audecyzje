@@ -21,7 +21,7 @@
         <section>
             <div class="container">
                 <div class="stats">
-                    <div class="card-deck">
+                    <div class="card-columns">
                         <div class="card">
                             <div class="card-body">
                                 <h1 class="card-title text-center">20 tys.</h1>
@@ -58,25 +58,25 @@
         <!-- Info -->
         <section class="container info my-5">
             <div class="row">
-                <div class="col-sm mb-4">
+                <div class="col-md-3 col-sm-6 col-12 mb-4 d-flex flex-column">
                     <h5 class="font-weight-bold">Reprywatyzacja w Twojej dzielnicy</h5>
                     <p>Lorem ipsum dolor sit amet augue. Praesent gravida pulvinar. Nulla facilisi. Etiam vel nulla.</p>
-                    <router-link to="lokatorzy">Przeglądaj ></router-link>
+                    <router-link class="mt-auto" to="lokatorzy">Przeglądaj ></router-link>
                 </div>
-                <div class="col-sm mb-4">
+                <div class="col-md-3 col-sm-6 col-12 mb-4 d-flex flex-column">
                     <h5 class="font-weight-bold">Raporty i opracowania</h5>
                     <p>Lorem ipsum dolor sit amet augue. Praesent gravida pulvinar. Nulla facilisi. Etiam vel nulla.</p>
-                   <router-link to="decyzja">Przeglądaj ></router-link>
+                   <router-link class="mt-auto" to="decyzja">Przeglądaj ></router-link>
                 </div>
-                <div class="col-sm mb-4">
+                <div class="col-md-3 col-sm-6 col-12 mb-4 d-flex flex-column">
                     <h5 class="font-weight-bold">Baza wiedzy o reprywatyzacji</h5>
                     <p>Lorem ipsum dolor sit amet augue. Praesent gravida pulvinar. Nulla facilisi. Etiam vel nulla.</p>
-                    <router-link to="baza-wiedzy">Przeglądaj ></router-link>
+                    <router-link class="mt-auto" to="baza-wiedzy">Przeglądaj ></router-link>
                 </div>
-                <div class="col-sm mb-4">
+                <div class="col-md-3 col-sm-6 col-12 mb-4 d-flex flex-column">
                     <h5 class="font-weight-bold">Kontakt/ źródła opracowań</h5>
                     <p>Lorem ipsum dolor sit amet augue. Praesent gravida pulvinar. Nulla facilisi. Etiam vel nulla.</p>
-                    <a href="">Przeglądaj ></a>
+                    <router-link class="mt-auto" to="baza-wiedzy">Przeglądaj ></router-link>
                 </div>
             </div>
         </section>
