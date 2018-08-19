@@ -12,7 +12,7 @@ export const routes = [
     { path: '/baza-wiedzy', component: BazaWiedzy, display: 'Baza wiedzy', style: 'glyphicon glyphicon-th-list' },
     { path: '/lokatorzy', component: Lokatorzy, display: 'Reprywatyzacja a lokatorzy', style: 'glyphicon glyphicon-th-list' },
     { path: '/decyzja', component: Decyzja, display: 'Jak przeanalizować decyzję', style: 'glyphicon glyphicon-th-list' },
-    { path: '/mapa', component: Map, display: 'Mapa reprywatyzacji', style: 'glyphicon glyphicon-th-list' },
+    { path: '/mapa', name: 'map', component: Map, display: 'Mapa reprywatyzacji', style: 'glyphicon glyphicon-th-list', props: {query: false} },
     { path: '/kontakt', component: Contact, display: 'Kontakt', style: 'glyphicon glyphicon-th-list' },
     { path: "*", component: PageNotFound },
 ]

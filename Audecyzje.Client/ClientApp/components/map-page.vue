@@ -12,8 +12,6 @@
                                             class="form-control"
                                             placeholder="Wpisz adres warszawskiej nieruchomości">
                         </vue-simple-suggest>
-                        <!--<input type="text" v-model="query" v-on:keyup.enter="search" class="form-control" placeholder="Wpisz adres warszawskiej nieruchomości" aria-label="Recipient's username"
-                               aria-describedby="basic-addon2" />-->
 
                         <!-- <div class="dropdown">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
@@ -271,7 +269,7 @@
     import Vue from 'vue'
     import { LMap, LTileLayer } from 'vue2-leaflet';
     import { OpenStreetMapProvider } from 'leaflet-geosearch';
-    import { VGeosearch } from 'vue2-leaflet-geosearch';
+    import VGeosearch from 'vue2-leaflet-geosearch';
     import MarkerPopup from './map-popup';
     import streets from '../resources/streets';
     import VueSimpleSuggest from 'vue-simple-suggest';
@@ -306,10 +304,8 @@
             }
         },
         methods: {
-            search: async function (event) {
-                event.preventDefault();
+            search: async function () {
                 var searchQuery = this.query;
-                console.log(this.query);
                 this.searching = true;
                 this.searchPerformed = false;
                 try {
@@ -328,12 +324,16 @@
                 }
                 this.searchPerformed = true;
             },
-            searchStreetChange: async function (event) {
-                console.log(this.query);
+            searchStreetChange: async function () {
                 var results = await this.$http.get('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(this.query + ", Warszawa, Polska"));
-                console.log(results);
-            }
+            },
         },
+        created() {
+            this.query = this.$route.params.query;
+            if (this.query.length > 3) {
+                this.search(this.query);
+            }
+        }
     }
 </script>
 
