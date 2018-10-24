@@ -14,10 +14,12 @@ namespace Audecyzje.WebQuickDemo.Controllers
     public class TagsController : Controller
     {
         private readonly WarsawContext _context;
+        private StaticDecisionContainer _staticContext;
 
         public TagsController(WarsawContext context)
         {
             _context = context;
+            _staticContext = StaticDecisionContainer.Instance;
         }
 
         // GET: Tags
