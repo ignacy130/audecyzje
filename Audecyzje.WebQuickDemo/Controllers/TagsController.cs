@@ -19,13 +19,14 @@ namespace Audecyzje.WebQuickDemo.Controllers
         public TagsController(WarsawContext context)
         {
             _context = context;
-            _staticContext = StaticDecisionContainer.Instance;
+            _staticContext = StaticDecisionContainer.GetInstance(context);
+            
         }
 
         // GET: Tags
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Tags.Include(t => t.LinkedDecisions).ThenInclude(link => link.Decision).ToListAsync());
+            return View(_staticContext.Tags.ToList());
         }
 
         public async Task<IActionResult> ClearAllTagRelations()
@@ -40,32 +41,34 @@ namespace Audecyzje.WebQuickDemo.Controllers
         }
         public async Task<IActionResult> CheckAllDecisionsContentWithTagsRegexp()
         {
-            var tags = await _context.Tags.Where(x => x.RegExp != null).ToListAsync();
-            var decisions = await _context.Descisions.ToListAsync();
-            foreach (var tag in tags)
-            {
-                foreach (var dec in decisions)
-                {
-                    var regexp = tag.RegExp;
-                    if (Regex.IsMatch(dec.Content, regexp, RegexOptions.IgnoreCase))
-                    {
-                        DecisionTag dt = new DecisionTag()
-                        {
-                            DecisionID = dec.ID,
-                            TagID = tag.ID
-                        };
-                        _context.DecisionTags.Add(dt);
-                    }
-                }
-                await _context.SaveChangesAsync();
-            }
+            
+            //var tags = await _context.Tags.Where(x => x.RegExp != null).ToListAsync();
+            //var decisions = await _context.Descisions.ToListAsync();
+            //foreach (var tag in tags)
+            //{
+            //    foreach (var dec in decisions)
+            //    {
+            //        var regexp = tag.RegExp;
+            //        if (Regex.IsMatch(dec.Content, regexp, RegexOptions.IgnoreCase))
+            //        {
+            //            DecisionTag dt = new DecisionTag()
+            //            {
+            //                DecisionID = dec.ID,
+            //                TagID = tag.ID
+            //            };
+            //            _context.DecisionTags.Add(dt);
+            //        }
+            //    }
+            //    await _context.SaveChangesAsync();
+            //}
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> RecreateTags()
         {
-            await ClearAllTagRelations();
-            await CheckAllDecisionsContentWithTagsRegexp();
+            _staticContext.RecreateAllTags();
+            //await ClearAllTagRelations();
+            //await CheckAllDecisionsContentWithTagsRegexp();
             return RedirectToAction("Index");
         }
         // GET: Tags/Details/5
@@ -75,7 +78,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
             {
                 return NotFound();
             }
-
+            
             var tag = await _context.Tags
                 .Include(t => t.LinkedDecisions).ThenInclude(link => link.Decision)
                 .SingleOrDefaultAsync(m => m.ID == id);
@@ -102,9 +105,11 @@ namespace Audecyzje.WebQuickDemo.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tag);
-                await _context.SaveChangesAsync();
-                await RecreateSingleTag(tag.ID);
+                //_context.Add(tag);
+                //await _context.SaveChangesAsync();
+                //await RecreateSingleTag(tag.ID);
+                _staticContext.AddTag(tag);
+                _staticContext.RecreateSingleTag(tag.ID);
                 return RedirectToAction(nameof(Index));
             }
             return View(tag);
@@ -114,48 +119,49 @@ namespace Audecyzje.WebQuickDemo.Controllers
 
         public async Task<IActionResult> RecreateSingleTag(int? id)
         {
-
-            Tag tag = await _context.Tags.SingleAsync(x => x.ID == id);
-            if (tag != null)
-            {
-                var decisions = _context.Descisions.ToList();
-                var newDecisionTags = new List<DecisionTag>();
-                foreach (var dec in decisions)
-                {
-                    var regexp = tag.RegExp;
-                    if (Regex.IsMatch(dec.Content, regexp, RegexOptions.IgnoreCase))
-                    {
-                        DecisionTag dt = new DecisionTag()
-                        {
-                            DecisionID = dec.ID,
-                            TagID = tag.ID
-                        };
-                        newDecisionTags.Add(dt);
-                    }
-                }
-                var existing = _context.DecisionTags.Where(x => x.TagID == tag.ID);
-                if (existing.Count() == 0)
-                {
-                    _context.AddRange(newDecisionTags);
-                }
-                else
-                {
-                    _context.DecisionTags.RemoveRange(existing);
-                    await _context.SaveChangesAsync();
-                    _context.DecisionTags.AddRange(newDecisionTags);
-                }
-                await _context.SaveChangesAsync();
-            }
+            _staticContext.RecreateSingleTag(id);
+            //Tag tag = await _context.Tags.SingleAsync(x => x.ID == id);
+            //if (tag != null)
+            //{
+            //    var decisions = _context.Descisions.ToList();
+            //    var newDecisionTags = new List<DecisionTag>();
+            //    foreach (var dec in decisions)
+            //    {
+            //        var regexp = tag.RegExp;
+            //        if (Regex.IsMatch(dec.Content, regexp, RegexOptions.IgnoreCase))
+            //        {
+            //            DecisionTag dt = new DecisionTag()
+            //            {
+            //                DecisionID = dec.ID,
+            //                TagID = tag.ID
+            //            };
+            //            newDecisionTags.Add(dt);
+            //        }
+            //    }
+            //    var existing = _context.DecisionTags.Where(x => x.TagID == tag.ID);
+            //    if (existing.Count() == 0)
+            //    {
+            //        _context.AddRange(newDecisionTags);
+            //    }
+            //    else
+            //    {
+            //        _context.DecisionTags.RemoveRange(existing);
+            //        await _context.SaveChangesAsync();
+            //        _context.DecisionTags.AddRange(newDecisionTags);
+            //    }
+            //    await _context.SaveChangesAsync();
+            //}
             return RedirectToAction("Index");
         }
         public async Task<IActionResult> Edit(int? id)
         {
+            //todo przerobić na staticcontext?
             if (id == null)
             {
                 return NotFound();
             }
 
-            var tag = await _context.Tags.SingleOrDefaultAsync(m => m.ID == id);
+            var tag = _staticContext.Tags.Where(x => x.ID == id);
             if (tag == null)
             {
                 return NotFound();
@@ -170,6 +176,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,TagName,RegExp")] Tag tag)
         {
+            //todo przerobić na staticcontext?
             if (id != tag.ID)
             {
                 return NotFound();
@@ -179,8 +186,10 @@ namespace Audecyzje.WebQuickDemo.Controllers
             {
                 try
                 {
-                    _context.Update(tag);
-                    await _context.SaveChangesAsync();
+                    //_context.Update(tag);
+                    //await _context.SaveChangesAsync();
+
+                    _staticContext.UpdateTag(tag);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -221,15 +230,17 @@ namespace Audecyzje.WebQuickDemo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tag = await _context.Tags.SingleOrDefaultAsync(m => m.ID == id);
-            _context.Tags.Remove(tag);
-            await _context.SaveChangesAsync();
+            //var tag = await _context.Tags.SingleOrDefaultAsync(m => m.ID == id);
+            //_context.Tags.Remove(tag);
+            //await _context.SaveChangesAsync();
+
+            _staticContext.RemoveTag(id);
             return RedirectToAction(nameof(Index));
         }
 
         private bool TagExists(int id)
         {
-            return _context.Tags.Any(e => e.ID == id);
+            return _staticContext.Tags.Any(e => e.ID == id);
         }
     }
 }

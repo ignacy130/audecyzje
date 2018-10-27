@@ -1,4 +1,5 @@
 ﻿using Audecyzje.WebQuickDemo.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -11,10 +12,9 @@ namespace Audecyzje.WebQuickDemo.Data
     public class StaticDecisionContainer
     {
         private static WarsawContext _realDbContext;
-        private static ConcurrentBag<DecisionTag> _decisionTags;
-        private static ConcurrentBag<Decision> _decisions;
-        private static ConcurrentBag<Tag> _tags;
-        private static string _connectionString;
+        private SynchronizedCollection<DecisionTag> _decisionTags;
+        private SynchronizedCollection<Decision> _decisions;
+        private SynchronizedCollection<Tag> _tags;
 
         private readonly static object _locker = new object();
         private static StaticDecisionContainer _instance;
@@ -22,19 +22,19 @@ namespace Audecyzje.WebQuickDemo.Data
         {
             InitializeBag();
         }
-        public static StaticDecisionContainer Instance
+        public static StaticDecisionContainer GetInstance(WarsawContext context)
         {
-            get
+
+            if (_instance == null)
             {
-                if (_instance == null)
-                {
-                    _instance = new StaticDecisionContainer();
-                }
-                return _instance;
+                _realDbContext = context;
+                _instance = new StaticDecisionContainer();
             }
+            return _instance;
+
         }
 
-        public static WarsawContext DbContext
+        public WarsawContext DbContext
         {
             set
             {
@@ -42,7 +42,7 @@ namespace Audecyzje.WebQuickDemo.Data
             }
         }
 
-        public static ConcurrentBag<DecisionTag> DecisionTags
+        public SynchronizedCollection<DecisionTag> DecisionTags
         {
             get
             {
@@ -56,32 +56,74 @@ namespace Audecyzje.WebQuickDemo.Data
                 }
             }
         }
-
-
-        private static void InitializeBag()
+        public SynchronizedCollection<Tag> Tags
         {
-            _decisionTags = new ConcurrentBag<DecisionTag>();
-            _decisions = new ConcurrentBag<Decision>();
-            _tags = new ConcurrentBag<Tag>();
-
-            
-            foreach (var dt in _realDbContext.DecisionTags)
+            get
             {
-                _decisionTags.Add(dt);
-            }
-            foreach (var d in _realDbContext.Descisions)
-            {
-                _decisions.Add(d);
-            }
-            foreach (var t in _realDbContext.Tags)
-            {
-                _tags.Add(t);
+                lock (_locker)
+                {
+                    if (_tags == null)
+                    {
+                        InitializeBag();
+                    }
+                    return _tags;
+                }
             }
         }
 
-        public static void RecreateAllTags()
-        {            // probably better use SynchronizedCollection 
-            _decisionTags = new ConcurrentBag<DecisionTag>();
+        public void AddTag(Tag tag)
+        {
+            lock (_locker)
+            {
+                _realDbContext.Tags.Add(tag);
+                _realDbContext.SaveChangesAsync();
+                _tags.Add(tag);
+            }
+        }
+        public void UpdateTag(Tag newTag)
+        {
+            var previous = _tags.Single(x => x.ID == newTag.ID);
+            if (previous != null)
+            {
+                _tags.Remove(previous);
+                _tags.Add(newTag);
+            }
+        }
+        public void RemoveTag(int id)
+        {
+            var tag = _tags.Single(x => x.ID == id);
+            if (tag != null)
+            {
+                _tags.Remove(tag);
+            }
+        }
+
+        private void InitializeBag()
+        {
+            _decisionTags = new SynchronizedCollection<DecisionTag>();
+            _decisions = new SynchronizedCollection<Decision>();
+            _tags = new SynchronizedCollection<Tag>();
+            if (_realDbContext != null)
+            {
+                foreach (var dt in _realDbContext?.DecisionTags)
+                {
+                    _decisionTags.Add(dt);
+                }
+                foreach (var d in _realDbContext?.Descisions)
+                {
+                    _decisions.Add(d);
+                }
+                foreach (var t in _realDbContext?.Tags.Include(t => t.LinkedDecisions).ThenInclude(link => link.Decision))                
+
+                {
+                    _tags.Add(t);
+                }
+            }
+        }
+
+        public void RecreateAllTags()
+        {
+            _decisionTags = new SynchronizedCollection<DecisionTag>();
             Parallel.ForEach(_tags, tag =>
             {
                 Parallel.ForEach(_decisions, dec =>
@@ -99,16 +141,52 @@ namespace Audecyzje.WebQuickDemo.Data
                 });
             });
         }
-        public static void RecreateSingleTags(int id)
+        public void RecreateSingleTag(int? id)
         {
-            // probably better use SynchronizedCollection 
+            Tag tag = _tags.Where(x => x.ID == id).SingleOrDefault();
+            if (tag != null)
+            {
+                lock (_locker)
+                {
+                    var decisions = _decisions.ToList();
+                    var existing = _decisionTags.Where(x => x.TagID == id);
+                    Parallel.ForEach(existing, existingTag =>
+                    {
+                        _decisionTags.Remove(existingTag);
+                    });
 
+                    Parallel.ForEach(_decisions, dec =>
+                    {
+                        if (Regex.IsMatch(dec.Content, tag.RegExp, RegexOptions.IgnoreCase))
+                        {
+                            DecisionTag dt = new DecisionTag()
+                            {
+                                DecisionID = dec.ID,
+                                TagID = tag.ID
+                            };
+                            _decisionTags.Add(dt);
+                        }
+                    });
+                }
+            }
         }
 
-        public static void SyncDatabse()
+        public async void SaveToDatabase()
         {
-            //todo some magic shit assign to Job
+            //todo log execution time and warn when exceeding time limit
+            foreach (var dt in _realDbContext.DecisionTags)
+            {
+                _realDbContext.DecisionTags.Remove(dt);
+            }
+            _realDbContext.DecisionTags.AddRange(_decisionTags);
+            foreach (var tag in _realDbContext.Tags)
+            {
+                _realDbContext.Tags.Remove(tag);
+            }
+            _realDbContext.Tags.AddRange(_tags);
+            await _realDbContext.SaveChangesAsync();
         }
+
 
     }
 }

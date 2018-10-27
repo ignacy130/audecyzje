@@ -48,11 +48,11 @@ namespace Audecyzje.WebQuickDemo.Data
             var mjnallFolder = @"E:\RepratekstyDone\txtmjnall\";// Path.Combine(resourcesFolder, "txtmjnall");
             if (Directory.Exists(mjnallFolder))
             {
-                //LoadBefore2016(context, mjnallFolder);
-                //LoadAfter2016approach1(context, mjnallFolder);
+                LoadBefore2016(context, mjnallFolder);
+                LoadAfter2016approach1(context, mjnallFolder);
 
                 //po pobraniu kolejnej paczki okazało się że nazwy trochę się pozmieniały -_-
-                //LoadAfter2016approach2(context, mjnallFolder);
+                LoadAfter2016approach2(context, mjnallFolder);
 
             }
         }

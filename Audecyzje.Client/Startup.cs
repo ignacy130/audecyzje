@@ -46,7 +46,6 @@ namespace Audecyzje.Client
             services.AddTransient(c => AutoMapperConfig.Initialize());
             services.AddTransient<IDocumentRepository, DocumentRepository>();
 
-            
 
             services.Scan(selector =>
             {
