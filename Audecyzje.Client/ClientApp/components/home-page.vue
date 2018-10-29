@@ -112,11 +112,6 @@
             }
         },
         methods: {
-            checkInputToSearch() {
-                if (event.keyCode === 13) {
-                    this.search();
-                }
-            },
             search: async function () {
                 this.$router.push({ name: 'map', params: { query: this.query } })
             },

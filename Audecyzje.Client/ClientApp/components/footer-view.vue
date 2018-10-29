@@ -1,24 +1,20 @@
 <template>
     <footer class="container pt-5 pb-3" v-bind:class="{ 'hide': isMap }">
         <div class="row">
-            <p class="col-sm-2">
-                Copyright &copy; 2017
-            </p>
-            <p class="col-sm-2">
-                <a href="/privacy-policy">Polityka Prywatności</a>
-            </p>
-            <p class="col-sm-1">
+            <div class="col-12 col-md-3 align-self-center">
+                Copyright &copy; 2017<br />
+                <a href="/privacy-policy">Polityka Prywatności</a><br />
                 <a href="/termsofuse">Regulamin</a>
-            </p>
-            <div class="col-sm-7">
+            </div>
+            <div class="col-12 col-md-9">
                 <div class="row">
-                    <div class="col-lg-2 float-right ml-auto">
+                    <div class="col-12 col-md-4 mt-3 align-self-center float-right ml-auto">
                         <img class="img-fluid" src="../img/kdp.png" alt="" />
                     </div>
-                    <div class="col-lg-3 float-right ml-auto">
+                    <div class="col-12 col-md-4 mt-3 align-self-center float-right ml-auto">
                         <img class="img-fluid" src="../img/mjn.png" alt="" />
                     </div>
-                    <div class="col-lg-3 float-right ml-auto">
+                    <div class="col-12 col-md-4 mt-3 align-self-center float-right ml-auto">
                         <img class="img-fluid" src="../img/neatcode_logo_typo_transparent_50.png" alt="" />
                     </div>
                 </div>

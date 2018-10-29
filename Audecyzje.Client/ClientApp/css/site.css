@@ -111,6 +111,10 @@ button,
     color: #fff;
 }
 
+.navbar-brand{
+    font-size: 1rem;
+}
+
 .input-field h2 {
     color: #fff;
 }
@@ -248,7 +252,8 @@ footer li img {
     position: absolute;
     padding: 6px;
     border-radius: 50%;
-    width: 2rem;
+    width: 30px;
+    height: 30px;
 }
 
     .fa-times.fa-2x:hover {

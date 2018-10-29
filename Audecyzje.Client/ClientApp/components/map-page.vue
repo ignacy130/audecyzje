@@ -3,41 +3,51 @@
         <!-- Form -->
         <div id="map" class="jumbotron form px-4 mx-auto">
             <div class="row">
+                <div class="d-block d-sm-none col-12">
+                    <div class="row">
+                        <button class="btn col-6 text-center" v-on:click="doShowDecisions">Decyzje</button>
+                        <button class="btn col-6 text-center" v-on:click="doShowMap"> Mapa</button>
+                    </div>
+                </div>
                 <div class="col-md-4 input-card order-md-1">
                     <div class="input-group mb-3">
                         <vue-simple-suggest :list="suggestions"
                                             :filter-by-query="true"
+                                            ref="queryInput"
                                             v-model="query"
-                                            v-on:keyup.enter="search"
+                                            @hover="onSuggestHover"
+                                            @select="search"
+                                            v-on:suggestion-click="search"
                                             class="form-control"
+                                            :styles="suggestStyles"
                                             placeholder="Wpisz adres warszawskiej nieruchomości">
                         </vue-simple-suggest>
 
                         <!-- <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false"></button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <form class="px-4 py-3">
-          <div class="form-group">
-            <label for="exampleDropdownFormEmail1">Rok/Lata</label>
-            <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="1950-2017">
-          </div>
-          <div class="form-group">
-            <label for="exampleDropdownFormPassword1">Dzielnica</label>
-            <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Wola">
-          </div>
-          <div class="form-check mb-3">
-            <input type="checkbox" class="form-check-input" id="dropdownCheck">
-            <label class="form-check-label" for="dropdownCheck">
-              Zaznacz
-            </label>
-          </div>
-          <button type="submit" class="btn btn-primary">Znajdź</button>
-        </form>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Lorem ipsum dolor sit amet</a>
-      </div>
-    </div> -->
+                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"></button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <form class="px-4 py-3">
+                              <div class="form-group">
+                                <label for="exampleDropdownFormEmail1">Rok/Lata</label>
+                                <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="1950-2017">
+                              </div>
+                              <div class="form-group">
+                                <label for="exampleDropdownFormPassword1">Dzielnica</label>
+                                <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Wola">
+                              </div>
+                              <div class="form-check mb-3">
+                                <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                                <label class="form-check-label" for="dropdownCheck">
+                                  Zaznacz
+                                </label>
+                              </div>
+                              <button type="submit" class="btn btn-primary">Znajdź</button>
+                            </form>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Lorem ipsum dolor sit amet</a>
+                          </div>
+                        </div> -->
                         <div class="input-group-append">
                             <button v-on:click="search" class="btn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
                                     aria-controls="collapseExample">
@@ -49,7 +59,7 @@
                     <div v-if="searching && !searchPerformed" class="text-center py-2 px-2">
                         <i class="far fa-file-alt fa-spin fa-2x"></i>
                     </div>
-                    <div id="decisions-list" v-if="decisions && decisions.length>0">
+                    <div id="decisions-list" v-if="showDecisions && (decisions && decisions.length>0)">
                         <div v-for="decision in decisions">
                             <!-- Success Card -->
                             <div class="card card-body" id="success">
@@ -249,8 +259,7 @@
                     </div>
 
                 </div>
-                <div class="col-md-8 map-responsive mb-5 order-md-12">
-                    
+                <div v-if="showMap" class="col-md-8 map-responsive mb-5 order-md-12">
                     <l-map :zoom="zoom" :center="center" style="height: 1000px; width: 1000px;">
                         <v-geosearch :options="geosearchOptions"></v-geosearch>
                         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
@@ -300,10 +309,33 @@
                 query: "",
                 searchPerformed: false,
                 searching: false,
-                suggestions: streets
+                suggestions: streets,
+                suggestStyles: {
+                    vueSimpleSuggest: "suggest-width",
+                },
+                showMap: true,
+                showDecisions: true,
+                windowWidth: 0,
+                windowHeight: 0,
+                responsive: false
             }
         },
         methods: {
+            doShowMap() {
+                this.showMap = true;
+                if (this.responsive) {
+                    this.showDecisions = false;
+                }
+            },
+            doShowDecisions() {
+                this.showDecisions = true;
+                if (this.responsive) {
+                    this.showMap = false;
+                }
+            },
+            onSuggestHover: function () {
+                this.query = this.$refs.queryInput.hovered;
+            },
             search: async function () {
                 var searchQuery = this.query;
                 this.searching = true;
@@ -319,6 +351,9 @@
                         m.push({ position: L.latLng(first.lat, first.lon), text: this.decisions[i].decisionNumber, title: this.decisions[i].decisionNumber });
                     }
                     this.markers = m;
+                    if (m.length > 0) {
+                        this.center = [m[0].position.lat, m[0].position.lng];
+                    }
                 } catch (error) {
                     console.log(error)
                 }
@@ -327,16 +362,46 @@
             searchStreetChange: async function () {
                 var results = await this.$http.get('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(this.query + ", Warszawa, Polska"));
             },
+            getWindowWidth(event) {
+                this.windowWidth = document.documentElement.clientWidth;
+                this.responsive = this.windowWidth < 600;
+                if (!this.responsive) {
+                    this.showMap = true;
+                    this.showDecisions = true;
+                }
+                else if(this.showDecisions && this.showMap) {
+                    this.doShowMap()
+                }
+            },
+            getWindowHeight(event) {
+                this.windowHeight = document.documentElement.clientHeight;
+            }
         },
         created() {
             this.query = this.$route.params.query;
             if (this.query.length > 3) {
                 this.search(this.query);
             }
+        },
+        mounted() {
+            this.$nextTick(function () {
+                window.addEventListener('resize', this.getWindowWidth);
+                window.addEventListener('resize', this.getWindowHeight);
+                this.getWindowWidth()
+                this.getWindowHeight()
+            })
+        },
+        beforeDestroy() {
+            window.removeEventListener('resize', this.getWindowWidth);
+            window.removeEventListener('resize', this.getWindowHeight);
         }
-    }
+        }
 </script>
 
 <style>
     @import "~leaflet/dist/leaflet.css";
+
+    .suggest-width {
+        width: 1% !important;
+    }
 </style>
