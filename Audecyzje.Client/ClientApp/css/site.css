@@ -305,7 +305,7 @@ footer li img {
 
 #decisions-list {
     overflow-y: scroll;
-    height: 500px;
+    max-height: 80vh;
 }
 
 .jumbotron .card p {
