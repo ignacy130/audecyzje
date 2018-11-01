@@ -313,7 +313,7 @@
                 this.searching = true;
                 this.searchPerformed = false;
                 try {
-                    let response = await this.$http.get('/api/document/search/?query=' + encodeURIComponent(searchQuery))
+                    let response = await this.$http.get('/api/decisions/search/?query=' + encodeURIComponent(searchQuery))
                     this.decisions = response.data;
 
                     var m = [];
