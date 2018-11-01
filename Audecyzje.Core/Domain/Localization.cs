@@ -16,5 +16,8 @@ namespace Audecyzje.Core.Domain
         public int DocumentId { get; set; }
         [NotMapped]
         public string FullAddressString => City+" "+Street+" "+Number+" "+PostalCode;
-    }
+
+		public double Latitude { get; set; }
+		public double Longitude { get; set; }
+	}
 }

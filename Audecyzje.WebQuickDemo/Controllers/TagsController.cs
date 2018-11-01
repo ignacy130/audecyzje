@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Audecyzje.WebQuickDemo.Data;
 using Audecyzje.WebQuickDemo.Models;
 using System.Text.RegularExpressions;
+using Audecyzje.Core.Domain;
+using Audecyzje.Infrastructure;
 
 namespace Audecyzje.WebQuickDemo.Controllers
 {
@@ -81,7 +83,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
             
             var tag = await _context.Tags
                 .Include(t => t.LinkedDecisions).ThenInclude(link => link.Decision)
-                .SingleOrDefaultAsync(m => m.ID == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (tag == null)
             {
                 return NotFound();
@@ -109,7 +111,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
                 //await _context.SaveChangesAsync();
                 //await RecreateSingleTag(tag.ID);
                 _staticContext.AddTag(tag);
-                _staticContext.RecreateSingleTag(tag.ID);
+                _staticContext.RecreateSingleTag(tag.Id);
                 return RedirectToAction(nameof(Index));
             }
             return View(tag);
@@ -161,7 +163,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
                 return NotFound();
             }
 
-            var tag = _staticContext.Tags.Where(x => x.ID == id);
+            var tag = _staticContext.Tags.Where(x => x.Id == id);
             if (tag == null)
             {
                 return NotFound();
@@ -177,7 +179,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("ID,TagName,RegExp")] Tag tag)
         {
             //todo przerobić na staticcontext?
-            if (id != tag.ID)
+            if (id != tag.Id)
             {
                 return NotFound();
             }
@@ -193,7 +195,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TagExists(tag.ID))
+                    if (!TagExists(tag.Id))
                     {
                         return NotFound();
                     }
@@ -216,7 +218,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
             }
 
             var tag = await _context.Tags
-                .SingleOrDefaultAsync(m => m.ID == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (tag == null)
             {
                 return NotFound();
@@ -240,7 +242,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
 
         private bool TagExists(int id)
         {
-            return _staticContext.Tags.Any(e => e.ID == id);
+            return _staticContext.Tags.Any(e => e.Id == id);
         }
     }
 }

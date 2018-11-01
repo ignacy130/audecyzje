@@ -13,7 +13,7 @@ namespace Audecyzje.Infrastructure.Mappers
     {
         public static IMapper Initialize() => new MapperConfiguration(config =>
         {
-            config.CreateMap<Document, DocumentDto>();
+            config.CreateMap<Decision, DecisionDto>();
             config.CreateMap<Localization, LocalizationDto>();
 
         }).CreateMapper();

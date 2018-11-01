@@ -24,6 +24,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Audecyzje.Core\Audecyzje.Core.csproj" />
+    <ProjectReference Include="..\Audecyzje.Infrastructure\Audecyzje.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 

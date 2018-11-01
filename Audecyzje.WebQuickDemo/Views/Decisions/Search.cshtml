@@ -1,4 +1,4 @@
-﻿@model PaginatedList<Audecyzje.WebQuickDemo.Models.Decision>
+﻿@model PaginatedList<Audecyzje.Core.Domain.Decision>
 
 @{
 	ViewData["Title"] = "Index";
@@ -67,9 +67,9 @@ Strony
 				@Html.DisplayFor(modelItem => item.SubmissionDate)
 			</td>
 			<td>
-				<a asp-action="Edit" asp-route-id="@item.ID">Edytuj</a> |
-				<a asp-action="Details" asp-route-id="@item.ID">Szczegóły</a> |
-				<a asp-action="Delete" class="text-danger" asp-route-id="@item.ID">Usuń</a>
+				<a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
+				<a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
+				<a asp-action="Delete" class="text-danger" asp-route-id="@item.Id">Usuń</a>
 			</td>
 		</tr>
 		}

@@ -1,4 +1,6 @@
-﻿using Audecyzje.WebQuickDemo.Models;
+﻿using Audecyzje.Core.Domain;
+using Audecyzje.Infrastructure;
+using Audecyzje.WebQuickDemo.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Concurrent;
@@ -22,16 +24,15 @@ namespace Audecyzje.WebQuickDemo.Data
         {
             InitializeBag();
         }
+
         public static StaticDecisionContainer GetInstance(WarsawContext context)
         {
-
             if (_instance == null)
             {
                 _realDbContext = context;
                 _instance = new StaticDecisionContainer();
             }
             return _instance;
-
         }
 
         public WarsawContext DbContext
@@ -56,6 +57,7 @@ namespace Audecyzje.WebQuickDemo.Data
                 }
             }
         }
+
         public SynchronizedCollection<Tag> Tags
         {
             get
@@ -82,7 +84,7 @@ namespace Audecyzje.WebQuickDemo.Data
         }
         public void UpdateTag(Tag newTag)
         {
-            var previous = _tags.Single(x => x.ID == newTag.ID);
+            var previous = _tags.Single(x => x.Id == newTag.Id);
             if (previous != null)
             {
                 _tags.Remove(previous);
@@ -91,7 +93,7 @@ namespace Audecyzje.WebQuickDemo.Data
         }
         public void RemoveTag(int id)
         {
-            var tag = _tags.Single(x => x.ID == id);
+            var tag = _tags.Single(x => x.Id == id);
             if (tag != null)
             {
                 _tags.Remove(tag);
@@ -109,7 +111,7 @@ namespace Audecyzje.WebQuickDemo.Data
                 {
                     _decisionTags.Add(dt);
                 }
-                foreach (var d in _realDbContext?.Descisions)
+                foreach (var d in _realDbContext?.Decisions)
                 {
                     _decisions.Add(d);
                 }
@@ -133,23 +135,24 @@ namespace Audecyzje.WebQuickDemo.Data
                     {
                         DecisionTag dt = new DecisionTag()
                         {
-                            DecisionID = dec.ID,
-                            TagID = tag.ID
+                            DecisionId = dec.Id,
+                            TagId = tag.Id
                         };
                         _decisionTags.Add(dt);
                     }
                 });
             });
         }
+
         public void RecreateSingleTag(int? id)
         {
-            Tag tag = _tags.Where(x => x.ID == id).SingleOrDefault();
+            Tag tag = _tags.Where(x => x.Id == id).SingleOrDefault();
             if (tag != null)
             {
                 lock (_locker)
                 {
                     var decisions = _decisions.ToList();
-                    var existing = _decisionTags.Where(x => x.TagID == id);
+                    var existing = _decisionTags.Where(x => x.TagId == id);
                     Parallel.ForEach(existing, existingTag =>
                     {
                         _decisionTags.Remove(existingTag);
@@ -161,8 +164,8 @@ namespace Audecyzje.WebQuickDemo.Data
                         {
                             DecisionTag dt = new DecisionTag()
                             {
-                                DecisionID = dec.ID,
-                                TagID = tag.ID
+                                DecisionId = dec.Id,
+                                TagId = tag.Id
                             };
                             _decisionTags.Add(dt);
                         }
@@ -186,7 +189,5 @@ namespace Audecyzje.WebQuickDemo.Data
             _realDbContext.Tags.AddRange(_tags);
             await _realDbContext.SaveChangesAsync();
         }
-
-
     }
 }
