@@ -9,16 +9,16 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace Audecyzje.Infrastructure.Repositories
 {
-    public class DecisionsRepository : Repository<Decision>, IDecisionsRepository
-    {
-        private readonly WarsawContext _context;
+	public class DecisionsRepository : Repository<Decision>, IDecisionsRepository
+	{
+		private readonly WarsawContext _context;
 		private IMemoryCache _cache;
 
 		public DecisionsRepository(WarsawContext context, IMemoryCache memoryCache) : base(context)
-        {
-            _context = context;
+		{
+			_context = context;
 			_cache = memoryCache;
-        }
+		}
 
 		enum CacheKeys
 		{
@@ -42,89 +42,63 @@ namespace Audecyzje.Infrastructure.Repositories
 			return documents;
 		}
 
-        public async Task<List<Decision>> GetByLocalization(string address)
-        {
-            var documents = await GetCachedDocuments();
-            var resultTmpListOfDocuments = new Dictionary<Decision, int>();
-            var splitedAddress = address.Split(" ", StringSplitOptions.None);
-            // wyszukiwanie w kazdym dokumencie
-            foreach (var document in documents)
-            {
-                var isDocumentFitting = false;
-                var documentLocalizationsArray = document.Localizations.ToArray();
+		public async Task<List<Decision>> GetByLocalization(string address)
+		{
+			var documents = await GetCachedDocuments();
+			var resultTmpListOfDocuments = new List<Tuple<Decision, int>>();
+			var splitedAddress = address.Split(" ", StringSplitOptions.None).ToList();
+			splitedAddress.Remove("ul.");
+			splitedAddress.Remove("al.");
+			// wyszukiwanie w kazdym dokumencie
+			foreach (var document in documents)
+			{
+				if (!string.IsNullOrEmpty(document.Address))
+				{
+					var dist = document.Address.LevenshteinDistanceTo(address);
+					if (dist < 10)
+					{
+						resultTmpListOfDocuments.Add(new Tuple<Decision, int>(document, dist));
+					}
+				}
+			}
 
-                int i = 0;
-                // Wyszukiwanie w wszystkich adresach danego dokumentu
-                while (!isDocumentFitting && i < documentLocalizationsArray.Length)
-                {
-                    var documentLocalization = documentLocalizationsArray[i];
-                    int fitCount = 0;
-                    bool isMandatoryFit = false;
-                    // Wyszukiwanie w każdej frazie danego adresu
-                    foreach (var partOfSplitedAddress in splitedAddress)
-                    {
-                        if (documentLocalization.Street.ToLower().Contains(partOfSplitedAddress.ToLower()))
-                        {
-                            fitCount++;
-                            isMandatoryFit = true;
-                        }
-                        if (documentLocalization.PostalCode.ToLower() == (partOfSplitedAddress.ToLower()))
-                        {
-                            fitCount++;
-                            isMandatoryFit = true;
-                        }
-                        if (documentLocalization.Number.ToLower() == (partOfSplitedAddress.ToLower()))
-                        {
-                            fitCount++;
-                        }
-                        
-                    }
-                    if (isMandatoryFit)
-                    {
-                        // Jezeli jedna z wymaganych składowych adresu została odnaleziona to dokument ma zostac dodany
-                        isDocumentFitting = true;
-                        resultTmpListOfDocuments.Add(document,fitCount);
-                    }
-                    i++;
-                }
-            }
-            var resultList = (resultTmpListOfDocuments
-                .Select(e => e)
-                .OrderByDescending(o => o.Value)).Select(e => e.Key);
-            return resultList.ToList();
-        }
+			var resultList = (resultTmpListOfDocuments
+				.Select(e => e)
+				.OrderByDescending(o => o.Item2)).Select(e => e.Item1);
+			return resultList.ToList();
+		}
 
-        public async Task<List<Decision>> GetByDecisionNumber(string decisionNumber)
-        {
-            var documents = await GetCachedDocuments();
-            var searchResult = documents
-                                        .Where(doc => doc.DecisionNumber == decisionNumber)
-                                        .Select(doc => doc)
-                                        .DefaultIfEmpty()
-                                        .ToList();
-            return searchResult;
-        }
+		public async Task<List<Decision>> GetByDecisionNumber(string decisionNumber)
+		{
+			var documents = await GetCachedDocuments();
+			var searchResult = documents
+										.Where(doc => doc.DecisionNumber == decisionNumber)
+										.Select(doc => doc)
+										.DefaultIfEmpty()
+										.ToList();
+			return searchResult;
+		}
 
-        public async Task<List<Decision>> GetByDecisionDate(DateTime dateTime)
-        {
-            var documents = await GetCachedDocuments();
-            var searchResult = documents
-                                        .Where(doc => doc.Date == dateTime)
-                                        .Select(doc => doc)
-                                        .DefaultIfEmpty()
-                                        .ToList();
-            return searchResult;
-        }
+		public async Task<List<Decision>> GetByDecisionDate(DateTime dateTime)
+		{
+			var documents = await GetCachedDocuments();
+			var searchResult = documents
+										.Where(doc => doc.Date == dateTime)
+										.Select(doc => doc)
+										.DefaultIfEmpty()
+										.ToList();
+			return searchResult;
+		}
 
-        public async Task<List<Decision>> GetByLegalBasis(string legalBasis)
-        {
-            var documents = await GetCachedDocuments();
-            var searchResult = documents
-                                        .Where(doc => doc.LegalBasis == legalBasis)
-                                        .Select(doc => doc)
-                                        .DefaultIfEmpty()
-                                        .ToList();
-            return searchResult;
-        }
-    }
+		public async Task<List<Decision>> GetByLegalBasis(string legalBasis)
+		{
+			var documents = await GetCachedDocuments();
+			var searchResult = documents
+										.Where(doc => doc.LegalBasis == legalBasis)
+										.Select(doc => doc)
+										.DefaultIfEmpty()
+										.ToList();
+			return searchResult;
+		}
+	}
 }

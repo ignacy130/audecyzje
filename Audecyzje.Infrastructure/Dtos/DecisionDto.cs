@@ -17,5 +17,6 @@ namespace Audecyzje.Infrastructure.Dtos
 		public string DecisionNumber { get; set; }
 		public ICollection<LocalizationDto> Localizations { get; set; }
 		public string Content { get; set; }
+		public string Address { get; set; }
 	}
 }

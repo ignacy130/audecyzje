@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 
 namespace Audecyzje.Core.Domain
 {
-    public class Localization:BaseEntity
+    public class Localization : BaseEntity
     {
         public string City { get; set; }
         public string Street { get; set; }
         public string Number { get; set; }
         public string PostalCode { get; set; }
         public int DocumentId { get; set; }
+
         [NotMapped]
-        public string FullAddressString => City+" "+Street+" "+Number+" "+PostalCode;
+        public string FullAddressString => $"{City} {Street} {Number} {PostalCode}";
 
 		public double Latitude { get; set; }
 		public double Longitude { get; set; }

@@ -45,7 +45,7 @@ namespace Audecyzje.Infrastructure.Services
 
         public async Task<IEnumerable<DecisionDto>> GetByAddress(string address)
         {
-            var listOfDocuments = await _documentRepository.GetByLocalization(address);
+            var listOfDocuments = await _documentRepository.GetByLocalization(address.ToLower());
             return _mapper.Map<List<DecisionDto>>(listOfDocuments);
         }
 

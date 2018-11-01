@@ -60,7 +60,7 @@ namespace Audecyzje.Infrastructure
 			contentdirectory = @"D:\D\Projekty\KdP\audecyzje\audecyzje\Audecyzje.WebQuickDemo\Resources";
 			if (Directory.Exists(contentdirectory))
 			{
-				LoadBefore2016(Path.Combine(contentdirectory, "txtmjnall_25052018"));
+				LoadBefore2016(Path.Combine(contentdirectory, "txtmjnall_25052018"), true);
 				//LoadAfter2016approach1(Path.Combine(contentdirectory, "txtmjnall_25052018"));
 
 				//po pobraniu kolejnej paczki okazało się że nazwy trochę się pozmieniały -_-
@@ -68,12 +68,18 @@ namespace Audecyzje.Infrastructure
 			}
 		}
 
-		private void LoadBefore2016(string mjnallFolder)
+		private void LoadBefore2016(string mjnallFolder, bool loadSmallSet = false)
 		{
 			var sourceLinks = File.ReadAllLines(Path.Combine(mjnallFolder, "DirectUrls_before2016.txt"));
 
 			CultureInfo provider = CultureInfo.InvariantCulture;
 			var filePaths = Directory.GetFiles(Path.Combine(mjnallFolder, "mjntxtonly"));
+
+			if (loadSmallSet)
+			{
+				filePaths = filePaths.Take(500).ToArray();
+			}
+
 			DateTime uploadedDate = DateTime.Now;
 			foreach (var filePath in filePaths)
 			{
@@ -141,7 +147,8 @@ namespace Audecyzje.Infrastructure
 							DecisionNumber = decisionNumber,
 							Content = fileContent,
 							UploadedTime = uploadedDate,
-							SourceLink = sourceLink
+							SourceLink = sourceLink,
+							Address = streetFull
 						};
 						context.Add(dec);
 						context.SaveChanges();
@@ -198,6 +205,8 @@ namespace Audecyzje.Infrastructure
 					}
 				}
 			}
+
+			var streets = context.Decisions.Select(x => x.Address).ToList();
 		}
 
 		private static string ExtractOthersStreetFull(string filename, bool CRWIP, bool CRWIPbis, bool randomEnding, out int streetStartIndex)
@@ -218,7 +227,54 @@ namespace Audecyzje.Infrastructure
 			}
 
 			streetStartIndex = filename.IndexOfFirstLetter();
-			return streetFull = filename.Substring(streetStartIndex, streetEndIndex - streetStartIndex);
+			streetFull = filename.Substring(streetStartIndex, streetEndIndex - streetStartIndex);
+			streetFull = TransformToStreetFormat(streetFull);
+
+			return streetFull;
+		}
+
+		private static string TransformToStreetFormat(string streetFull)
+		{
+			if (streetFull.StartsWith("ul"))
+			{
+				streetFull = $"ul. {streetFull.Substring("ul".Length)}";
+			}
+
+			if (streetFull.StartsWith("al"))
+			{
+				streetFull = $"al. {streetFull.Substring("al".Length)}";
+			}
+
+			if (streetFull.StartsWith("Al"))
+			{
+				streetFull = $"Al. {streetFull.Substring("Al".Length)}";
+			}
+
+			streetFull = streetFull.Replace("dawnaul", " dawna ul. ")
+								   .Replace("iul", " i ul. ")
+								   .Replace("rógul", " róg ul. ")
+								   .Replace("dawniej", " dawniej ");
+
+			var i = 0;
+			var indexInDigitSeries = false;
+			while (i < streetFull.Length)
+			{
+				if (Char.IsDigit(streetFull[i]) && !indexInDigitSeries)
+				{
+					indexInDigitSeries = true;
+					streetFull = streetFull.Insert(i, " ");
+				}
+				else if(Char.IsLetter(streetFull[i]))
+				{
+					indexInDigitSeries = false;
+				}
+				i++;
+			}
+
+			streetFull = streetFull.Insert(streetFull.IndexOfFirstDigit(), " ")
+								   .Trim()
+								   .Replace("  ", " ");
+			return streetFull;
 		}
 
 		private static string ExtractStreetFull(string filename, bool CRWIP, bool CRWIPbis, bool randomEnding, out int streetStartIndex)
@@ -239,7 +295,11 @@ namespace Audecyzje.Infrastructure
 			{
 				streetEndIndex = streetEndIndex - 4;//cofamy od kropki 4 wstecz
 			}
+
 			streetFull = streetFull.Substring(streetStartIndex, streetEndIndex - streetStartIndex);
+
+			streetFull = TransformToStreetFormat(streetFull);
+
 			return streetFull;
 		}
 

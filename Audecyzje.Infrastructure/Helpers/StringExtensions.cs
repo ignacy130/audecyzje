@@ -58,6 +58,21 @@ namespace Audecyzje.Infrastructure
 			return pos;
 		}
 
+		public static int IndexOfFirstDigit(this string text)
+		{
+			var pos = -1;
+			var i = 0;
+			while (pos == -1)
+			{
+				if (Char.IsDigit(text[i]))
+				{
+					pos = i;
+				}
+				i++;
+			}
+			return pos;
+		}
+
 		public static int LevenshteinDistanceTo(this string s, string t)
 		{
 			int sLength = s.Length;
