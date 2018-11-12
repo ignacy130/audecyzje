@@ -78,12 +78,12 @@ button,
 
 .navbar {
     position: relative;
-    background-color: transparent !important;
+    color: #333;
 }
 
     .navbar a {
-        color: #000;
         transition: 0.3s;
+        color: #333;
     }
 
         .navbar a > .line {
@@ -107,12 +107,13 @@ button,
     padding-left: 0 !important;
 }
 
-.navbar-dark a {
-    color: #fff;
+.navbar-brand {
+    font-size: 1rem;
 }
 
-.navbar-brand{
-    font-size: 1rem;
+.navbar-black-bg{
+    background-color: #333;
+    color: #fff;
 }
 
 .input-field h2 {
@@ -151,7 +152,6 @@ button,
 }
 
     .stats .card:hover {
-        transform: scale(1.02);
         box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.4);
     }
 
@@ -169,7 +169,7 @@ button,
 }
 
 .stats {
-    margin-top: -3rem;
+    margin-top: -2rem;
 }
 
 footer .col-sm-5 {
@@ -454,6 +454,60 @@ footer li img {
     }
 
 /****** MEDIA QUERIES ******/
+@media (max-width: 321px) {
+
+    .bold-header {
+        line-height: 2.5rem;
+        font-size: 1.5rem;
+    }
+
+    .view {
+        margin-top: -16rem;
+    }
+
+    .input-field {
+        margin-top: -0.5rem;
+    }
+
+    h4,
+    h4.bold-header {
+        line-height: 1.6rem;
+        font-size: 1rem;
+    }
+
+    .stats {
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 366px) {
+
+    .bold-header {
+        line-height: 2.5rem;
+        font-size: 1.5rem;
+    }
+
+    .view {
+        margin-top: -16rem;
+    }
+}
+
+@media (min-width: 465px) {
+    .btn-warning {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+}
+
+@media (min-width: 465px) and (max-width: 991px) {
+    .view {
+        margin-top: -14rem;
+    }
+
+    .input-field {
+        margin-top: 3rem;
+    }
+}
 
 @media (max-width: 464px) {
 
@@ -515,66 +569,11 @@ footer li img {
     }
 
     .stats {
-        margin-top: -2rem;
+        margin-top: -1rem;
     }
 
     .decision-steps > button {
         width: 100%;
-    }
-}
-
-@media (max-width: 321px) {
-
-    .bold-header {
-        line-height: 2.5rem;
-        font-size: 1.5rem;
-    }
-
-    .view {
-        margin-top: -16rem;
-    }
-
-    .input-field {
-        margin-top: -0.5rem;
-    }
-
-    h4,
-    h4.bold-header {
-        line-height: 1.6rem;
-        font-size: 1rem;
-    }
-
-    .stats {
-        margin-top: 1rem;
-    }
-}
-
-@media (max-width: 366px) {
-
-    .bold-header {
-        line-height: 2.5rem;
-        font-size: 1.5rem;
-    }
-
-    .view {
-        margin-top: -16rem;
-    }
-}
-
-@media (min-width: 465px) {
-    .btn-warning {
-        padding-left: 3rem;
-        padding-right: 3rem;
-    }
-}
-
-@media (min-width: 465px) and (max-width: 991px) {
-    .view {
-        margin-top: -14rem;
-    }
-
-    .input-field {
-        margin-top: 3rem;
     }
 }
 
@@ -622,12 +621,18 @@ footer li img {
         .bottom-el button {
             width: 65%;
         }
-}
 
-@media (max-width: 768px) {
+    .bold-header {
+        font-size: 2.6rem;
+        line-height: 2.9rem;
+    }
 
     .input-card {
         padding-right: 0;
+    }
+
+    .stats {
+        margin-top: -2rem;
     }
 }
 
@@ -643,6 +648,11 @@ footer li img {
 }
 
 @media (max-width: 991px) {
+    .navbar-collapse.show .nav-link,
+    .navbar-collapse.show .nav-link.router-link-active {
+        font-weight: bold;
+        text-align: right;
+    }
 
     h2, .section-header {
         text-align: center;
@@ -693,6 +703,10 @@ footer li img {
 }
 
 @media (min-width: 992px) {
+
+    .navbar-transparent{
+        background-color: transparent;
+    }
 
     .navbar-brand {
         position: absolute;
@@ -754,10 +768,4 @@ footer li img {
     background-color: #FCE603;
     padding: 3px;
     display: inline-block;
-}
-
-@media (max-width: 768px) {
-    .card-columns {
-        column-count: 1;
-    }
 }

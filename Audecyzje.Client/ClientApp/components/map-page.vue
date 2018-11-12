@@ -344,7 +344,7 @@
                         }
                     }
                     this.markers = m;
-                    if (m.length > 0) {
+                    if (m && m.length > 0) {
                         this.center = [m[0].position.lat, m[0].position.lng];
                     }
                 } catch (error) {
@@ -372,7 +372,7 @@
         },
         created() {
             this.query = this.$route.params.query;
-            if (this.query.length > 3) {
+            if (this.query && this.query.length > 3) {
                 this.search(this.query);
             }
         },

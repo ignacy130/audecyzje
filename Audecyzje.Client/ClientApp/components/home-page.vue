@@ -4,21 +4,21 @@
         <div class="broad-view">
             <div class="container pt-5">
                 <div class="text-center input-field py-4">
-                    <h1 class="bold-header text-center px-lg-5">Dostęp do ponad 2000 decyzji reprywatyzacyjnych wydanych w Warszawie w latach 1950-2017</h1>
-                    <div class="input-group my-4 my-lg-5 col-8 offset-2">
-                        <vue-simple-suggest :list="suggestions"
-                                            :filter-by-query="true"
-                                            ref="queryInput"
-                                            v-model="query"
-                                            @hover="onSuggestHover"
-                                            @select="search"
-                                            v-on:suggestion-click="search"
-                                            id="query-input"
-                                            class="form-control"
-                                            placeholder="Wpisz adres warszawskiej nieruchomości">
-                        </vue-simple-suggest>
-                        <div class="input-group-append">
-                            <button type="button" v-on:click="search" class="btn btn-warning btn-lg btn-outline-secondary">Sprawdź</button>
+                    <h1 class="bold-header text-center px-lg-5">Dostęp do ponad 2000 decyzji reprywatyzacyjnych wydanych w&nbsp;Warszawie w latach 1950-2017</h1>
+                    <div class="my-4 my-lg-5 col-12 col-md-8 offset-md-2">
+                        <div class="row">
+                            <vue-simple-suggest :list="suggestions"
+                                                :filter-by-query="true"
+                                                ref="queryInput"
+                                                v-model="query"
+                                                @hover="onSuggestHover"
+                                                @select="search"
+                                                v-on:suggestion-click="search"
+                                                id="query-input"
+                                                class="form-control col-8 p-0"
+                                                placeholder="Wpisz adres warszawskiej nieruchomości">
+                            </vue-simple-suggest>
+                            <button type="button" v-on:click="search" class="btn btn-warning btn-lg btn-outline-secondary col-4">Sprawdź</button>
                         </div>
                     </div>
                     <h5 class="text-center px-lg-5">
@@ -30,11 +30,11 @@
         </div>
 
         <!-- Stats -->
-        <section>
-            <div class="container">
-                <div class="stats">
-                    <div class="card-columns">
-                        <div class="card">
+        <section class="container-fluid stats ">
+            <div class="align-items-stretch">
+                <div class="card-columns row">
+                    <div class="col-12 col-md-4 d-flex col-sm-6">
+                        <div class="card ">
                             <div class="card-body">
                                 <h1 class="card-title text-center">20 tys.</h1>
                                 <div>
@@ -43,6 +43,8 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-12 col-md-4 d-flex col-sm-6">
                         <div class="card">
                             <div class="card-body">
                                 <h1 class="card-title text-center">450</h1>
@@ -52,6 +54,8 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-12 col-md-4 d-flex col-sm-6">
                         <div class="card">
                             <div class="card-body">
                                 <h1 class="card-title text-center">15 mln</h1>
@@ -128,5 +132,7 @@
         border: none;
         box-shadow: none;
         text-align: left;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
     }
 </style>
