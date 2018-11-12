@@ -1,4 +1,4 @@
-﻿@model Audecyzje.WebQuickDemo.Models.Tag
+﻿@model Audecyzje.Core.Domain.Tag
 
 @{
     ViewData["Title"] = "Details";
@@ -25,7 +25,7 @@
         <div class="table-responsive">
             <table class="table">
                 <tr>
-                    <td>ID</td>
+                    <td>Id</td>
                     <td>Decision Number</td>
                     <td>Uploaded Date</td>
                 </tr>
@@ -33,7 +33,7 @@
                 {
                 <tr>
                     <td>
-                        <a asp-action="Details" asp-controller="Decisions" asp-route-id="@dt.DecisionID">@dt.DecisionID</a>
+                        <a asp-action="Details" asp-controller="Decisions" asp-route-id="@dt.DecisionId">@dt.DecisionId</a>
                     </td>
                     <td>
                         @dt.Decision.DecisionNumber
@@ -49,6 +49,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

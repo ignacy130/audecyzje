@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Audecyzje.Infrastructure;
 using Audecyzje.WebQuickDemo.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +25,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
         [HttpGet("{id}", Name = "Get")]
         public JsonResult Get(int id)
         {
-			var l = _context.Descisions.SingleOrDefault(x => x.ID == id);
+			var l = _context.Decisions.SingleOrDefault(x => x.Id == id);
 
 			return new JsonResult(l);
         }
@@ -32,7 +33,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
 		[Route("getpage")]
 		public JsonResult GetPage(int number)
 		{
-			var l = _context.Descisions.Skip(number*100).Take(100).ToList();
+			var l = _context.Decisions.Skip(number*100).Take(100).ToList();
 
 			return new JsonResult(l);
 		}
@@ -42,7 +43,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
         [Route("alldecisions")]
         public JsonResult GetAll()
         {
-            return new JsonResult(_context.Descisions.ToList());
+            return new JsonResult(_context.Decisions.ToList());
         }
     }
 }

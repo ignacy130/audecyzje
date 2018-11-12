@@ -12,50 +12,50 @@ using System.Text.RegularExpressions;
 
 namespace Audecyzje.Infrastructure.Services
 {
-    public class DocumentService : Service, IDocumentService
+    public class DocumentService : Service, IDecisionsService
     {
-        private readonly IDocumentRepository _documentRepository;
+        private readonly IDecisionsRepository _documentRepository;
         private readonly IMapper _mapper;
 
-        public DocumentService(IDocumentRepository documentRepository, IMapper mapper)
+        public DocumentService(IDecisionsRepository documentRepository, IMapper mapper)
         {
             _documentRepository = documentRepository;
             _mapper = mapper;
         }
 
-        public async Task<List<DocumentDto>> GetAll()
+        public async Task<List<DecisionDto>> GetAll()
         {
-           return _mapper.Map<List<DocumentDto>>(await _documentRepository.GetAll());
+           return _mapper.Map<List<DecisionDto>>(await _documentRepository.GetAll());
         }
 
-        public async Task<List<DocumentDto>> GetByDecisionNumber(string decisionNumber)
+        public async Task<List<DecisionDto>> GetByDecisionNumber(string decisionNumber)
         {
-            return _mapper.Map<List<DocumentDto>>(await _documentRepository.GetByDecisionNumber(decisionNumber));
+            return _mapper.Map<List<DecisionDto>>(await _documentRepository.GetByDecisionNumber(decisionNumber));
         }
 
-        public async Task<List<DocumentDto>> GetByDecisionDate(DateTime dateTime)
+        public async Task<List<DecisionDto>> GetByDecisionDate(DateTime dateTime)
         {
-            return _mapper.Map<List<DocumentDto>>(await _documentRepository.GetByDecisionDate(dateTime));
+            return _mapper.Map<List<DecisionDto>>(await _documentRepository.GetByDecisionDate(dateTime));
         }
 
-        public async Task<List<DocumentDto>> GetByLegalBasis(string legalBasis)
+        public async Task<List<DecisionDto>> GetByLegalBasis(string legalBasis)
         {
-            return _mapper.Map<List<DocumentDto>>(await _documentRepository.GetByLegalBasis(legalBasis));
+            return _mapper.Map<List<DecisionDto>>(await _documentRepository.GetByLegalBasis(legalBasis));
         }
 
-        public async Task<IEnumerable<DocumentDto>> GetByAddress(string address)
+        public async Task<IEnumerable<DecisionDto>> GetByAddress(string address)
         {
-            var listOfDocuments = await _documentRepository.GetByLocalization(address);
-            return _mapper.Map<List<DocumentDto>>(listOfDocuments);
+            var listOfDocuments = await _documentRepository.GetByLocalization(address.ToLower());
+            return _mapper.Map<List<DecisionDto>>(listOfDocuments);
         }
 
-		public async Task<IEnumerable<DocumentDto>> SearchInContent(string query)
+		public async Task<IEnumerable<DecisionDto>> SearchInContent(string query)
 		{
 			var listOfDocuments = (await _documentRepository.GetAll()).Where(d => d.Content.Contains(query));
-			return _mapper.Map<List<DocumentDto>>(listOfDocuments);
+			return _mapper.Map<List<DecisionDto>>(listOfDocuments);
 		}
 
-		public async Task<IEnumerable<DocumentDto>> Search(string query)
+		public async Task<IEnumerable<DecisionDto>> Search(string query)
 		{
 			var decisionNumberRegex = new Regex(@"[0-9]{1,100}\/GK\/DW\/[0-9]{4}");
 			if (decisionNumberRegex.IsMatch(query))

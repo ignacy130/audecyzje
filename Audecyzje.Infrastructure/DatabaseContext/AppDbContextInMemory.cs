@@ -6,9 +6,9 @@ namespace Audecyzje.Infrastructure.DatabaseContext
 {
     public static class AppDbContextInMemory
     {
-        public static async void Seed(AppDbContext context)
+        public static async void Seed(WarsawContext context)
         {
-            var documentOne = new Document()
+            var documentOne = new Decision()
             {
                 Localization = "Nowogrodzka 22",
                 Localizations = new List<Localization>(),
@@ -19,7 +19,7 @@ namespace Audecyzje.Infrastructure.DatabaseContext
                 SubmissionDate = DateTime.Today,
 
             };
-            context.Documents.Add(documentOne);
+            context.Decisions.Add(documentOne);
             var localizationOne = new Localization()
             {
                 Id = 1,
@@ -51,7 +51,7 @@ namespace Audecyzje.Infrastructure.DatabaseContext
             };
             context.Localizations.Add(localizationOne);
             documentOne.Localizations.Add(localizationOne);
-            documentOne = new Document()
+            documentOne = new Decision()
             {
                 Localization = "lokalizacja druga",
                 Localizations = new List<Localization>(),
@@ -62,7 +62,7 @@ namespace Audecyzje.Infrastructure.DatabaseContext
                 SubmissionDate = DateTime.Today,
 
             };
-            context.Documents.Add(documentOne);
+            context.Decisions.Add(documentOne);
             localizationOne = new Localization()
             {
                 Id = 4,
@@ -73,28 +73,22 @@ namespace Audecyzje.Infrastructure.DatabaseContext
             };
             context.Localizations.Add(localizationOne);
             documentOne.Localizations.Add(localizationOne);
-            context.Persons.Add(new Person()
-            {
-                Id = 1,
-                FirstName = "Michal",
-                Function = "Przewodniczacy",
-                LastName = "Kowalski",
-                Supervisor = "Prezydent m.s Warszawa"
-            });
-            context.Persons.Add(new Person()
-            {
-                Id = 2,
-                FirstName = "Dariusz",
-                Function = "Zastepca",
-                LastName = "Nowak",
-                Supervisor = "Przewodniczący Michal Kowalski"
-            });
-            context.Decisions.Add(new Decision()
-            {
-                Content = "content ",
-                Id = 1,
-                IsApproved = true
-            });
+            //context.Persons.Add(new Person()
+            //{
+            //    Id = 1,
+            //    FirstName = "Michal",
+            //    Function = "Przewodniczacy",
+            //    LastName = "Kowalski",
+            //    Supervisor = "Prezydent m.s Warszawa"
+            //});
+            //context.Persons.Add(new Person()
+            //{
+            //    Id = 2,
+            //    FirstName = "Dariusz",
+            //    Function = "Zastepca",
+            //    LastName = "Nowak",
+            //    Supervisor = "Przewodniczący Michal Kowalski"
+            //});
             await context.SaveChangesAsync();
         }
     }

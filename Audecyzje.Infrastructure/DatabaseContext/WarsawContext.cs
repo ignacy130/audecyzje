@@ -1,18 +1,18 @@
-﻿using Audecyzje.WebQuickDemo.Models;
+﻿using Audecyzje.Core.Domain;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Audecyzje.WebQuickDemo.Data
+namespace Audecyzje.Infrastructure
 {
     public class WarsawContext : DbContext
     {
         public WarsawContext(DbContextOptions<WarsawContext> options) : base(options)
         {
         }
-        public DbSet<Decision> Descisions { get; set; }
+        public DbSet<Decision> Decisions { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Localization> Localizations { get; set; }
         public DbSet<DecisionTag> DecisionTags { get; set; }
@@ -23,7 +23,7 @@ namespace Audecyzje.WebQuickDemo.Data
             modelBuilder.Entity<Tag>().ToTable("Tag");
             modelBuilder.Entity<Localization>().ToTable("Localization");
             modelBuilder.Entity<DecisionTag>().ToTable("DecisionTag");
-            modelBuilder.Entity<DecisionTag>().HasKey(x => new { x.DecisionID, x.TagID });
+            modelBuilder.Entity<DecisionTag>().HasKey(x => new { x.DecisionId, x.TagId });
         }
 
     }

@@ -9,6 +9,8 @@ using Audecyzje.WebQuickDemo.Data;
 using Audecyzje.WebQuickDemo.Models;
 using Audecyzje.WebQuickDemo.Helpers;
 using System.Globalization;
+using Audecyzje.Core.Domain;
+using Audecyzje.Infrastructure;
 
 namespace Audecyzje.WebQuickDemo.Controllers
 {
@@ -39,7 +41,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
 
             ViewData["CurrentFilter"] = searchString;
 
-            var decisions = from s in _context.Descisions
+            var decisions = from s in _context.Decisions
                             select s;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -60,7 +62,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
                     decisions = decisions.OrderByDescending(s => s.SubmissionDate);
                     break;
                 default:
-                    decisions = decisions.OrderBy(s => s.ID);
+                    decisions = decisions.OrderBy(s => s.Id);
                     break;
             }
             
@@ -75,7 +77,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
 			ViewData["inLastCharacters"] = inLastCharacters;
 
 			
-			var decisions = from s in _context.Descisions
+			var decisions = from s in _context.Decisions
 							select s;
 			if (!string.IsNullOrEmpty(query))
 			{
@@ -104,8 +106,8 @@ namespace Audecyzje.WebQuickDemo.Controllers
                 return NotFound();
             }
 
-            var decision = await _context.Descisions.Include(d=>d.Localizations)
-                .SingleOrDefaultAsync(m => m.ID == id);
+            var decision = await _context.Decisions.Include(d=>d.Localizations)
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (decision == null)
             {
                 return NotFound();
@@ -125,7 +127,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,SubmissionDate,Content")] Decision decision)
+        public async Task<IActionResult> Create([Bind("Id,SubmissionDate,Content")] Decision decision)
         {
             if (ModelState.IsValid)
             {
@@ -144,7 +146,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
                 return NotFound();
             }
 
-            var decision = await _context.Descisions.SingleOrDefaultAsync(m => m.ID == id);
+            var decision = await _context.Decisions.SingleOrDefaultAsync(m => m.Id == id);
             if (decision == null)
             {
                 return NotFound();
@@ -159,7 +161,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,SubmissionDate,Content")] Decision decision)
         {
-            if (id != decision.ID)
+            if (id != decision.Id)
             {
                 return NotFound();
             }
@@ -173,7 +175,7 @@ namespace Audecyzje.WebQuickDemo.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DecisionExists(decision.ID))
+                    if (!DecisionExists(decision.Id))
                     {
                         return NotFound();
                     }
@@ -195,8 +197,8 @@ namespace Audecyzje.WebQuickDemo.Controllers
                 return NotFound();
             }
 
-            var decision = await _context.Descisions
-                .SingleOrDefaultAsync(m => m.ID == id);
+            var decision = await _context.Decisions
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (decision == null)
             {
                 return NotFound();
@@ -210,15 +212,15 @@ namespace Audecyzje.WebQuickDemo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var decision = await _context.Descisions.SingleOrDefaultAsync(m => m.ID == id);
-            _context.Descisions.Remove(decision);
+            var decision = await _context.Decisions.SingleOrDefaultAsync(m => m.Id == id);
+            _context.Decisions.Remove(decision);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool DecisionExists(int id)
         {
-            return _context.Descisions.Any(e => e.ID == id);
+            return _context.Decisions.Any(e => e.Id == id);
         }
     }
 }

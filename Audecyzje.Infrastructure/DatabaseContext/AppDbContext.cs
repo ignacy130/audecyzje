@@ -14,9 +14,20 @@ namespace Audecyzje.Infrastructure.DatabaseContext
         {
 
         }
-        public virtual DbSet<Document> Documents { get; set; }
+
         public virtual DbSet<Decision> Decisions { get; set; }
-        public virtual DbSet<Localization> Localizations { get; set; }
-        public virtual DbSet<Person> Persons { get; set; }
-    }
+		public DbSet<Tag> Tags { get; set; }
+		public virtual DbSet<Localization> Localizations { get; set; }
+		public DbSet<DecisionTag> DecisionTags { get; set; }
+		public virtual DbSet<Person> Persons { get; set; }
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			modelBuilder.Entity<Decision>().ToTable("Decision");
+			modelBuilder.Entity<Tag>().ToTable("Tag");
+			modelBuilder.Entity<Localization>().ToTable("Localization");
+			modelBuilder.Entity<DecisionTag>().ToTable("DecisionTag");
+			modelBuilder.Entity<DecisionTag>().HasKey(x => new { x.DecisionId, x.TagId });
+		}
+	}
 }

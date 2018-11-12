@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Audecyzje.Infrastructure;
+using Audecyzje.Infrastructure.DatabaseContext;
 using Audecyzje.WebQuickDemo.Data;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -24,7 +26,7 @@ namespace Audecyzje.WebQuickDemo
                 try
                 {
                     var context = services.GetRequiredService<WarsawContext>();
-                    DbInitializer.Initialize(context);
+                    new DbInitializer(context).Initialize();
                 }
                 catch (Exception ex)
                 {

@@ -8,7 +8,6 @@
 
 <script>
     import Vue from 'vue'
-    import CounterExample from './counter-example'
     import Map from './map-page'
     import HomePage from './home-page'
     import NavMenu from './nav-menu'
@@ -18,7 +17,6 @@
     import Decyzja from './decyzja';
     import Footer from './footer-view'
 
-    Vue.component('counter-example', CounterExample);
     Vue.component('map-page', Map);
     Vue.component('home-page', HomePage);
     Vue.component('nav-menu', NavMenu);

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Audecyzje.WebQuickDemo.Models.Tag>
+﻿@model IEnumerable<Audecyzje.Core.Domain.Tag>
 
 @{
     ViewData["Title"] = "Index";
@@ -43,10 +43,10 @@
                     @Html.DisplayFor(modelItem => item.LinkedDecisionsCount)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.ID">Edytuj</a> |
-                    <a asp-action="Details" asp-route-id="@item.ID">Szczegóły</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ID">Usuń</a> |
-                    <a asp-action="RecreateSingleTag" class="btn btn-success" asp-route-id="@item.ID">Przeskanuj na nowo</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a> |
+                    <a asp-action="RecreateSingleTag" class="btn btn-success" asp-route-id="@item.Id">Przeskanuj na nowo</a>
                 </td>
             </tr>
         }

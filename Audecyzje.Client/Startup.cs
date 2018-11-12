@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Audecyzje.Infrastructure.Services;
 using Swashbuckle.AspNetCore.Swagger;
+using Audecyzje.Infrastructure;
 
 namespace Audecyzje.Client
 {
@@ -37,14 +38,15 @@ namespace Audecyzje.Client
         {
             services.AddMemoryCache();
 
-            services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase(Guid.NewGuid().ToString("N")), ServiceLifetime.Singleton);
+            services.AddDbContext<WarsawContext>(options => options.UseInMemoryDatabase(Guid.NewGuid().ToString("N")), ServiceLifetime.Singleton);
             //                Configuration.GetSection("ConnectionStrings")["DatabaseServer"],
             //                c => c.MigrationsAssembly("Audecyzje.API")), ServiceLifetime.Transient);
 
             // Add framework services.
             services.AddMvc();
             services.AddTransient(c => AutoMapperConfig.Initialize());
-            services.AddTransient<IDocumentRepository, DocumentRepository>();
+            services.AddTransient<IDecisionsRepository, DecisionsRepository>();
+
 
             services.Scan(selector =>
             {
@@ -61,6 +63,7 @@ namespace Audecyzje.Client
                     builder.AllowCredentials();
                 });
             });
+
             services.AddSwaggerGen(options =>
             {
                 options.CustomSchemaIds(type => type.FullName);
@@ -114,8 +117,8 @@ namespace Audecyzje.Client
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Audecyzje API V1");
             });
 
-            var dbContext = serviceProvider.GetService<AppDbContext>();
-            AppDbContextInMemory.Seed(dbContext);
+            var dbContext = serviceProvider.GetService<WarsawContext>();
+            new DbInitializer(dbContext).Initialize();
         }
     }
 }

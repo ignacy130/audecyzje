@@ -12,10 +12,10 @@ namespace Audecyzje.Infrastructure.Repositories
 {
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {
-        private readonly AppDbContext _context;
+        private readonly WarsawContext _context;
         private readonly DbSet<T> _dbSet;
 
-        public Repository(AppDbContext context)
+        public Repository(WarsawContext context)
         {
             _context = context;
             _dbSet = _context.Set<T>();

@@ -14,6 +14,5 @@ namespace Audecyzje.Core.Repositories
         Task<T> Create(T entity);
         Task<T> Update(T entity);
         Task Delete(int id);
-
     }
 }
