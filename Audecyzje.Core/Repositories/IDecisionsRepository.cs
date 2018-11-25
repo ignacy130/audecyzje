@@ -14,4 +14,9 @@ namespace Audecyzje.Core.Repositories
         Task<List<Decision>> GetByDecisionDate(DateTime dateTime);
         Task<List<Decision>> GetByLegalBasis(string legalBasis);
     }
+
+	public interface IPostsRepository : IRepository<Post>
+	{
+
+	}
 }

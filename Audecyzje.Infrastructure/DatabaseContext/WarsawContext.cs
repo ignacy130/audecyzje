@@ -1,4 +1,5 @@
 ﻿using Audecyzje.Core.Domain;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Audecyzje.Infrastructure
 {
-    public class WarsawContext : DbContext
+    public class WarsawContext : IdentityDbContext
     {
         public WarsawContext(DbContextOptions<WarsawContext> options) : base(options)
         {
