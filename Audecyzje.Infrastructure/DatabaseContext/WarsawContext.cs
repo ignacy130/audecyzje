@@ -17,9 +17,12 @@ namespace Audecyzje.Infrastructure
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Localization> Localizations { get; set; }
         public DbSet<DecisionTag> DecisionTags { get; set; }
+		public DbSet<Post> Posts { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Decision>().ToTable("Decision");
             modelBuilder.Entity<Tag>().ToTable("Tag");
             modelBuilder.Entity<Localization>().ToTable("Localization");

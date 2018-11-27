@@ -73,23 +73,44 @@ namespace Audecyzje.Infrastructure.DatabaseContext
             };
             context.Localizations.Add(localizationOne);
             documentOne.Localizations.Add(localizationOne);
-            //context.Persons.Add(new Person()
-            //{
-            //    Id = 1,
-            //    FirstName = "Michal",
-            //    Function = "Przewodniczacy",
-            //    LastName = "Kowalski",
-            //    Supervisor = "Prezydent m.s Warszawa"
-            //});
-            //context.Persons.Add(new Person()
-            //{
-            //    Id = 2,
-            //    FirstName = "Dariusz",
-            //    Function = "Zastepca",
-            //    LastName = "Nowak",
-            //    Supervisor = "Przewodniczący Michal Kowalski"
-            //});
-            await context.SaveChangesAsync();
+
+			var post = context.Posts.Add(new Post()
+			{
+				AuthorId = Guid.NewGuid().ToString(),
+				Content = "Lorem ipsum dolor sit amet, hinc apeirian ad pri. Rebum molestie qualisque quo at, exerci moderatius dissentias pro no. Et magna partem complectitur quo, ut quo suas nostrud. Id qui erat brute prompta, mea admodum nostrum id, ad sed elit saperet voluptatum. Eum ocurreret assueverit ad. Sit modus nullam possim ei, pro erant scripserit no.",
+				CreatedAt = DateTime.Now,
+				IsPublished = true,
+				ModifiedAt=DateTime.Now,
+				PublishedAt = DateTime.Now,
+				Title = "TOP Lorem ipsum dolot sit amet",
+				ParentId = -1,
+			});
+
+			context.Posts.Add(new Post()
+			{
+				AuthorId = Guid.NewGuid().ToString(),
+				Content = "Lorem ipsum dolor sit amet, hinc apeirian ad pri. Rebum molestie qualisque quo at, exerci moderatius dissentias pro no. Et magna partem complectitur quo, ut quo suas nostrud. Id qui erat brute prompta, mea admodum nostrum id, ad sed elit saperet voluptatum. Eum ocurreret assueverit ad. Sit modus nullam possim ei, pro erant scripserit no.",
+				CreatedAt = DateTime.Now,
+				IsPublished = true,
+				ModifiedAt = DateTime.Now,
+				PublishedAt = DateTime.Now,
+				Title = "CHILD Lorem ipsum dolot sit amet",
+				ParentId = post.Entity.Id,
+			});
+
+			context.Posts.Add(new Post()
+			{
+				AuthorId = Guid.NewGuid().ToString(),
+				Content = "Lorem ipsum dolor sit amet, hinc apeirian ad pri. Rebum molestie qualisque quo at, exerci moderatius dissentias pro no. Et magna partem complectitur quo, ut quo suas nostrud. Id qui erat brute prompta, mea admodum nostrum id, ad sed elit saperet voluptatum. Eum ocurreret assueverit ad. Sit modus nullam possim ei, pro erant scripserit no.",
+				CreatedAt = DateTime.Now,
+				IsPublished = true,
+				ModifiedAt = DateTime.Now,
+				PublishedAt = DateTime.Now,
+				Title = "CHILD Lorem ipsum dolot sit amet",
+				ParentId = post.Entity.Id,
+			});
+
+			await context.SaveChangesAsync();
         }
     }
 }

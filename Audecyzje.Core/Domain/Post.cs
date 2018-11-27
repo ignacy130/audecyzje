@@ -14,5 +14,10 @@ namespace Audecyzje.Core.Domain
 		public DateTime? PublishedAt { get; set; }
 		public DateTime? ModifiedAt { get; set; }
 		public string Content { get; set; }
+
+		public Post()
+		{
+			Id = -1;
+		}
 	}
 }
