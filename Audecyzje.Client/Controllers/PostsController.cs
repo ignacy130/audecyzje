@@ -40,9 +40,15 @@ namespace Audecyzje.Client.Controllers
             return await _postsService.Get(id);
         }
 
+        [Authorize]
         public async Task<IEnumerable<Post>> GetAll()
         {
             return await _postsService.GetAll();
+        }
+
+        public async Task<IEnumerable<Post>> GetAllPublished()
+        {
+            return (await _postsService.GetAll()).Where(x => x.IsPublished);
         }
 
         [Authorize]
