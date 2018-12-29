@@ -1,4 +1,5 @@
 ﻿using Audecyzje.Core.Domain;
+using Audecyzje.Infrastructure.DatabaseContext;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,6 +14,7 @@ namespace Audecyzje.Infrastructure
         public WarsawContext(DbContextOptions<WarsawContext> options) : base(options)
         {
         }
+
         public DbSet<Decision> Decisions { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Localization> Localizations { get; set; }
@@ -28,7 +30,10 @@ namespace Audecyzje.Infrastructure
             modelBuilder.Entity<Localization>().ToTable("Localization");
             modelBuilder.Entity<DecisionTag>().ToTable("DecisionTag");
             modelBuilder.Entity<DecisionTag>().HasKey(x => new { x.DecisionId, x.TagId });
-        }
 
+            //AppDbContextInMemory.Seed(modelBuilder);
+
+            
+        }
     }
 }

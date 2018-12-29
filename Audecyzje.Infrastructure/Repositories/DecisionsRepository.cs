@@ -34,7 +34,7 @@ namespace Audecyzje.Infrastructure.Repositories
 				documents = await GetAll();
 
 				var cacheEntryOptions = new MemoryCacheEntryOptions()
-											.SetSlidingExpiration(TimeSpan.FromHours(1));
+											.SetSlidingExpiration(TimeSpan.FromSeconds(1));
 
 				_cache.Set(CacheKeys.Documents, documents, cacheEntryOptions);
 			}

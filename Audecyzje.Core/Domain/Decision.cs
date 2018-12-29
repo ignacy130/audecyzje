@@ -13,7 +13,6 @@ namespace Audecyzje.Core.Domain
 		public IEnumerable<DecisionTag> LinkedTags { get; set; }
 		public string SourceLink { get; set; }
 		public string DecisionNumber { get; set; }
-
 		public string Address { get; set; }
 		public string City { get; set; }
 		public string Street { get; set; }

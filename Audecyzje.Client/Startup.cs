@@ -47,6 +47,7 @@ namespace Audecyzje.Client
             services.AddMvc();
             services.AddTransient(c => AutoMapperConfig.Initialize());
             services.AddTransient<IDecisionsRepository, DecisionsRepository>();
+            services.AddTransient<IPostsRepository, PostsRepository>();
 
 
             services.Scan(selector =>
@@ -155,7 +156,9 @@ namespace Audecyzje.Client
             });
 
             var dbContext = serviceProvider.GetService<WarsawContext>();
-            new DbInitializer(dbContext).Initialize();
+            dbContext.Database.EnsureCreated();
+            AppDbContextInMemory.Seed(dbContext);
+            dbContext.SaveChanges();
         }
     }
 }

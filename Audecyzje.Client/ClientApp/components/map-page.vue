@@ -1,264 +1,241 @@
 <template>
     <div>
         <!-- Form -->
-        <div id="map" class="jumbotron form px-0 mx-auto">
-            <div class="row">
-                <div class="col-md-4 input-card mx-0 my-0 py-0 d-flex flex-column order-md-1">
-                    <div class="input-group">
-                        <vue-simple-suggest :list="suggestions"
-                                            :filter-by-query="true"
-                                            ref="queryInput"
-                                            v-model="query"
-                                            @hover="onSuggestHover"
-                                            @select="search"
-                                            v-on:suggestion-click="search"
-                                            class="form-control"
-                                            :styles="suggestStyles"
-                                            placeholder="Wpisz adres warszawskiej nieruchomości">
-                        </vue-simple-suggest>
+        <div id="map" class="">
+            <div class="row mr-0">
+                <div class="d-inline-block col-md-4 pr-0">
+                    <div class="input-card mx-0 my-0 py-0 d-flex flex-column order-md-1">
+                        <div class="input-group">
+                            <vue-simple-suggest :list="suggestions"
+                                                :filter-by-query="true"
+                                                ref="queryInput"
+                                                v-model="query"
+                                                @hover="onSuggestHover"
+                                                @select="search"
+                                                v-on:suggestion-click="search"
+                                                class="form-control"
+                                                :styles="suggestStyles"
+                                                placeholder="Wpisz adres warszawskiej nieruchomości">
+                            </vue-simple-suggest>
 
-                        <!-- <div class="dropdown">
-                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false"></button>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <form class="px-4 py-3">
-                              <div class="form-group">
-                                <label for="exampleDropdownFormEmail1">Rok/Lata</label>
-                                <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="1950-2017">
-                              </div>
-                              <div class="form-group">
-                                <label for="exampleDropdownFormPassword1">Dzielnica</label>
-                                <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Wola">
-                              </div>
-                              <div class="form-check mb-3">
-                                <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                                <label class="form-check-label" for="dropdownCheck">
-                                  Zaznacz
-                                </label>
-                              </div>
-                              <button type="submit" class="btn btn-primary">Znajdź</button>
-                            </form>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Lorem ipsum dolor sit amet</a>
-                          </div>
-                        </div> -->
-                        <div class="input-group-append">
-                            <button v-on:click="search" class="btn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
-                                    aria-controls="collapseExample">
-                                <i class="fas fa-search"></i>
-                            </button>
+                            <div class="input-group-append">
+                                <button v-on:click="search" class="btn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+                                        aria-controls="collapseExample">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+
                         </div>
+                        <div v-if="searching && !searchPerformed" class="text-center py-2 px-2">
+                            <i class="far fa-file-alt fa-spin fa-2x"></i>
+                        </div>
+                        <div class="mt-3 ml-2" id="decisions-list-container">
+                            <div id="decisions-list" v-if="showDecisions && (decisions && decisions.length>0)">
+                                <div v-for="decision in decisions">
+                                    <!-- Success Card -->
+                                    <div class="card card-body mb-3 p-0 ml-1 mr-3">
+                                        <img class="img-fluid success-img" src="" alt="" />
+                                        <!--<i class="fas fa-times fa-2x ml-3 mt-3" href="#"></i>-->
+                                        <div class="address py-3">
+                                            <h5 class="mt-2 ml-4">{{decision.address}}</h5>
+                                            <p class="mb-2 ml-4">Warszawa</p>
+                                        </div>
+                                        <div class="card-content mt-3 mb-4">
+                                            <div class="row mx-auto">
+                                                <div class="col-md-2">
+                                                    <i class="fas fa-home fa-2x mb-2"></i>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <p>Liczba lokali: 15</p>
+                                                    <p>Liczba lokatorów na dzień 31.12.2017 r.: 43</p>
+                                                </div>
+                                            </div>
+                                            <div class="row mx-auto mt-4">
+                                                <div class="col-md-2">
+                                                    <a :href="decision.sourceLink" target="_blank" title="Zobacz dokument w BIP">
+                                                        <i class="fas fa-file-pdf fa-2x mb-2 ml-1"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <p>Decyzja nr: <strong> {{decision.decisionNumber}}</strong></p>
+                                                    <p>Wydana: {{decision.date}} r.</p>
+                                                    <small>
+                                                        <a :href="decision.sourceLink" target="_blank">
+                                                            Źródło: BIP
+                                                        </a>
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                    </div>
-                    <div v-if="searching && !searchPerformed" class="text-center py-2 px-2">
-                        <i class="far fa-file-alt fa-spin fa-2x"></i>
-                    </div>
-                    <div id="decisions-list" v-if="showDecisions && (decisions && decisions.length>0)">
-                        <div v-for="decision in decisions">
-                            <!-- Success Card -->
-                            <div class="card card-body mb-3" id="success">
-                                <img class="img-fluid success-img" src="" alt="" />
-                                <!--<i class="fas fa-times fa-2x ml-3 mt-3" href="#"></i>-->
-                                <div class="address py-3">
-                                    <h5 class="mt-2 ml-4">{{decision.address}}</h5>
-                                    <p class="mb-2 ml-4">Warszawa</p>
                                 </div>
-                                <div class="card-content mt-3 mb-4">
-                                    <div class="row mx-auto">
+
+                                <!-- Error Card -->
+                                <div class="card card-body hide" id="error">
+                                    <img class="img-fluid mb-4" src="" alt="" />
+                                    <div class="row">
                                         <div class="col-md-2">
-                                            <i class="fas fa-home fa-2x mb-2"></i>
+                                            <i class="fas fa-frown fa-lg"></i>
                                         </div>
                                         <div class="col-md-10">
-                                            <p>Liczba lokali: 15</p>
-                                            <p>Liczba lokatorów na dzień 31.12.2017 r.: 43</p>
+                                            <p class="text-justify">Nie mamy żadnej decyzji dotyczącej tego adresu.</p>
                                         </div>
                                     </div>
-                                    <div class="row mx-auto mt-4">
+                                    <div class="row">
                                         <div class="col-md-2">
-                                            <a :href="decision.sourceLink" target="_blank" title="Zobacz dokument w BIP">
-                                                <i class="fas fa-file-pdf fa-2x mb-2 ml-1"></i>
-                                            </a>
+                                            <i class="fab fa-wpforms fa-lg"></i>
                                         </div>
                                         <div class="col-md-10">
-                                            <p>Decyzja nr: <strong> {{decision.decisionNumber}}</strong></p>
-                                            <p>Wydana: {{decision.date}} r.</p>
-                                            <small>
-                                                <a :href="decision.sourceLink" target="_blank">
-                                                    Źródło: BIP
-                                                </a>
-                                            </small>
+                                            <p class="text-justify">
+                                                Jeśli chcesz złożyć wniosek do xxxx skorzystaj z szablonu i wyślij go do ...
+                                            </p>
+                                            <button type="button" class="btn btn-primary btn-lg btn-block mb-4">Uzupełnij formularz</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item">
+                                                    <i class="fas fa-plus-circle fa-lg color-blue"></i>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <p>Dodaj komentarz</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col">
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item">
+                                                    <i class="fas fa-users fa-lg color-blue"></i>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <p>Historie lokatorów</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item">
+                                                    <i class="fas fa-file-alt fa-lg color-blue"></i>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <p>Zobacz artykuły</p>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                        </div>
-
-                        <!-- Error Card -->
-                        <div class="card card-body hide" id="error">
-                            <img class="img-fluid mb-4" src="" alt="" />
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <i class="fas fa-frown fa-lg"></i>
-                                </div>
-                                <div class="col-md-10">
-                                    <p class="text-justify">Nie mamy żadnej decyzji dotyczącej tego adresu.</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <i class="fab fa-wpforms fa-lg"></i>
-                                </div>
-                                <div class="col-md-10">
-                                    <p class="text-justify">
-                                        Jeśli chcesz złożyć wniosek do xxxx skorzystaj z szablonu i wyślij go do ...
-                                    </p>
-                                    <button type="button" class="btn btn-primary btn-lg btn-block mb-4">Uzupełnij formularz</button>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <i class="fas fa-plus-circle fa-lg color-blue"></i>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <p>Dodaj komentarz</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col">
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <i class="fas fa-users fa-lg color-blue"></i>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <p>Historie lokatorów</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <i class="fas fa-file-alt fa-lg color-blue"></i>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <p>Zobacz artykuły</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- District Card -->
-                        <div class="card card-body hide" id="district">
-                            <img class="img-fluid mb-4" src="" alt="" />
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <i class="fas fa-file-pdf fa-lg"></i>
-                                </div>
-                                <div class="col-md-10">
-                                    <p>
-                                        X wydanych decyzji
-                                        <a href="">Pokaż</a>
-                                    </p>
-                                    <p>W latach:</p>
-                                    <div class="btn-group">
-                                        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            1950
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            ...
+                                <!-- District Card -->
+                                <div class="card card-body hide" id="district">
+                                    <img class="img-fluid mb-4" src="" alt="" />
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <i class="fas fa-file-pdf fa-lg"></i>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <p>
+                                                X wydanych decyzji
+                                                <a href="">Pokaż</a>
+                                            </p>
+                                            <p>W latach:</p>
+                                            <div class="btn-group">
+                                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    1950
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    ...
+                                                </div>
+                                            </div>
+                                            <div class="btn-group">
+                                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    2017
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    ...
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="btn-group">
-                                        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            2017
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            ...
+                                    <div class="row mt-3">
+                                        <div class="col-md-2">
+                                            <i class="fas fa-home fa-lg"></i>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <p>Ilość lokali: xxxx</p>
+                                            <p>Ilość lokatorów na dzień x: xxx</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <i class="fas fa-exclamation-circle fa-lg"></i>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <p>Zwróć uwagę na:</p>
+                                            <p>
+                                                Tag 1
+                                                <a href="url">co to znaczy?</a>
+                                            </p>
+                                            <p>
+                                                Tag 2
+                                                <a href="url">co to znaczy?</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item">
+                                                    <i class="fas fa-plus-circle fa-lg color-blue"></i>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <p>Dodaj komentarz</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col">
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item">
+                                                    <i class="fas fa-users fa-lg color-blue"></i>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <p>Historie lokatorów</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item">
+                                                    <i class="fas fa-file-alt fa-lg color-blue"></i>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <p>Zobacz artykuły</p>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
-                            <div class="row mt-3">
-                                <div class="col-md-2">
-                                    <i class="fas fa-home fa-lg"></i>
-                                </div>
-                                <div class="col-md-10">
-                                    <p>Ilość lokali: xxxx</p>
-                                    <p>Ilość lokatorów na dzień x: xxx</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <i class="fas fa-exclamation-circle fa-lg"></i>
-                                </div>
-                                <div class="col-md-10">
-                                    <p>Zwróć uwagę na:</p>
-                                    <p>
-                                        Tag 1
-                                        <a href="url">co to znaczy?</a>
-                                    </p>
-                                    <p>
-                                        Tag 2
-                                        <a href="url">co to znaczy?</a>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <i class="fas fa-plus-circle fa-lg color-blue"></i>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <p>Dodaj komentarz</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col">
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <i class="fas fa-users fa-lg color-blue"></i>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <p>Historie lokatorów</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <i class="fas fa-file-alt fa-lg color-blue"></i>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <p>Zobacz artykuły</p>
-                                        </li>
-                                    </ul>
-                                </div>
+                            <div class="ml-1" v-if="searchPerformed && decisions && decisions.length <= 0">
+                                Brak wyników
                             </div>
                         </div>
-
                     </div>
-                    <div v-if="searchPerformed && decisions && decisions.length <= 0">
-                        Brak wyników
+                </div>
+                <l-map :zoom="zoom" :center="center" class="d-inline-block col-md-8 ml-0" style="height: 93vh;">
+                    <v-geosearch :options="geosearchOptions"></v-geosearch>
+                    <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+                    <div v-for="marker in markers">
+                        <marker-popup :position="marker.position" :text="marker.text" :title="marker.title"></marker-popup>
                     </div>
+                </l-map>
 
-                </div>
-                <div class="col-md-8 map-responsive mb-5 mx-0 px-0 order-md-12">
-                    <l-map :zoom="zoom" :center="center" style="height: 1000px; width: 1000px;">
-                        <v-geosearch :options="geosearchOptions"></v-geosearch>
-                        <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-                        <div v-for="marker in markers">
-                            <marker-popup :position="marker.position" :text="marker.text" :title="marker.title"></marker-popup>
-                        </div>
-                    </l-map>
-                </div>
             </div>
         </div>
     </div>
@@ -362,7 +339,7 @@
                     this.showMap = true;
                     this.showDecisions = true;
                 }
-                else if(this.showDecisions && this.showMap) {
+                else if (this.showDecisions && this.showMap) {
                     this.doShowMap()
                 }
             },
@@ -388,11 +365,12 @@
             window.removeEventListener('resize', this.getWindowWidth);
             window.removeEventListener('resize', this.getWindowHeight);
         }
-        }
+    }
 </script>
 
 <style>
     @import "~leaflet/dist/leaflet.css";
+
     .input-card .input-group {
         border: none;
     }
