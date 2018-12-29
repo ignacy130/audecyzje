@@ -15,6 +15,9 @@
                 <div class="form-group">
                     <label for="parent">Wybierz post nadrzędny</label>
                     <select class="form-control" v-model="post.parentId" id="parent">
+                        <option value="-1">
+                            Wpis główny
+                        </option>
                         <option v-for="parent in posts" v-bind:value="parent.id">
                             {{ parent.title }}
                         </option>
@@ -54,7 +57,7 @@
         },
         methods: {
             async save() {
-                var result = await this.$http.post('/posts/Create', this.post);
+                var result = await this.$http.post('/api/posts/', this.post);
             },
             processEditOperation: function (operation) {
                 this.post.content = operation.api.origElements.innerHTML;

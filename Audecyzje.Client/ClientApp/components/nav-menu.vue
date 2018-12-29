@@ -16,7 +16,7 @@
                     </router-link>
                 </li>
                 <li class="nav-item mx-2">
-                    <router-link class="nav-link" to="mapa">
+                    <router-link class="nav-link" to="/mapa">
                         Mapa Reprywatyzacji
                         <span class="line" v-bind:class="{ 'white-line' : isHome() }"></span>
                     </router-link>
@@ -24,13 +24,13 @@
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item mx-2">
-                    <router-link class="nav-link" to="baza-wiedzy">
+                    <router-link class="nav-link" to="/baza-wiedzy">
                         Baza Wiedzy
                         <span class="line" v-bind:class="{ 'white-line' : isHome() }"></span>
                     </router-link>
                 </li>
                 <li class="nav-item mx-2">
-                    <router-link class="nav-link" to="kontakt">
+                    <router-link class="nav-link" to="/kontakt">
                         Kontakt
                         <span class="line" v-bind:class="{ 'white-line' : isHome() }"></span>
                     </router-link>
