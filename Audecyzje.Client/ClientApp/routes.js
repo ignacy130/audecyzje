@@ -5,6 +5,9 @@ import BazaWiedzy from 'components/baza-wiedzy'
 import Lokatorzy from 'components/lokatorzy'
 import Decyzja from 'components/decyzja'
 import Contact from 'components/contact'
+import AdminIndex from 'components/admin/index'
+import AddPost from 'components/admin/posts/add'
+import EditPost from 'components/admin/posts/edit'
 
 export const routes = [
     { path: '/', component: HomePage, display: 'Home', style: 'glyphicon glyphicon-home' },
@@ -13,6 +16,9 @@ export const routes = [
     { path: '/decyzja', component: Decyzja, display: 'Jak przeanalizować decyzję', style: 'glyphicon glyphicon-th-list' },
     { path: '/mapa', name: 'map', component: Map, display: 'Mapa reprywatyzacji', style: 'glyphicon glyphicon-th-list', props: {query: false} },
     { path: '/kontakt', component: Contact, display: 'Kontakt', style: 'glyphicon glyphicon-th-list' },
+    { path: '/admin/', component: AdminIndex, display: 'Admin', style: 'glyphicon glyphicon-th-list' },
+    { path: '/admin/posts/add', component: AddPost, display: 'Dodaj post', style: 'glyphicon glyphicon-th-list' },
+    { path: '/admin/posts/edit/:id', component: EditPost, display: 'Edytuj post', style: 'glyphicon glyphicon-th-list' },
     { path: "*", component: PageNotFound },
 ]
 

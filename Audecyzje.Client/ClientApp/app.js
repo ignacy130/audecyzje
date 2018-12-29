@@ -5,6 +5,7 @@ import store from './store'
 import { sync } from 'vuex-router-sync'
 import App from 'components/app-root'
 import VueFuse from 'vue-fuse'
+
 Vue.use(VueFuse)
 
 Vue.prototype.$http = axios;
