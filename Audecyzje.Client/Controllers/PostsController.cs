@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Audecyzje.Client.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class PostsController : Controller
     {

@@ -29,7 +29,8 @@ namespace Audecyzje.Infrastructure.Services
 				ParentId = parentId,
 				PublishedAt = null,
 				Title = title,
-				CreatedAt = DateTime.Now
+				CreatedAt = DateTime.Now,
+                Content = content
 			});
 		}
 
