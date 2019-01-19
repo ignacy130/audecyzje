@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Audecyzje.Client
 {
+    [Route("api/[controller]")]
     [Authorize]
     public class AccountController : Controller
     {
@@ -28,33 +29,19 @@ namespace Audecyzje.Client
             _logger = loggerFactory.CreateLogger<AccountController>();
         }
 
-        //
-        // GET: /Account/Login
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult Login(string returnUrl = null)
-        {
-            ViewData["ReturnUrl"] = returnUrl;
-            return View();
-        }
-
-        //
-        // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Login([FromBody]LoginViewModel model)
         {
-            ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation(1, "User logged in.");
-                    return RedirectToLocal(returnUrl);
+                    return Ok();
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -63,7 +50,7 @@ namespace Audecyzje.Client
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning(2, "User account locked out.");
-                    return View("Lockout");
+                    return StatusCode(403, "Lockout");
                 }
                 else
                 {
@@ -76,21 +63,8 @@ namespace Audecyzje.Client
             return View(model);
         }
 
-        //
-        // GET: /Account/Register
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult Register()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Account/Register
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        [HttpPost("/register")]
+        public async Task<IActionResult> AddAccount([FromBody]RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -111,13 +85,12 @@ namespace Audecyzje.Client
                 AddErrors(result);
             }
 
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
         //
         // POST: /Account/LogOff
-        [HttpPost]
+        [HttpPost("/logoff")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogOff()
         {
@@ -126,35 +99,22 @@ namespace Audecyzje.Client
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
-        //
-        // POST: /Account/ExternalLogin
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public IActionResult ExternalLogin(string provider, string returnUrl = null)
+        [HttpPost("/manage")]
+        public async Task<IActionResult> Manage(ManageViewModel vm)
         {
-            // Request a redirect to the external login provider.
-            var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
-            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
-            return new ChallengeResult(provider, properties);
-        }
-
-        // GET: /Account/ConfirmEmail
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<IActionResult> ConfirmEmail(string userId, string code)
-        {
-            if (userId == null || code == null)
-            {
-                return View("Error");
-            }
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByIdAsync(vm.UserId);
             if (user == null)
             {
-                return View("Error");
+                return StatusCode(500, "No user with this id");
             }
-            var result = await _userManager.ConfirmEmailAsync(user, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            else
+            {
+                await _userManager.RemovePasswordAsync(user);
+                await _userManager.AddPasswordAsync(user, vm.Password);
+                await _userManager.SetLockoutEnabledAsync(user, vm.Blocked);
+            }
+
+            return Ok();
         }
 
         #region Helpers

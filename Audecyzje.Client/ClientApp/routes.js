@@ -8,9 +8,11 @@ import Contact from 'components/contact'
 import AdminIndex from 'components/admin/index'
 import AddPost from 'components/admin/posts/add'
 import EditPost from 'components/admin/posts/edit'
+import Login from 'components/login'
 
 export const routes = [
     { path: '/', component: HomePage, display: 'Home', style: 'glyphicon glyphicon-home' },
+    { path: '/admin/login', component: Login, display: 'Login', style: 'glyphicon glyphicon-th-list' },
     { path: '/baza-wiedzy', component: BazaWiedzy, display: 'Baza wiedzy', style: 'glyphicon glyphicon-th-list' },
     { path: '/lokatorzy', component: Lokatorzy, display: 'Reprywatyzacja a lokatorzy', style: 'glyphicon glyphicon-th-list' },
     { path: '/decyzja', component: Decyzja, display: 'Jak przeanalizować decyzję', style: 'glyphicon glyphicon-th-list' },

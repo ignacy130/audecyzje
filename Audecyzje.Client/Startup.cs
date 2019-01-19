@@ -159,6 +159,14 @@ namespace Audecyzje.Client
             dbContext.Database.EnsureCreated();
             AppDbContextInMemory.Seed(dbContext);
             dbContext.SaveChanges();
+
+            var userManager = serviceProvider.GetService<UserManager<IdentityUser>>();
+            var uName = "test@example.com";
+            var suc = userManager.CreateAsync(new IdentityUser()
+            {
+                Email = uName,
+                UserName = uName
+            }, "P@ssw0rd");
         }
     }
 }
