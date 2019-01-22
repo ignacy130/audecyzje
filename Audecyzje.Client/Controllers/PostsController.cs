@@ -52,7 +52,7 @@ namespace Audecyzje.Client.Controllers
         [AllowAnonymous]
         public async Task<IEnumerable<Post>> GetAllPublished()
         {
-            if(!string.IsNullOrEmpty(GetUserId().Trim()))
+            if(!string.IsNullOrEmpty(GetUserId()))
             {
                 return (await _postsService.GetAll());
             }

@@ -59,6 +59,7 @@
         methods: {
             async save() {
                 var result = await this.$http.patch('/api/posts/', this.post);
+                this.$router.push("/admin")
             },
             processEditOperation: function (operation) {
                 this.post.content = operation.api.origElements.innerHTML;
