@@ -37,7 +37,7 @@
                             </h2>
                         </div>
                         <div class="col-12 col-lg-12">
-                            {{selectedArticle.content}}
+                            <div v-html="selectedArticle.content"></div>
                         </div>
                     </div>
                     <div v-else>

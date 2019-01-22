@@ -1,28 +1,31 @@
 <template>
     <div class="container">
-        <div class="col-12 py-5 mx-auto">
-            <h2>Zaloguj się</h2>
+        <div class="col-6 py-5 mx-auto">
+            <h2 class="mb-2">Zaloguj się</h2>
             <form @submit.prevent="login" autocomplete="off">
                 <div class="form-group with-icon-right">
                     <div class="input-group">
+                        <label for="password">Email</label>
                         <input id="email"
                                name="email"
                                v-model="email"
+                               class="form-control"
                                required />
-                        <i class="fa fa-exclamation-triangle error-icon icon-right input-icon"></i>
-                        <i class="fa fa-check valid-icon icon-right input-icon"></i>
                     </div>
                 </div>
-
-                <label for="password">Password</label>
-                <input id="password" v-model="password" placeholder="password" type="password" />
-                <button type="submit">login</button>
+                <div class="input-group">
+                    <label for="password">Hasło</label>
+                    <input id="password" v-model="password" class="form-control" type="password" />
+                </div>
+                <button type="submit" class="btn btn-success form-control mt-2">Zaloguj</button>
             </form>
         </div>
     </div>
 </template>
 
 <script>
+    import router from 'vue-router'
+
     export default {
         name: 'Login',
         data() {
@@ -33,7 +36,9 @@
         },
         methods: {
             async login() {
-                var result = await this.$http.post('/api/account/', { email: this.email, password: this.password});
+                var result = await this.$http.post('/api/account/', { email: this.email, password: this.password });
+                let redirectTo = '/admin'
+                this.$router.push(redirectTo)
             }
         }
     }

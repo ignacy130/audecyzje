@@ -49,9 +49,18 @@ namespace Audecyzje.Client.Controllers
         }
 
         [HttpGet("GetAllPublished")]
+        [AllowAnonymous]
         public async Task<IEnumerable<Post>> GetAllPublished()
         {
-            return (await _postsService.GetAll()).Where(x=>x.IsPublished);
+            if(!string.IsNullOrEmpty(GetUserId().Trim()))
+            {
+                return (await _postsService.GetAll());
+            }
+            else
+            {
+                return (await _postsService.GetAll()).Where(x => x.IsPublished);
+            }
+            
         }
 
         [Authorize]

@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Audecyzje.Client.Controllers;
@@ -63,7 +64,22 @@ namespace Audecyzje.Client
             return View(model);
         }
 
-        [HttpPost("/register")]
+        [AllowAnonymous]
+        [HttpGet("isloggedin")]
+        public async Task<IActionResult> IsLoggedIn()
+        {
+            var user = await GetCurrentUserAsync();
+            if (user != null)
+            {
+                return Ok(new { @roles = (await _userManager.GetRolesAsync(user)).ToList() });
+            }
+            else
+            {
+                return StatusCode((int)HttpStatusCode.Unauthorized);
+            }
+        }
+
+        [HttpPost("register")]
         public async Task<IActionResult> AddAccount([FromBody]RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -88,18 +104,14 @@ namespace Audecyzje.Client
             return View(model);
         }
 
-        //
-        // POST: /Account/LogOff
-        [HttpPost("/logoff")]
-        [ValidateAntiForgeryToken]
+        [HttpPost("logoff")]
         public async Task<IActionResult> LogOff()
         {
             await _signInManager.SignOutAsync();
-            _logger.LogInformation(4, "User logged out.");
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return Ok();
         }
 
-        [HttpPost("/manage")]
+        [HttpPost("manage")]
         public async Task<IActionResult> Manage(ManageViewModel vm)
         {
             var user = await _userManager.FindByIdAsync(vm.UserId);
