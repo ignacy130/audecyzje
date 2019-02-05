@@ -107,6 +107,10 @@ button,
     padding-left: 0 !important;
 }
 
+    .nav-link.active .line {
+        width: inherit;
+    }
+
 .navbar-brand {
     font-size: 1rem;
 }

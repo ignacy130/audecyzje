@@ -269,7 +269,12 @@ Vue.component('tab',{
 })
 
 </script>
+
 <style>
+    #knowledge-base{
+        min-height: 150vh;
+    }
+
     #posts-nav > div{
         cursor: pointer;
     }
