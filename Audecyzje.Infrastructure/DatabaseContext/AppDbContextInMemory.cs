@@ -78,8 +78,8 @@ namespace Audecyzje.Infrastructure.DatabaseContext
                     LegalBasis = "Podstawy prawne",
                     DecisionNumber = "13/GK/DW/1007",
                     SubmissionDate = DateTime.Today,
-                    Street = "ul. Nowogrodzka 22",
-                    Address = "ul. Nowogrodzka 22",
+                    Street = "ul. Marszałkowska 120",
+                    Address = "ul. Marszałkowska 120",
                 };
 
                 context.Decisions.Add(documentZero);
@@ -94,8 +94,8 @@ namespace Audecyzje.Infrastructure.DatabaseContext
                 LegalBasis = "Podstawy prawne",
                 DecisionNumber = "13/GK/DW/1007",
                 SubmissionDate = DateTime.Today,
-                Street = "ul. Nowogrodzka 22",
-                Address = "ul. Nowogrodzka 22",
+                Street = "ul. Stalowa 22",
+                Address = "ul. Stalowa 22",
             };
             
             context.Decisions.Add(documentOne);
