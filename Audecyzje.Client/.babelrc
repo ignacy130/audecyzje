@@ -1,8 +1,8 @@
-﻿{
-  "presets": ["es2015", "stage-2"],
+{
+   "presets": ["@babel/preset-env"],
   "plugins": [
-    "transform-runtime",
-    "transform-async-to-generator"
+    "@babel/plugin-transform-runtime",
+    "@babel/transform-async-to-generator"
   ],
   "comments": false
 }

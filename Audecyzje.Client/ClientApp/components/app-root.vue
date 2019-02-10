@@ -32,7 +32,5 @@
 
         }
     }
-    }</script>
-
-<style>
-</style>
+    }
+</script>
