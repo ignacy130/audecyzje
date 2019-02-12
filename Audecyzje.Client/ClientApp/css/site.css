@@ -298,11 +298,6 @@ footer li img {
     line-height: 1.1rem;
 }
 
-.row .col-md-9 p {
-    margin: 5px;
-    line-height: 1.1rem;
-}
-
 .map-responsive {
     overflow: hidden;
     padding-bottom: 50%;
@@ -782,4 +777,14 @@ footer li img {
     background-color: #FCE603;
     padding: 3px;
     display: inline-block;
+}
+
+blockquote {
+    border-left: 10px solid #FCE603;
+    padding-left: 1rem;
+}
+
+.article-content p {
+    margin-left: 0;
+    line-height: 1.1rem;
 }

@@ -36,7 +36,7 @@
                                 {{selectedArticle.title}}
                             </h2>
                         </div>
-                        <div class="col-12 col-lg-12">
+                        <div class="col-12 col-lg-12 article-content">
                             <div v-html="selectedArticle.content"></div>
                         </div>
                     </div>
