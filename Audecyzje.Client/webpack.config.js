@@ -23,13 +23,14 @@ module.exports = (env) => {
         output: {
             path: path.join(__dirname, bundleOutputDir),
             filename: '[name].js',
-            publicPath: '/dist/'
+            publicPath: '/dist/',
+            library: '[name]_[hash]',
         },
         plugins: [
-            //new webpack.DllReferencePlugin({
-            //    context: __dirname,
-            //    manifest: require('./wwwroot/dist/vendor-manifest.json')
-            //}),
+            new webpack.DllReferencePlugin({
+                context: __dirname,
+                manifest: require('./wwwroot/dist/vendor-manifest.json')
+            }),
             new MiniCssExtractPlugin({
                 // Options similar to the same options in webpackOptions.output
                 // both options are optional
