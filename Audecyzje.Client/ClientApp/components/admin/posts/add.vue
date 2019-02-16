@@ -44,7 +44,7 @@
         data() {
             return {
                 options: {
-                    toolbar: { buttons: ['bold', 'strikethrough', 'h1'] }
+                    toolbar: {  }
                 },
                 post: {
                     title: '',

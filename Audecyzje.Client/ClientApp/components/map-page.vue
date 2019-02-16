@@ -244,13 +244,24 @@
 
 <script>
     import Vue from 'vue'
-    import { LMap, LTileLayer } from 'vue2-leaflet';
+    import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
+    import 'leaflet/dist/leaflet.css'
     import { OpenStreetMapProvider } from 'leaflet-geosearch';
     import VGeosearch from 'vue2-leaflet-geosearch';
     import MarkerPopup from './map-popup';
     import streets from '../resources/streets';
     import VueSimpleSuggest from 'vue-simple-suggest';
     import 'vue-simple-suggest/dist/styles.css';
+
+    Vue.component('l-marker', LMarker);
+
+    delete L.Icon.Default.prototype._getIconUrl;
+
+    L.Icon.Default.mergeOptions({
+        iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+        iconUrl: require('leaflet/dist/images/marker-icon.png'),
+        shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+    });
 
     const provider = new OpenStreetMapProvider();
 
@@ -308,29 +319,32 @@
                 var searchQuery = this.query;
                 this.searching = true;
                 this.searchPerformed = false;
-                try {
-                    let response = await this.$http.get('/api/decisions/search/?query=' + encodeURIComponent(searchQuery))
-                    this.decisions = response.data;
+                if (this.query.length > 3) {
+                    try {
+                        let response = await this.$http.get('/api/decisions/search/?query=' + encodeURIComponent(searchQuery))
+                        this.decisions = response.data;
 
-                    var m = [];
-                    for (var i = 0; i < this.decisions.length; i++) {
-                        var results = await this.$http.get('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(this.decisions[i].localization + ", Warszawa, Polska"));
-                        var first = results.data[0];
-                        if (first) {
-                            m.push({ position: L.latLng(first.lat, first.lon), text: this.decisions[i].decisionNumber, title: this.decisions[i].decisionNumber });
+                        var m = [];
+                        for (var i = 0; i < this.decisions.length; i++) {
+                            var results = await this.$http.get('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(this.decisions[i].address + ", Warszawa, Polska"));
+                            var first = results.data[0];
+                            if (first) {
+                                m.push({ position: L.latLng(first.lat, first.lon), text: this.decisions[i].decisionNumber, title: this.decisions[i].decisionNumber });
+                            }
                         }
+                        this.markers = m;
+                        if (m && m.length > 0) {
+                            this.center = [m[0].position.lat, m[0].position.lng];
+                        }
+                    } catch (error) {
+                        console.log(error)
                     }
-                    this.markers = m;
-                    if (m && m.length > 0) {
-                        this.center = [m[0].position.lat, m[0].position.lng];
-                    }
-                } catch (error) {
-                    console.log(error)
+                }
+                else {
+                    this.decisions = [];
+                    this.markers = [];
                 }
                 this.searchPerformed = true;
-            },
-            searchStreetChange: async function () {
-                var results = await this.$http.get('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(this.query + ", Warszawa, Polska"));
             },
             getWindowWidth(event) {
                 this.windowWidth = document.documentElement.clientWidth;

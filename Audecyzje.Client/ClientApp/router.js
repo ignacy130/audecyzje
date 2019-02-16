@@ -6,6 +6,7 @@ import { routes } from './routes'
 Vue.use(VueRouter);
 
 let router = new VueRouter({
+    linkExactActiveClass: 'active',
     mode: 'history',
     routes
 })

@@ -1,7 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const bundleOutputDir = './wwwroot/dist';
+const TerserPlugin = require('terser-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = (env) => {
     const isDevBuild = !(env && env.prod);
@@ -21,15 +23,32 @@ module.exports = (env) => {
         output: {
             path: path.join(__dirname, bundleOutputDir),
             filename: '[name].js',
-            publicPath: '/dist/'
+            publicPath: '/dist/',
+            library: '[name]_[hash]',
         },
+        plugins: [
+            new webpack.DllReferencePlugin({
+                context: __dirname,
+                manifest: require('./wwwroot/dist/vendor-manifest.json')
+            }),
+            new MiniCssExtractPlugin({
+                // Options similar to the same options in webpackOptions.output
+                // both options are optional
+                filename: isDevBuild ? '[name].css' : '[name].[hash].css',
+                chunkFilename: isDevBuild ? '[id].css' : '[id].[hash].css',
+            }),
+            new VueLoaderPlugin()
+        ].concat(isDevBuild ? [] : [
+            new TerserPlugin(),
+            new MiniCssExtractPlugin('site.css')
+        ]),
         module: {
             rules: [
                 {
                     test: /\.css$/,
                     use: [
                         'vue-style-loader',
-                        'css-loader'
+                        'css-loader',
                     ],
                 },
                 {
@@ -54,21 +73,5 @@ module.exports = (env) => {
                 }
             ]
         },
-        plugins: [
-            new webpack.DllReferencePlugin({
-                context: __dirname,
-                manifest: require('./wwwroot/dist/vendor-manifest.json')
-            })
-        ].concat(isDevBuild ? [
-            // Plugins that apply in development builds only
-            new webpack.SourceMapDevToolPlugin({
-                filename: '[file].map', // Remove this line if you prefer inline source maps
-                moduleFilenameTemplate: path.relative(bundleOutputDir, '[resourcePath]') // Point sourcemap entries to the original file locations on disk
-            })
-        ] : [
-                // Plugins that apply in production builds only
-                new webpack.optimize.UglifyJsPlugin(),
-                new ExtractTextPlugin('site.css')
-            ])
     }];
 };

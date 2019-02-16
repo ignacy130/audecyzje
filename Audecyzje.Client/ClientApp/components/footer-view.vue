@@ -1,5 +1,5 @@
 <template>
-    <footer class="container pt-5 pb-3" v-bind:class="{ 'd-none': isMap }">
+    <footer class="container pt-5 pb-3" v-if="['map'].indexOf($route.name) === -1">
         <div class="row">
             <div class="col-12 col-md-3 align-self-center">
                 Copyright &copy; 2017<br />
@@ -23,12 +23,12 @@
     </footer>
 </template>
 <script>
-export default {
-    data() {
-    return {
-    isMap: this.$route.path === "/mapa",
-    }
-    },
+    export default {
+        data() {
+            return {};
+        },
+        methods: {
+        },
     }</script>
 <style>
 </style>
