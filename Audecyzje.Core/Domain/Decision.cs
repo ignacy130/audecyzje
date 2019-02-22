@@ -6,6 +6,7 @@ namespace Audecyzje.Core.Domain
     public class Decision :BaseEntity
     {
         // Czemu tu jest Localization i Localizations
+        // bo w założeniu od MJN może sie pojawić sytuacja że pojedyncza decyzja dotyczy więcej niż jednego adresu
         public DateTime SubmissionDate { get; set; }
         public DateTime Date { get; set; }
         public string LegalBasis { get; set; }
