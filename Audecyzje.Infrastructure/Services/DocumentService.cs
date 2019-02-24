@@ -25,7 +25,7 @@ namespace Audecyzje.Infrastructure.Services
 
         public async Task<List<DecisionDto>> GetAll()
         {
-           return _mapper.Map<List<DecisionDto>>(await _documentRepository.GetAll());
+            return _mapper.Map<List<DecisionDto>>(await _documentRepository.GetAll());
         }
 
         public async Task<List<DecisionDto>> GetByDecisionNumber(string decisionNumber)
@@ -49,26 +49,39 @@ namespace Audecyzje.Infrastructure.Services
             return _mapper.Map<List<DecisionDto>>(listOfDocuments);
         }
 
-		public async Task<IEnumerable<DecisionDto>> SearchInContent(string query)
-		{
-			var listOfDocuments = (await _documentRepository.GetAll()).Where(d => d.Content.Contains(query));
-			return _mapper.Map<List<DecisionDto>>(listOfDocuments);
-		}
+        public async Task<IEnumerable<DecisionDto>> SearchInContent(string query)
+        {
+            var listOfDocuments = (await _documentRepository.GetAll()).Where(d => d.Content.Contains(query));
+            return _mapper.Map<List<DecisionDto>>(listOfDocuments);
+        }
 
-		public async Task<IEnumerable<DecisionDto>> Search(string query)
-		{
-			var decisionNumberRegex = new Regex(@"[0-9]{1,100}\/GK\/DW\/[0-9]{4}");
-			if (decisionNumberRegex.IsMatch(query))
-			{
-				return await GetByDecisionNumber(query);
-			}
-			else 
-			{
-				var addressResults = await GetByAddress(query);
-				var fulltextResults = await SearchInContent(query);
-				addressResults = addressResults.Concat(fulltextResults);
-				return addressResults;
-			}
-		}
-	}
+        public async Task<IEnumerable<DecisionDto>> Search(string query)
+        {
+            var decisionNumberRegex = new Regex(@"[0-9]{1,100}\/GK\/DW\/[0-9]{4}");
+            if (decisionNumberRegex.IsMatch(query))
+            {
+                return await GetByDecisionNumber(query);
+            }
+            else
+            {
+                var addressResults = await GetByAddress(query);
+                var fulltextResults = await SearchInContent(query);
+                addressResults = addressResults.Concat(fulltextResults);
+                return addressResults;
+            }
+        }
+
+        Task<bool> IDecisionsService.AddNewDecision(DecisionDto dto)
+        {
+            //TODO nie jestem pewien jak dziala cache documentow na razie zrobilem na _context
+
+            throw new NotImplementedException();
+        }
+
+        public async Task<DecisionDto> GetFirstUnparsedDecisionNotCachedRepository()
+        {
+            var decision = _documentRepository.GetFirstEmptyDecisionNotCached();
+            return _mapper.Map<DecisionDto>(decision);
+        }
+    }
 }

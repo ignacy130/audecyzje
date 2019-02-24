@@ -13,5 +13,7 @@ namespace Audecyzje.Infrastructure.Services.Interfaces
         Task<List<DecisionDto>> GetByDecisionDate(DateTime dateTime);
         Task<List<DecisionDto>> GetByLegalBasis(string legalBasis);
         Task<IEnumerable<DecisionDto>> GetByAddress(string address);
+        Task<bool> AddNewDecision(DecisionDto dto);
+        Task<DecisionDto> GetFirstUnparsedDecisionNotCachedRepository();
     }
 }

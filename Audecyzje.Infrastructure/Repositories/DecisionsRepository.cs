@@ -100,5 +100,11 @@ namespace Audecyzje.Infrastructure.Repositories
 										.ToList();
 			return searchResult;
 		}
-	}
+        public Decision GetFirstEmptyDecisionNotCached()
+        {
+            var documents = _context.Decisions.ToList();
+            var decision = documents.Where(doc => string.IsNullOrEmpty(doc.Content)).FirstOrDefault();
+            return decision;
+        }
+    }
 }
